@@ -1,0 +1,121 @@
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 55px;
+    padding: 0 1rem;
+    background: var(--white_color);
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 1px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+
+    .search-section {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        position: relative;
+
+        .logo {
+            .image {
+                width: 40px;
+                height: 40px;
+                object-fit: cover;
+            }
+        }
+
+        .search {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            width: 240px;
+            height: 40px;
+            padding: .5rem .75rem;
+            background: var(--main_background_color);
+            color: var(--gray_color);
+            border-radius: 20px;
+
+            p {
+                font-size: 15px;
+            }
+        }
+    }
+
+    .main-section {
+        height: 100%;
+        padding: 3px 0;
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+
+        .link {
+            height: 100%;
+            text-decoration: none;
+            color: var(--gray_color);
+            padding: 0 2.5rem;
+            border-radius: 4px;
+            display: grid;
+            place-items: center;
+            position: relative;
+            transition: background .3s;
+
+            &:hover {
+                background: var(--white_color_1);
+            }
+
+            &.active {
+                color: var(--main_bleu_color);
+                background: transparent;
+            
+                &::after {
+                    position: absolute;
+                    content: '';
+                    bottom: -3px;
+                    left: 0;
+                    width: 100%;
+                    height: 3px;
+                    background: var(--main_bleu_color);
+                }
+            }
+        }
+    }
+
+    .personal-section {
+        display: flex;
+        gap: .5rem;
+        align-items: center;
+
+        div {
+            width: 40px;
+            height: 40px;
+            background: var(--main_background_color);
+            display: grid;
+            place-items: center;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: background .3s;
+
+            &.active {
+                color: var(--main_bleu_color);
+                background: rgba(1, 119, 253, .2);
+
+                &:hover {
+                    background: rgba(1, 119, 253, .2);
+                }
+            }
+
+            &:hover {
+                background: var(--gray_color_3);
+            }
+
+            .image {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+        }
+    }
+}

@@ -1,0 +1,108 @@
+.profile-container {
+    position: absolute;
+    right: 1rem;
+    top: 3.25rem;
+    background: var(--white_color);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    
+    .profiles {
+        width: 340px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        padding: .3rem;
+        border-radius: 8px;
+        display: flex;
+        flex-direction: column;
+        gap: .3rem;
+        
+        .header {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .8rem .5rem;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--black_color);
+            transition: .3s;
+
+            &:hover {
+                background: var(--main_background_color);
+            }
+
+            .image {
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+
+            p {
+                font-size: 16px;
+                font-weight: 600;
+            }
+        }
+
+        .line {
+            width: 94%;
+            margin: 0 auto;
+            height: 1px;
+            background: var(--gray_color_3);
+        }
+
+        button {
+            outline: 0;
+            border: none;
+            background: transparent;
+            color: var(--main_bleu_color);
+            text-align: left;
+            padding: .5rem;
+            font-size: 15px;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: .3s;
+
+            &:hover {
+                background: var(--main_background_color);
+            }
+        }
+    }
+    
+
+    .parameters {
+        margin-top: 1.5rem;
+
+        .param {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            padding: .5rem;
+            border-radius: 8px;
+            transition: .3s;
+
+            &:hover {
+                background: var(--main_background_color);
+            }
+
+            .icon {
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                background: var(--gray_color_2);
+                color: #1c1d21;
+                display: grid;
+                place-items: center;
+            }
+
+            p {
+                font-size: 15px;
+                font-weight: 550;
+            }
+
+            .chevron {
+                margin-left: auto;
+                color: var(--gray_color);
+            }
+        }
+    }
+}

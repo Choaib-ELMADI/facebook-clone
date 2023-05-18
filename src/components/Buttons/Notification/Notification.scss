@@ -1,0 +1,74 @@
+.notification-container {
+    position: absolute;
+    right: 1rem;
+    top: 3.25rem;
+    background: var(--white_color);
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; 
+
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 340px;
+
+        div {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            transition: .3s;
+            color: var(--gray_color);
+            cursor: pointer;
+            display: grid;
+            place-items: center;
+
+            &:hover {
+                background: var(--gray_color_3);
+            }
+        }
+    }
+
+    .filter {
+        display: flex;
+        align-items: center;
+        gap: .5rem;
+        margin-top: .5rem;
+
+        button {
+            outline: none;
+            border: 0;
+            padding: .5rem 1rem;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            background: transparent;
+            cursor: pointer;
+            transition: .3s;
+
+            &:hover {
+                background: var(--gray_color_3);
+            }
+
+            &.active {
+                background: var(--main_bleu_background);
+                color: var(--main_bleu_color);
+            }
+        }
+    }
+
+    .container {
+        .no-notif {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+            color: #a4a7ab;
+            margin-top: 3rem;
+            
+            h3 {
+                color: var(--gray_color);
+            }
+        }
+    }
+}
