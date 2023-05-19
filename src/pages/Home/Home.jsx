@@ -5,7 +5,7 @@ import './Home.scss';
 
 export default function Home() {
   return (
-    <main className="main">
+    <main className="home">
       <Navbar />
       <h1>Facebook Home Page</h1>
     </main>

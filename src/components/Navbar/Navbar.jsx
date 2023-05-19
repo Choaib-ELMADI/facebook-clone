@@ -1,5 +1,5 @@
-import { useEffect, useState, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import { GoSearch } from 'react-icons/go';
 import { 
     AiFillHome, AiOutlineHome,
@@ -21,31 +21,31 @@ import { Notification, Messenger, Profile, Menu } from '../index';
 const links = [
     {
         name: 'home',
-        link: '/',
+        link: 'home',
         fill: <AiFillHome size={ 30 } />,
         outline: <AiOutlineHome size={ 30 } />
     },
     {
         name: 'friends',
-        link: '/',
+        link: 'friends',
         fill: <MdPeopleAlt size={ 30 } />,
         outline: <MdPeopleOutline size={ 30 } />
     },
     {
         name: 'videos',
-        link: '/',
+        link: 'watch',
         fill: <AiFillVideoCamera size={ 29 } />,
         outline: <AiOutlineVideoCamera size={ 29 } />
     },
     {
         name: 'shop',
-        link: '/',
+        link: 'marketplace',
         fill: <AiFillShop size={ 30 } />,
         outline: <AiOutlineShop size={ 30 } />
     },
     {
         name: 'games',
-        link: '/',
+        link: 'games',
         fill: <IoGameController size={ 30 } />,
         outline: <IoGameControllerOutline size={ 30 } />
     },
@@ -70,9 +70,9 @@ const buttons = [
 
 const Navbar = () => {
     const [vueSearchList, setVueSearchList] = useState(false);
-    const [activeLink, setActiveLink] = useState('home');
     const [clickedButton, setClickedButton] = useState(null);
     const { user } = useAuth();
+    const location = useLocation();
 
     const handleChoosedButton = (name) => {
         if (clickedButton === name) {
@@ -104,19 +104,18 @@ const Navbar = () => {
             <div className='main-section'>
                 {
                     links.map((link, i) => (
-                        <Link 
-                            to={ `/home` }
+                        <NavLink 
+                            to={ `/${ link.link }` }
                             key={ `link-${ i }` }
                             href={ link.link } 
-                            className={ activeLink === link.name ? 'link active' : 'link' }
-                            onClick={ () => setActiveLink(link.name) }
+                            className='link'
                         >
-                            { 
-                                activeLink === link.name ?
-                                link.fill : 
+                            {
+                                location.pathname.split('/')[1] === link.link ?
+                                link.fill :
                                 link.outline
                             }
-                        </Link>
+                        </NavLink>
                     ))
                 }
             </div>

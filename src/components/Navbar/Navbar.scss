@@ -96,6 +96,7 @@
             border-radius: 50%;
             cursor: pointer;
             transition: background .3s;
+            overflow: hidden;
 
             &.active {
                 color: var(--main_bleu_color);

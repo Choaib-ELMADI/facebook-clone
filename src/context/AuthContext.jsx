@@ -17,8 +17,7 @@ export const AuthContextProvider = ({ children }) => {
             setUser(user);
             setLoading(false);
 
-            if (user) navigate('/home');
-            else navigate('/');
+            if (!user) navigate('/');
         });
     }, [user, navigate]);
 
