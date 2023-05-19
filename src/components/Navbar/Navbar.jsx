@@ -15,7 +15,7 @@ import { FaBell } from 'react-icons/fa';
 import './Navbar.scss';
 import images from '../../constants/images';
 import Searchbar from '../SearchBar/Searchbar';
-import { auth } from '../../config/firebase';
+import { useAuth } from '../../context/AuthContext';
 import { Notification, Messenger, Profile, Menu } from '../index';
 
 const links = [
@@ -72,7 +72,7 @@ const Navbar = () => {
     const [vueSearchList, setVueSearchList] = useState(false);
     const [activeLink, setActiveLink] = useState('home');
     const [clickedButton, setClickedButton] = useState(null);
-    
+    const { user } = useAuth();
 
     const handleChoosedButton = (name) => {
         if (clickedButton === name) {
@@ -85,7 +85,7 @@ const Navbar = () => {
     return (
         <nav className="navbar">
             <div className='search-section'>
-                <Link to='/' className='logo'>
+                <Link to='/home' className='logo'>
                     <img 
                         className='image'
                         src={ images.facebook_logo }
@@ -105,8 +105,8 @@ const Navbar = () => {
                 {
                     links.map((link, i) => (
                         <Link 
-                            to={ `/` }
-                            // to={ `link-${ i }` }
+                            to={ `/home` }
+                            key={ `link-${ i }` }
                             href={ link.link } 
                             className={ activeLink === link.name ? 'link active' : 'link' }
                             onClick={ () => setActiveLink(link.name) }
@@ -142,8 +142,8 @@ const Navbar = () => {
                         className='image'
                         width={ 40 }
                         height={ 40 }
-                        alt={ auth.currentUser ? auth.currentUser.displayName : 'user' }
-                        src={ images.user_1 }
+                        alt={ user.displayName ? user.displayName : 'user' }
+                        src={ user.photoURL ? user.photoURL : images.user_1 }
                     />
                 </div>
             </div>
