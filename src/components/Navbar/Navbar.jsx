@@ -1,4 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { GoSearch } from 'react-icons/go';
 import { 
     AiFillHome, AiOutlineHome,
@@ -84,13 +85,13 @@ const Navbar = () => {
     return (
         <nav className="navbar">
             <div className='search-section'>
-                <a href='/' className='logo'>
+                <Link to='/' className='logo'>
                     <img 
                         className='image'
                         src={ images.facebook_logo }
                         alt='Facebook'
                     />
-                </a>
+                </Link>
                 <div 
                     className='search'
                     onClick={ () => setVueSearchList(true) }
@@ -103,8 +104,9 @@ const Navbar = () => {
             <div className='main-section'>
                 {
                     links.map((link, i) => (
-                        <a 
-                            key={ `link-${ i }` }
+                        <Link 
+                            to={ `/` }
+                            // to={ `link-${ i }` }
                             href={ link.link } 
                             className={ activeLink === link.name ? 'link active' : 'link' }
                             onClick={ () => setActiveLink(link.name) }
@@ -114,7 +116,7 @@ const Navbar = () => {
                                 link.fill : 
                                 link.outline
                             }
-                        </a>
+                        </Link>
                     ))
                 }
             </div>

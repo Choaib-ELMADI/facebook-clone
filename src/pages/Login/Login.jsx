@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebook } from 'react-icons/fa';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
@@ -16,6 +17,7 @@ export default function Login() {
         password: '',
     });
     const [inputTypeChecked, setInputTypeChecked] = useState(false);
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -37,6 +39,8 @@ export default function Login() {
                     email: user.email,
                     photo: user.photoURL
                 });
+
+                navigate('/');
             })
             .catch((err) => {
                 console.error(err);
@@ -56,6 +60,8 @@ export default function Login() {
                     email: user.email,
                     photo: user.photoURL
                 });
+
+                navigate('/');
             })
             .catch((err) => {
                 console.error(err);
@@ -75,6 +81,8 @@ export default function Login() {
                     email: user.email,
                     photo: user.photoURL
                 });
+
+                navigate('/');
             })
             .catch((err) => {
                 console.error(err);
