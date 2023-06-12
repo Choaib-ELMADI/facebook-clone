@@ -4,8 +4,10 @@
     --main_bleu_background:  #0177fd33;
     --main_green_color:      #00b501;
     --white_color:           #ffffff;
+    --white_color_trs:       rgba(242, 242, 242, .8);
     --white_color_1:         #f2f2f2;
     --black_color:           #1c1e21;
+    --black_color_trs:       rgba(28, 30, 33, .4);
     --gray_color:            #65676b;
     --gray_color_1:          #969ba0;
     --gray_color_2:          rgba(150, 155, 160, .6);
@@ -15,6 +17,12 @@
 
     --main_font:             'helveticaregular', sans-serif;
     --main_logo_font:        'facebook_letter_facesregular', sans-serif;
+
+    --verysmall__size: 12px;
+    --small__size: 16px;
+    --normal__size: 20px;
+    --medium__size: 32px;
+    --large__size: 48px;
 }
 
 * {
@@ -26,4 +34,10 @@
 
 body {
     background: var(--main_background_color);
+
+    main {
+        width: 100%;
+        max-width: 1900px;
+        margin: 0 auto;
+    }
 }

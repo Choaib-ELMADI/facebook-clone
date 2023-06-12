@@ -17,7 +17,6 @@ export default function Login() {
         password: '',
     });
     const [inputTypeChecked, setInputTypeChecked] = useState(false);
-    const [error, setError] = useState({});
     const navigate = useNavigate();
 
     const handleChange = (e) => {
