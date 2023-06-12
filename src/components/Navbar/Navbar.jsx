@@ -141,8 +141,8 @@ const Navbar = () => {
                         className='image'
                         width={ 40 }
                         height={ 40 }
-                        alt={ user.displayName ? user.displayName : 'user' }
-                        src={ user.photoURL ? user.photoURL : images.user_1 }
+                        alt={ user?.displayName ? user?.displayName : 'user' }
+                        src={ user?.photoURL ? user?.photoURL : images.user_1 }
                     />
                 </div>
             </div>

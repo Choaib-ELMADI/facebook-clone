@@ -2,15 +2,28 @@ import { IoSettingsSharp, IoLogOut } from 'react-icons/io5';
 import { BsChevronRight } from 'react-icons/bs';
 import { BsFillQuestionCircleFill, BsFillMoonFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
+import { signOut, deleteUser } from 'firebase/auth';
+import { deleteDoc, doc } from 'firebase/firestore';
 
 import './Profile.scss';
 import images from '../../../constants/images';
+import { auth, db } from '../../../config/firebase';
 import { useAuth } from '../../../context/AuthContext';
 
 
 
 const Profile = () => {
     const { user } = useAuth();
+
+    const handleUserLogOut = () => {
+        signOut(auth)
+            .then(() => {
+                deleteDoc(doc(db, "users", user.uid))
+                    .then(() => console.log('Log out successfully'))
+                    .catch((error) => console.log('Error while deleting from firestore', error));
+            })
+            .catch((error) => console.log('Error while signing out', error));
+    };
 
     return (
         <div className='profile-container'>
@@ -49,7 +62,10 @@ const Profile = () => {
                     <p>Affichage et accessibilité</p>
                     <BsChevronRight className='chevron' size={ 22 } />
                 </div>
-                <div className='param'>
+                <div 
+                    className='param logout'
+                    onClick={ handleUserLogOut }
+                >
                     <div className='icon'>
                         <IoLogOut size={ 22 } />
                     </div>

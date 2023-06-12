@@ -13,11 +13,18 @@ const RequireAuth = ({ children }) => {
     user ? children : <Navigate to='/' />
   )
 };
+const RequireLogOut = ({ children }) => {
+  const { user } = useAuth();
+
+  return (
+    !user ? children : <Navigate to='/home' />
+  )
+};
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/'>
-      <Route index element={ <Login /> } />
+      <Route index element={ <RequireLogOut><Login /></RequireLogOut>} />
 
       <Route path='home'>
         <Route index element={ <RequireAuth><Home /></RequireAuth> } />

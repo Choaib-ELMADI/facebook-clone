@@ -4,7 +4,7 @@ import { FcGoogle } from 'react-icons/fc';
 import { FaFacebook } from 'react-icons/fa';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 import { createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
-import { collection, addDoc } from "firebase/firestore"; 
+import { setDoc, doc } from "firebase/firestore";
 
 import { auth, googleProvider, facebookProvider, db } from '../../config/firebase';
 import './Login.scss';
@@ -33,7 +33,7 @@ export default function Login() {
                 return user;
             })
             .then((user) => {
-                addDoc(collection(db, "users"), {
+                setDoc(doc(db, 'users', user.uid), {
                     id: user.uid,
                     name: user.displayName,
                     email: user.email,
@@ -54,7 +54,7 @@ export default function Login() {
                 return user;
             })
             .then((user) => {
-                addDoc(collection(db, "users"), {
+                setDoc(doc(db, "users", user.uid), {
                     id: user.uid,
                     name: user.displayName,
                     email: user.email,
@@ -75,7 +75,7 @@ export default function Login() {
                 return user;
             })
             .then((user) => {
-                addDoc(collection(db, "users"), {
+                setDoc(doc(db, "users", user.uid), {
                     id: user.uid,
                     name: user.displayName,
                     email: user.email,

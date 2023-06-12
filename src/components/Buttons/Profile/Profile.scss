@@ -103,6 +103,16 @@
                 margin-left: auto;
                 color: var(--gray_color);
             }
+
+            &.logout {
+                cursor: pointer;
+                transition: .2s;
+
+                &:hover {
+                    background: var(--red_color_trs);
+                    color: var(--red_color);
+                }
+            }
         }
     }
 }
