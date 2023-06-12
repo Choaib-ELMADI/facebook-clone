@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 import { FaFacebook } from 'react-icons/fa';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
-import { createUserWithEmailAndPassword, signInWithPopup } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
 import { setDoc, doc } from "firebase/firestore";
 
 import { auth, googleProvider, facebookProvider, db } from '../../config/firebase';
@@ -17,6 +17,7 @@ export default function Login() {
         password: '',
     });
     const [inputTypeChecked, setInputTypeChecked] = useState(false);
+    const [error, setError] = useState({});
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -28,6 +29,25 @@ export default function Login() {
         e.preventDefault();
 
         createUserWithEmailAndPassword(auth, userData.email, userData.password)
+            .then((userCredentials) => {
+                const user = userCredentials.user;
+                return user;
+            })
+            .then((user) => {
+                setDoc(doc(db, 'users', user.uid), {
+                    id: user.uid,
+                    name: user.displayName,
+                    email: user.email,
+                    photo: user.photoURL
+                });
+
+                navigate('/home');
+            })
+            .catch((err) => console.log(err));
+    };
+
+    const handleSignIn = () => {
+        signInWithEmailAndPassword(auth, userData.email, userData.password)
             .then((userCredentials) => {
                 const user = userCredentials.user;
                 return user;
@@ -129,7 +149,11 @@ export default function Login() {
                             }
                         </span>
                     </div>
-                    <button type='submit'>Se connecter</button>
+                    <button type='submit'>Créer compte</button>
+                    <button 
+                        type='button'
+                        onClick={ handleSignIn }
+                    >Se connecter</button>
                 </form>
 
                 <div className='line' />

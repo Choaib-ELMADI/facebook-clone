@@ -115,6 +115,11 @@
                 font-size: 20px;
                 font-weight: bold;
                 cursor: pointer;
+
+                &[type='button'] {
+                    background: rgba(1, 119, 253, .4);
+                    color: var(--black_color);
+                }
             }
         }
 
