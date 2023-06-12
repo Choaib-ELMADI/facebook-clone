@@ -1,25 +1,21 @@
-import React, { useContext, useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, createContext, useState, useEffect } from "react";
 
 import { auth } from "../config/firebase";
 
-const AuthContext = React.createContext();
+const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthContextProvider = ({ children }) => {
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
-    const navigate = useNavigate();
 
     useEffect(() => {
         auth.onAuthStateChanged((user) => {
             setUser(user);
             setLoading(false);
-
-            if (!user) navigate('/');
         });
-    }, [user, navigate]);
+    }, [user]);
 
     return (
         <AuthContext.Provider value={{ user }}>

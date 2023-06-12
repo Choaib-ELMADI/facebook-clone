@@ -40,7 +40,7 @@ export default function Login() {
                     photo: user.photoURL
                 });
 
-                navigate('/');
+                navigate('/home');
             })
             .catch((err) => {
                 console.error(err);
@@ -61,7 +61,7 @@ export default function Login() {
                     photo: user.photoURL
                 });
 
-                navigate('/');
+                navigate('/home');
             })
             .catch((err) => {
                 console.error(err);
@@ -82,7 +82,7 @@ export default function Login() {
                     photo: user.photoURL
                 });
 
-                navigate('/');
+                navigate('/home');
             })
             .catch((err) => {
                 console.error(err);
