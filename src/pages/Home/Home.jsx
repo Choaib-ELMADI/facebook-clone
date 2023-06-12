@@ -1,5 +1,5 @@
 import Navbar from "../../components/Navbar/Navbar";
-import { CreatePost } from "../../container/index";
+import { CreatePost, Stories } from "../../container/index";
 import './Home.scss';
 
 
@@ -10,7 +10,10 @@ export default function Home() {
       <Navbar />
       
       <div><h1>Left Side Bar</h1></div>
-      <CreatePost />
+      <div className="home__main-section">
+        <Stories />
+        <CreatePost />
+      </div>
       <div><h1>Right Side Bar</h1></div>
     </main>
   );
