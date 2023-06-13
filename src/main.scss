@@ -32,7 +32,12 @@
     font-family: var(--main_font);
 
     &::-webkit-scrollbar {
-        display: none;
+        width: 8px;
+        background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: yellow;
+        border-radius: 5px;
     }
 }
 

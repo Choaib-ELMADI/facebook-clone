@@ -7,7 +7,9 @@ import './LeftSidebar.scss';
 const LeftSidebar = () => {
     return (
         <div className='sidebar left'>
-            <h1>Left Sidebar</h1>
+            <div className='left-sidebar-content'>
+                <h1>Left Sidebar</h1>
+            </div>
         </div>
     );
 };
