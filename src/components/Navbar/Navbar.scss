@@ -10,13 +10,16 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 1rem;
     user-select: none;
+    z-index: 99;
 
     .search-section {
         display: flex;
         align-items: center;
         gap: .5rem;
         position: relative;
+        z-index: 100;
 
         .logo {
             .image {
@@ -40,6 +43,14 @@
             p {
                 font-size: 15px;
             }
+
+            @media screen and (width <= 1400px) {
+                width: max-content;
+
+                p {
+                    display: none;
+                }
+            }
         }
     }
 
@@ -54,12 +65,16 @@
             height: 100%;
             text-decoration: none;
             color: var(--gray_color);
-            padding: 0 2.5rem;
+            padding: 0 clamp(.5rem, 3vw, 2.5rem);
             border-radius: 4px;
             display: grid;
             place-items: center;
             position: relative;
             transition: background .3s;
+
+            &.bookmarks {
+                display: none;
+            }
 
             &:hover {
                 background: var(--white_color_1);
@@ -78,6 +93,23 @@
                     height: 3px;
                     background: var(--main_bleu_color);
                 }
+            }
+
+            @media screen and (width <= 1250px) {
+                &.bookmarks {
+                    display: grid;
+                }
+                &.games {
+                    display: none;
+                }
+            }
+        }
+
+        @media screen and (width <= 800px) {
+            margin-right: auto;
+
+            .link:not(.bookmarks) {
+                display: none;
             }
         }
     }

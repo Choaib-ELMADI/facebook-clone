@@ -1,3 +1,4 @@
+import { LeftSidebar } from "../../components/index";
 import Navbar from "../../components/Navbar/Navbar";
 import { CreatePost, StoriesAndReels } from "../../container/index";
 import './Home.scss';
@@ -9,12 +10,12 @@ export default function Home() {
     <main className="home">
       <Navbar />
       
-      <div><h1>Left Side Bar</h1></div>
+      <LeftSidebar />
       <div className="home__main-section">
         <StoriesAndReels />
         <CreatePost />
       </div>
-      <div><h1>Right Side Bar</h1></div>
+      <div className="sidebar right"><h1>Right Side Bar</h1></div>
     </main>
   );
 };

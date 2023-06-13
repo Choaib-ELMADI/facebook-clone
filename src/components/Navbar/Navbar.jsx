@@ -11,6 +11,7 @@ import { IoGameController, IoGameControllerOutline } from 'react-icons/io5';
 import { TbGridDots } from 'react-icons/tb';
 import { BsMessenger } from 'react-icons/bs';
 import { FaBell } from 'react-icons/fa';
+import { RxHamburgerMenu } from 'react-icons/rx';
 
 import './Navbar.scss';
 import images from '../../constants/images';
@@ -48,6 +49,12 @@ const links = [
         link: 'games',
         fill: <IoGameController size={ 30 } />,
         outline: <IoGameControllerOutline size={ 30 } />
+    },
+    {
+        name: 'bookmarks',
+        link: 'bookmarks',
+        fill: <RxHamburgerMenu size={ 30 } />,
+        outline: <RxHamburgerMenu size={ 30 } />
     },
 ];
 
@@ -101,6 +108,7 @@ const Navbar = () => {
                 </div>
                 { vueSearchList && <Searchbar setVueSearchList={ setVueSearchList } /> }
             </div>
+
             <div className='main-section'>
                 {
                     links.map((link, i) => (
@@ -108,7 +116,7 @@ const Navbar = () => {
                             to={ `/${ link.link }` }
                             key={ `link-${ i }` }
                             href={ link.link } 
-                            className='link'
+                            className={ `link ${ link.name }` }
                         >
                             {
                                 location.pathname.split('/')[1] === link.link ?
@@ -119,6 +127,7 @@ const Navbar = () => {
                     ))
                 }
             </div>
+
             <div className='personal-section'>
                 {
                     buttons.map((btn, i) => {
@@ -146,6 +155,7 @@ const Navbar = () => {
                     />
                 </div>
             </div>
+
             { clickedButton === 'notifications' && <Notification  /> }
             { clickedButton === 'messenger' && <Messenger /> }
             { clickedButton === 'profile' && <Profile /> }
