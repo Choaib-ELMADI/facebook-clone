@@ -13,7 +13,99 @@
     }
 
     .left-sidebar-content {
-        height: 1000px;
         width: 100%;
+        padding-left: .75rem;
+
+        &__item {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+
+            padding: .45rem;
+            text-decoration: none;
+            color: var(--gray_color);
+            font-size: calc(var(--normal__size) - 2.8px);
+            font-weight: 600;
+            border-radius: 8px;
+            transition: .2s;
+
+            
+            img {
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                object-fit: cover;
+                overflow: hidden;
+                background: var(--gray_color_2);
+            }
+
+            span {
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+
+                display: grid;
+                place-items: center;
+            }
+
+            &:hover {
+                background: var(--gray_color_3);
+            }
+        }
+
+        &__footer {
+            border-top: 1px solid var(--gray_color_2);
+            margin-bottom: 1.5rem;
+            margin-top: .5rem;
+
+            h2 {
+                color: var(--gray_color);
+                font-size: var(--normal__size);
+                margin-block: .75rem;
+            }
+
+            .left-sidebar-content__item {
+                gap: .25rem;
+
+                .icon {
+                    width: 100%;
+                    height: 100%;
+                    background: greenyellow;
+                    border-radius: 8px;
+                }
+            }
+
+            .cookies-links {
+                margin-top: .75rem;
+                display: flex;
+                flex-wrap: wrap;
+                gap: .1rem 1rem;
+
+                & > * {
+                    color: var(--gray_color);
+                    text-decoration: none;
+                }
+
+                a {
+                    position: relative;
+
+                    &::after {
+                        position: absolute;
+                        content: '';
+                        top: 50%;
+                        right: -.5rem;
+
+                        width: 3px;
+                        height: 3px;
+                        border-radius: 3px;
+                        background: var(--gray_color);
+                    }
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
     }
 }
