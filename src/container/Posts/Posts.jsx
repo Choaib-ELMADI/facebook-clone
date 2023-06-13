@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './Posts.scss';
+import './Post.scss';
 import Post from './Post';
 import images from '../../constants/images';
 
@@ -8,8 +8,8 @@ const post = {
     userName: 'user name',
     userProfile: images.user_2,
     postContent: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores, possimus?',
-    hasImage: false,
-    postImage: null,
+    hasImage: true,
+    postImage: images.user_2,
     date: '1h 20min'
 }
 

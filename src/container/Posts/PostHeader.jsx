@@ -1,16 +1,49 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { TbDots } from 'react-icons/tb';
 import { CgClose } from 'react-icons/cg';
 import { IoEarth } from 'react-icons/io5';
 
-import './PostHeader';
-
 
 
 const PostHeader = ({ post }) => {
+    const [viewUserModel, setViewUserModel] = useState(false);
+    const headerProfileRef = useRef(null);
+    const userModelRef = useRef(null);
+
+    useEffect(() => {
+        const headerProfile = headerProfileRef.current;
+        const userModel = userModelRef.current;
+
+        headerProfile.addEventListener('pointerenter', () => {
+            setViewUserModel(true);
+        });
+
+        headerProfile.addEventListener('click', () => {
+            setViewUserModel(false);
+        });
+
+        if (viewUserModel) {
+            userModel.addEventListener('mouseleave', () => {
+                setViewUserModel(false);
+            });
+        }
+    }, [viewUserModel]);
+
     return (
         <div className='post-header'>
-            <div className='post-header__profile'>
+            { viewUserModel &&
+                <div 
+                    className='user-model'
+                    ref={ userModelRef }
+                >
+                    <h1>I'm the user model</h1>
+                </div>
+            }
+
+            <div 
+                className='post-header__profile'
+                ref={ headerProfileRef }
+            >
                 <img src={ post.userProfile } alt={ post.userName } />
             </div>
             <div className='post-header__user-date'>
