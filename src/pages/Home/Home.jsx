@@ -12,8 +12,10 @@ export default function Home() {
       
       <LeftSidebar />
       <div className="home__main-section">
-        <StoriesAndReels />
-        <CreatePost />
+        <div className='home__main-section-content'>
+          <StoriesAndReels />
+          <CreatePost />
+        </div>
       </div>
       <RightSidebar />
     </main>

@@ -9,10 +9,23 @@
         margin: 0 5rem;
         max-width: 600px;
         width: 100%;
+        height: calc(100vh - 65px);
+        overflow-y: scroll;
 
-        display: flex;
-        flex-direction: column;
-        gap: 1rem;
+        &::-webkit-scrollbar-thumb {
+            display: none;
+        }
+
+        .home__main-section-content {
+            width: 100%;
+            padding: 0 2px;
+            height: 1000px;
+
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
     }
 
     @media screen and (width <= 1250px) {
