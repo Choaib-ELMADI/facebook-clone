@@ -2,8 +2,59 @@ import React, { useState, useRef, useEffect } from 'react';
 import { TbDots } from 'react-icons/tb';
 import { CgClose } from 'react-icons/cg';
 import { IoEarth } from 'react-icons/io5';
+import { AiFillInfoCircle } from 'react-icons/ai';
+import { TbWorld } from 'react-icons/tb';
+import { FaCalendarCheck } from 'react-icons/fa';
+import { BsMessenger } from 'react-icons/bs';
 
 
+
+const UserModel = ({ post, userModelRef }) => {
+    return (
+        <div 
+            className='user-model'
+            ref={ userModelRef }
+        >
+            <div className='user-model__details'>
+                <div className='profile'>
+                    <img 
+                        src={ post.userProfile } 
+                        alt={ post.userName }
+                    />
+                </div>
+                <div className='info'>
+                    <h2>{ post.userName }</h2>
+                    <p>
+                        <AiFillInfoCircle size={ 25 } />
+                        Page
+                    </p>
+                    <a 
+                        href='https://choaibelmadi.netlify.app'
+                        target='_blank'
+                        rel='noreferror'
+                    >
+                        <TbWorld size={ 25 } color='var(--gray_color)' />
+                        choaibelmadi
+                    </a>
+                    <p>
+                        <FaCalendarCheck size={ 24 } />
+                        375k followers
+                    </p>
+                </div>
+            </div>
+            <div className='user-model__buttons'>
+                <button>
+                    <BsMessenger size={ 20 } />
+                    Message
+                </button>
+                <button>
+                    <FaCalendarCheck size={ 20 } color='rgba(0, 0, 0, .8)' />
+                    Suivi(e)
+                </button>
+            </div>
+        </div>
+    );
+};
 
 const PostHeader = ({ post }) => {
     const [viewUserModel, setViewUserModel] = useState(false);
@@ -31,13 +82,11 @@ const PostHeader = ({ post }) => {
 
     return (
         <div className='post-header'>
-            { viewUserModel &&
-                <div 
-                    className='user-model'
-                    ref={ userModelRef }
-                >
-                    <h1>I'm the user model</h1>
-                </div>
+            { viewUserModel && 
+                <UserModel 
+                    post={ post} 
+                    userModelRef={ userModelRef } 
+                /> 
             }
 
             <div 

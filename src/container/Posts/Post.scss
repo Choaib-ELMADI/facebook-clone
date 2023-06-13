@@ -26,14 +26,101 @@
             .user-model {
                 position: absolute;
                 left: 0;
-                transform: 0;
-                bottom: calc(-100% - .5rem);
+                bottom: -100%;
+                transform: translateY(80%);
                 z-index: 4;
 
+                width: 100%;
+                max-width: 400px;
+
                 background: var(--white_color);
-                padding: .5rem;
+                padding: 1rem;
                 border-radius: 12px;
-                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 10px;
+
+                &__details {
+                    display: flex;
+                    padding-right: 2rem;
+                    margin-bottom: 1rem;
+                    gap: 1rem;
+
+                    .profile {
+                        width: 100px;
+                        height: 100px;
+                        background: var(--gray_color_3);
+                        border-radius: 50px;
+                        overflow: hidden;
+
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                    }
+
+                    .info {
+                        display: flex;
+                        flex-direction: column;
+                        gap: .5rem;
+
+                        h2 {
+                            text-transform: capitalize;
+                        }
+
+                        p {
+                            color: var(--gray_color);
+                            font-size: calc(var(--normal__size) - 2px);
+                            font-weight: 500;
+
+                            display: flex;
+                            align-items: center;
+                            gap: .5rem;
+                        }
+                        
+                        a {
+                            font-size: calc(var(--normal__size) - 2px);
+                            text-decoration: none;
+                            color: var(--main_bleu_color);
+                            font-weight: 600;
+
+                            display: flex;
+                            align-items: center;
+                            gap: .5rem;
+
+                            &:hover {
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+
+                &__buttons {
+                    display: flex;
+                    gap: .5rem;
+
+                    button {
+                        flex-grow: 1;
+                        padding: .75rem;
+                        font-size: calc(var(--normal__size) - 2px);
+                        font-weight: 600;
+                        border: 0;
+                        outline: none;
+                        cursor: pointer;
+                        border-radius: 10px;
+                        color: var(--gray_color);
+                        background: var(--gray_color_3);
+
+                        display: flex;
+                        gap: .25rem;
+                        align-items: center;
+                        justify-content: center;
+
+                        &:nth-child(1) {
+                            background: var(--main_bleu_color);
+                            color: var(--white_color);
+                        }
+                    }
+                }
             }
 
             &__profile {
