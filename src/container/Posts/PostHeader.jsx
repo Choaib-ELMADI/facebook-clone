@@ -56,7 +56,7 @@ const UserModel = ({ post, userModelRef }) => {
     );
 };
 
-const PostHeader = ({ post }) => {
+const PostHeader = ({ post, setHidePost }) => {
     const [viewUserModel, setViewUserModel] = useState(false);
     const headerProfileRef = useRef(null);
     const userModelRef = useRef(null);
@@ -103,7 +103,10 @@ const PostHeader = ({ post }) => {
                 </p>
             </div>
             <div className='post-header__options'><TbDots size={ 26 } /></div>
-            <div className='post-header__remove'><CgClose size={ 26 } /></div>
+            <div 
+                className='post-header__remove'
+                onClick={ () => setHidePost(true) }
+            ><CgClose size={ 26 } /></div>
         </div>
     );
 };

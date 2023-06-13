@@ -195,5 +195,55 @@
                 }
             }
         }
+
+        .post-hided {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            margin: .75rem .25rem;
+
+            span {
+                font-size: var(--normal__size);
+                font-weight: bold;
+                padding: .25rem;
+                border: 1px solid var(--gray_color);
+                border-radius: 8px;
+                user-select: none;
+            }
+
+            button {
+                border: 0;
+                outline: none;
+                cursor: pointer;
+                margin-left: auto;
+                border-radius: 4px;
+                padding: .5rem;
+                letter-spacing: -.5px;
+                font-size: var(--small__size);
+                color: rgba(0, 0, 0, .9);
+                font-weight: bold;
+                transition: .2s;
+
+                &:hover {
+                    background: var(--gray_color_3);
+                }
+            }
+
+            div {
+                p:nth-child(1) {
+                    letter-spacing: -.5px;
+                    font-size: calc(var(--small__size) + 1px);
+                    color: rgba(0, 0, 0, .9);
+                    font-weight: bold;
+                    margin-bottom: .15rem;
+                }
+
+                p:nth-child(2) {
+                    font-size: calc(var(--verysmall__size) + 2px);
+                    color: var(--gray_color_1);
+                }
+            }
+        }
     }
 }
