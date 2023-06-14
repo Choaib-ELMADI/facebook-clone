@@ -18,9 +18,16 @@ const likeVariants = {
 
 
 
-const Like = ({ zIndex, animate }) => {
+const Like = ({ zIndex, animate, setUserReaction, setGiveReaction }) => {
     return (
-        <div className='reaction like-reaction' style={{ zIndex }}>
+        <div 
+            className='reaction like-reaction' 
+            style={{ zIndex }}
+            onClick={ () => {
+                setGiveReaction(false);
+                setUserReaction('like');
+            }}
+        >
             { animate ?
                 <motion.span
                     variants={ likeVariants }
@@ -29,7 +36,7 @@ const Like = ({ zIndex, animate }) => {
                     <AiFillLike color='var(--white_color)' />
                 </motion.span>
                 :
-                <AiFillLike color='var(--white_color)' />
+                <AiFillLike color='var(--white_color)'  style={{ transform: 'translateY(-1px)' }} />
             }
         </div>
     );

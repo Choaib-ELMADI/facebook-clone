@@ -317,6 +317,7 @@
 
                 button {
                     flex-grow: 1;
+                    width: 100%;
                     background: transparent;
                     outline: none;
                     border: 0;
@@ -336,6 +337,16 @@
                     
                     &:hover {
                         background: var(--gray_color_4);
+                    }
+
+                    .reaction {
+                        width: 26px;
+                        height: 26px;
+                        border-radius: 50%;
+                        border: 3px solid var(--white_color);
+
+                        display: grid;
+                        place-items: center;
                     }
                 }
             }

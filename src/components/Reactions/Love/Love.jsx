@@ -17,9 +17,16 @@ const loveVariants = {
 
 
 
-const Love = ({ zIndex, animate }) => {
+const Love = ({ zIndex, animate, setUserReaction, setGiveReaction }) => {
     return (
-        <div className='reaction love-reaction' style={{ zIndex }}>
+        <div 
+            className='reaction love-reaction' 
+            style={{ zIndex }}
+            onClick={ () => {
+                setGiveReaction(false);
+                setUserReaction('love');
+            }}
+        >
             { animate ? 
                 <motion.span
                     variants={ loveVariants }

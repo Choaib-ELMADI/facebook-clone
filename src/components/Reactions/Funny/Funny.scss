@@ -1,0 +1,62 @@
+.funny-reaction {
+    background: linear-gradient(
+        to bottom,
+        var(--yellow_color),
+        orange
+    );
+    position: relative;
+
+    .eye {
+        position: absolute;
+        top: 3.5px;
+
+        width: 4px;
+        height: 4px;
+        border-left: 1px solid var(--black_color);
+        border-bottom: 1px solid var(--black_color);
+        border-radius: 1px;
+
+        &.left {
+            left: 2.5px;
+            transform: rotateZ(-125deg);
+        }
+        &.right {
+            right: 2.5px;
+            transform: rotateZ(30deg);
+        }
+    }
+
+    .mouth {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+        top: 9px;
+
+        width: 12px;
+        height: 7px;
+        background: brown;
+        overflow: hidden;
+
+        border-bottom-right-radius: 7px;
+        border-bottom-left-radius: 7px;
+        border-top-right-radius: 1px;
+        border-top-left-radius: 1px;
+
+        &::after {
+            position: absolute;
+            content: '';
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: -2px;
+
+            width: 10px;
+            height: 6px;
+            background: linear-gradient(
+                to bottom left,
+                var(--white_color_trs),
+                var(--red_color) 80%,
+            );
+            border-radius: 50%;
+        }
+    }
+}

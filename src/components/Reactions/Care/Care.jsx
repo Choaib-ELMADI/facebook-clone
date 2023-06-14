@@ -17,9 +17,9 @@ const Care = ({ zIndex, setUserReaction, setGiveReaction }) => {
         >
             <div className="body">
                 <div className="face">
-                    <div className="eye left"></div>
-                    <div className="eye right"></div>
-                    <div className="mouth"></div>
+                    <div className="eye left" />
+                    <div className="eye right" />
+                    <div className="mouth" />
                 </div>
                 <AiFillHeart size={ 13 } className='heart' />
             </div>

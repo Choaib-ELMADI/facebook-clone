@@ -1,8 +1,8 @@
 .care-reaction {
     background: linear-gradient(
         to bottom,
-        yellow 60%,
-        orange,
+        var(--yellow_color),
+        orange
     );
 
     .body {

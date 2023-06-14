@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { BiLike } from 'react-icons/bi';
 import { FaRegCommentAlt } from 'react-icons/fa';
 import { RiShareForwardLine } from 'react-icons/ri';
 import { motion } from 'framer-motion';
+import { AiOutlineLike, AiFillLike } from 'react-icons/ai';
 
-import { Care, Funny, Grrr, Like, Love, Sad, Wouah } from '../../components/index';
+import { Care, Funny, Grrr, Like, Love } from '../../components/index';
 const containerVariants = {
     hidden: {
         opacity: 0,
@@ -14,16 +14,38 @@ const containerVariants = {
         opacity: 1,
         y: 0,
         transition: {
-            duration: .45,
+            duration: .5,
             type: 'spring',
-            delay: .2,
+            delay: .5,
         }
     },
 };
-const colors = {
-    like: 'var(--main_bleu_color)',
-    love: 'red',
-    care: 'yellow',
+const reactions = {
+    like: {
+        color: 'var(--main_bleu_color)',
+        icon: <Like />,
+        title: "J'aime",
+    },
+    love: {
+        color: 'red',
+        icon: <Love />,
+        title: "J'adore",
+    },
+    care: {
+        color: 'var(--main_yellow_color)',
+        icon: <Care />,
+        title: "Solidaire",
+    },
+    funny: {
+        color: 'var(--main_yellow_color)',
+        icon: <Funny />,
+        title: "Funny",
+    },
+    grrr: {
+        color: 'orangered',
+        icon: <Grrr />,
+        title: "Grrr",
+    },
 };
 
 
@@ -37,10 +59,28 @@ const GiveReaction = ({ setGiveReaction, setUserReaction }) => {
             initial='hidden'
             animate='visible'
         >
-            <Like animate={ true } setUserReaction={ setUserReaction } setGiveReaction={ setGiveReaction } />
-            <Love animate={ true } setUserReaction={ setUserReaction } setGiveReaction={ setGiveReaction } />
-            <Care setUserReaction={ setUserReaction } setGiveReaction={ setGiveReaction } />
-            <Grrr setUserReaction={ setUserReaction } setGiveReaction={ setGiveReaction } />
+            <Like 
+                animate={ true } 
+                setUserReaction={ setUserReaction } 
+                setGiveReaction={ setGiveReaction } 
+            />
+            <Love 
+                animate={ true } 
+                setUserReaction={ setUserReaction } 
+                setGiveReaction={ setGiveReaction } 
+            />
+            <Care 
+                setUserReaction={ setUserReaction } 
+                setGiveReaction={ setGiveReaction } 
+            />
+            <Funny 
+                setUserReaction={ setUserReaction } 
+                setGiveReaction={ setGiveReaction } 
+            />
+            <Grrr 
+                setUserReaction={ setUserReaction } 
+                setGiveReaction={ setGiveReaction } 
+            />
         </motion.div>
     )
 };
@@ -84,15 +124,15 @@ const PostFooter = () => {
                         setGiveReaction(false);
                     }}
                     style={{
-                        color: userReaction ? colors[userReaction] : ''
+                        color: userReaction ? reactions[userReaction].color : ''
                     }}
                 >
-                    <BiLike size={ 24 } />
-                    J'aime
+                    { userReaction ? reactions[userReaction].icon : <AiOutlineLike size={ 24 } /> }
+                    { userReaction ? reactions[userReaction].title : "J'aime" }
                 </button>
                 <button>
                     <FaRegCommentAlt size={ 20 } />
-                    Commmenter
+                    Commenter
                 </button>
                 <button>
                     <RiShareForwardLine size={ 24 } />
