@@ -20,10 +20,15 @@ const containerVariants = {
         }
     },
 };
+const colors = {
+    like: 'var(--main_bleu_color)',
+    love: 'red',
+    care: 'yellow',
+};
 
 
 
-const GiveReaction = ({ setGiveReaction }) => {
+const GiveReaction = ({ setGiveReaction, setUserReaction }) => {
     return (
         <motion.div 
             className='give-reaction-wrapper'
@@ -32,16 +37,17 @@ const GiveReaction = ({ setGiveReaction }) => {
             initial='hidden'
             animate='visible'
         >
-            <Like animate={ true } />
-            <Love animate={ true } />
-            <Care />
-            <Grrr />
+            <Like animate={ true } setUserReaction={ setUserReaction } setGiveReaction={ setGiveReaction } />
+            <Love animate={ true } setUserReaction={ setUserReaction } setGiveReaction={ setGiveReaction } />
+            <Care setUserReaction={ setUserReaction } setGiveReaction={ setGiveReaction } />
+            <Grrr setUserReaction={ setUserReaction } setGiveReaction={ setGiveReaction } />
         </motion.div>
     )
 };
 
 const PostFooter = () => {
     const [giveReaction, setGiveReaction] = useState(false);
+    const [userReaction, setUserReaction] = useState(null);
 
     return (
         <div 
@@ -69,6 +75,17 @@ const PostFooter = () => {
             <div className='action-buttons'>
                 <button
                     onPointerEnter={ () => setGiveReaction(true) }
+                    onClick={ () => {
+                        if (userReaction) {
+                            setUserReaction(null);
+                        } else {
+                            setUserReaction('like');
+                        }
+                        setGiveReaction(false);
+                    }}
+                    style={{
+                        color: userReaction ? colors[userReaction] : ''
+                    }}
                 >
                     <BiLike size={ 24 } />
                     J'aime
@@ -84,7 +101,10 @@ const PostFooter = () => {
             </div>
 
             { giveReaction &&
-                <GiveReaction setGiveReaction={ setGiveReaction } />
+                <GiveReaction 
+                    setGiveReaction={ setGiveReaction } 
+                    setUserReaction={ setUserReaction } 
+                />
             }
         </div>
     );

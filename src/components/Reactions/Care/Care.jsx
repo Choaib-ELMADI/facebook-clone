@@ -5,9 +5,16 @@ import './Care.scss';
 
 
 
-const Care = ({ zIndex }) => {
+const Care = ({ zIndex, setUserReaction, setGiveReaction }) => {
     return (
-        <div className='reaction care-reaction' style={{ zIndex }}>
+        <div 
+            className='reaction care-reaction' 
+            style={{ zIndex }}
+            onClick={ () => {
+                setGiveReaction(false);
+                setUserReaction('care');
+            }}
+        >
             <div className="body">
                 <div className="face">
                     <div className="eye left"></div>
