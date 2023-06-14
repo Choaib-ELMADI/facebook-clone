@@ -81,7 +81,10 @@ const PostHeader = ({ post, setHidePost }) => {
     }, [viewUserModel]);
 
     return (
-        <div className='post-header'>
+        <div 
+            className='post-header'
+            onPointerLeave={ () => setViewUserModel(false) }
+        >
             { viewUserModel && 
                 <UserModel 
                     post={ post} 

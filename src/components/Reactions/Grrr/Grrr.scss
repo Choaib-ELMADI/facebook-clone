@@ -1,0 +1,59 @@
+.grrr-reaction {
+    background: linear-gradient(
+        to bottom,
+        orangered,
+        yellow
+    );
+    position: relative;
+
+    .face {
+        .eye {
+            position: absolute;
+            top: 9.5px;
+
+            background: var(--black_color);
+            width: 3px;
+            height: 3px;
+            border-radius: 3px;
+
+            &::after {
+                position: absolute;
+                content: '';
+                top: -45%;
+                width: 8px;
+                height: 2px;
+                background: var(--black_color);
+                border-radius: 3px;
+            }
+
+            &.left {
+                left: 4px;
+
+                &::after {
+                    left: -100%;
+                    transform: translateX(-5%) rotateZ(12deg);
+                }
+            }
+            &.right {
+                right: 4px;
+
+                &::after {
+                    right: -100%;
+                    transform: translateX(5%) rotateZ(-12deg);
+                }
+            }
+        }
+
+        .mouth {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 3.5px;
+
+            width: 9px;
+            height: 2px;
+            border-radius: 40%;
+            background: var(--black_color);
+        }
+    }
+}

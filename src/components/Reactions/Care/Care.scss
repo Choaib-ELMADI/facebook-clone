@@ -1,0 +1,101 @@
+.care-reaction {
+    background: linear-gradient(
+        to bottom,
+        yellow 60%,
+        orange,
+    );
+
+    .body {
+        position: relative;
+        width: 100%;
+        height: 100%;
+
+        .face {
+            position: relative;
+
+            .eye {
+                position: absolute;
+                top: 4px;
+                
+                width: 2.5px;
+                height: 4px;
+                background: var(--black_color);
+                border-top-left-radius: 3px;
+                border-top-right-radius: 3px;
+                border-bottom-left-radius: 1px;
+                border-bottom-right-radius: 1px;
+
+                &::after {
+                    position: absolute;
+                    content: '';
+                    top: -1.5px;
+
+                    height: 1px;
+                    width: 5px;
+                    background: orange;
+                }
+                &::before {
+                    position: absolute;
+                    content: '';
+                    top: .5px;
+                    left: .25px;
+
+                    width: 1.5px;
+                    height: 1.5px;
+                    border-radius: 1.5px;
+                    background: var(--white_color_trs);
+                }
+
+                &.left {
+                    left: 4.25px;
+                    transform: rotateZ(-5deg) translateY(-.5px);
+
+                    &::after {
+                        left: -1px;
+                        border-top-left-radius: 3px;
+                        border-bottom-left-radius: 1px;
+                        border-top-right-radius: 1px;
+                        border-bottom-right-radius: 1px;
+                    }
+                }
+                &.right {
+                    right: 4.25px;
+                    transform: rotateZ(5deg) translateY(-.5px);
+
+                    &::after {
+                        right: -1px;
+                        border-top-left-radius: 1px;
+                        border-bottom-left-radius: 1px;
+                        border-top-right-radius: 3px;
+                        border-bottom-right-radius: 1px;
+                    }
+                }
+            }
+
+            .mouth {
+                position: absolute;
+                top: 8px;
+                left: 50%;
+                transform: translateX(-50%);
+
+                width: 6px;
+                height: 1.5px;
+                background: brown;
+
+                border-bottom-left-radius: 4px;
+                border-bottom-right-radius: 4px;
+                border-top-left-radius: 1px;
+                border-top-right-radius: 1px;
+            }
+        }
+
+        .heart {
+            position: absolute;
+            left: 1px;
+            bottom: -3px;
+
+            fill: var(--red_color);
+            transform: rotateZ(15deg);
+        }
+    } 
+}

@@ -249,6 +249,7 @@
 
         .post-footer {
             padding: .5rem 1rem 0 1rem;
+            position: relative;
 
             .post-numbers {
                 padding: .5rem 0;
@@ -260,6 +261,25 @@
                 .reactions, .comments-share {
                     display: flex;
                     align-items: center;
+                }
+
+                .reactions {
+                    .reaction {
+                        width: 25px;
+                        height: 25px;
+                        border-radius: 50%;
+                        border: 3px solid var(--white_color);
+
+                        display: grid;
+                        place-items: center;
+
+                        &:nth-child(2) {
+                            transform: translateX(-5px);
+                        }
+                        &:nth-child(3) {
+                            transform: translateX(-10px);
+                        }
+                    }
                 }
 
                 .comments-share {
@@ -316,6 +336,39 @@
                     
                     &:hover {
                         background: var(--gray_color_4);
+                    }
+                }
+            }
+
+            .give-reaction-wrapper {
+                position: absolute;
+                left: 1rem;
+                bottom: 3rem;
+                z-index: 6;
+                background: var(--white_color);
+                border: 1px solid rgba(0, 0, 0, .1);
+                height: 55px;
+                border-radius: 40px;
+                padding-inline: 1rem;
+
+                display: flex;
+                align-items: center;
+                gap: 1.5rem;
+
+                .reaction {
+                    width: 25px;
+                    height: 25px;
+                    border-radius: 50%;
+                    border: 3px solid var(--white_color);
+                    transform: scale(2);
+                    transition: .3s;
+                    cursor: pointer;
+
+                    display: grid;
+                    place-items: center;
+
+                    &:hover {
+                        transform: scale(2.5);
                     }
                 }
             }

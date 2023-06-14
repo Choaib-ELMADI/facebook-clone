@@ -1,13 +1,14 @@
 import React from 'react';
+import { AiFillHeart } from 'react-icons/ai';
 
 import './Love.scss';
 
 
 
-const Love = () => {
+const Love = ({ zIndex }) => {
     return (
-        <div className='love-reaction'>
-            Love
+        <div className='reaction love-reaction' style={{ zIndex }}>
+            <AiFillHeart color='var(--white_color)' />
         </div>
     );
 };
