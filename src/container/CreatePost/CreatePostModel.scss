@@ -11,6 +11,21 @@
     background: var(--white_color_trs);
     overflow-y: scroll;
 
+    &::-webkit-scrollbar {
+        width: 8px;
+        background: transparent;
+    }
+    &::-webkit-scrollbar-thumb {
+        background: transparent;
+        border-radius: 8px;
+    }
+
+    &:hover {
+        &::-webkit-scrollbar-thumb {
+            background: var(--gray_color_2);
+        }
+    }
+
     display: grid;
     place-items: center;
 
@@ -157,6 +172,12 @@
                                 place-items: center;
                             }
                         }
+                    }
+
+                    img {
+                        width: 100%;
+                        border-radius: 10px;
+                        object-fit: cover;
                     }
                 }
             }

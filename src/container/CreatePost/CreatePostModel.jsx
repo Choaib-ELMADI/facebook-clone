@@ -1,9 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { GrClose } from 'react-icons/gr';
 import { IoMdPhotos } from 'react-icons/io';
 import { setDoc, doc } from 'firebase/firestore';
+import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
 
-import { db } from '../../config/firebase';
+import { db, store } from '../../config/firebase';
 import './CreatePostModel.scss';
 import { useAuth } from '../../context/AuthContext';
 import images from '../../constants/images';
@@ -12,9 +13,17 @@ import images from '../../constants/images';
 
 const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts }) => {
     const [postContent, setPostContent] = useState('');
+    const [postImage, setPostImage] = useState(null);
     const [hasImage, setHasImage] = useState(false);
+    const [loading, setLoading] = useState(0);
     const inputRef = useRef(null);
     const { user } = useAuth();
+    const [postDetails, setPostDetails] = useState({
+        hasImage: false,
+        email: user.email,
+        name: user.displayName || 'User',
+        time: new Date().getTime(),
+    });
 
     const autoResize = () => {
         const input = inputRef.current;
@@ -25,19 +34,57 @@ const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts }) => {
     const handleSubmitPost = () => {
         const id = new Date().getTime() + '__' + user.email.split('@')[0];
         setDoc(doc(db, 'posts', id), {
-            postContent: postContent,
-            email: user.email,
-            name: user.displayName || 'User',
-            time: new Date().getTime(),
-            hasImage: false,
+            ...postDetails,
+            hasImage: hasImage,
         })
         .then(() => {
             setPostContent('');
+            setPostImage(null);
             setViewCreatingPostModel(false);
             fetchPosts();
         })
         .catch((err) => console.error(err));
     };
+
+    const handlePostContent = (e) => {
+        setPostContent(e.target.value);
+        autoResize();
+        setPostDetails(
+            (prev) => ({ ...prev, postContent: postContent })
+        );
+    };
+
+    const handlePostImage = (e) => {
+        setPostImage(e.target.files[0]);
+    };
+
+    useEffect(() => {
+        const uploadPostImage = () => {
+            const postImageRef = ref(store, `/postImages/${ new Date().getTime() }__${ postImage.name }`);
+            const uploadTask = uploadBytesResumable(postImageRef, postImage);
+
+            uploadTask.on('state_changed', 
+                (snapshot) => {
+                    const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                    setLoading(progress);
+                }, 
+                (error) => {
+                    console.error(error);
+                }, 
+                () => {
+                    setHasImage(true);
+                    getDownloadURL(uploadTask.snapshot.ref)
+                        .then((downloadURL) => {
+                            setPostDetails(
+                                (prev) => ({ ...prev, image: downloadURL })
+                            );
+                        });
+                }
+            );
+        };
+        postImage && uploadPostImage();
+    }, [postImage]);
+    
     
     return (
         <div className='create-new-post-wrapper'>
@@ -69,26 +116,39 @@ const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts }) => {
                             name='postContent'
                             ref={ inputRef }
                             value={ postContent }
-                            onChange={ (e) => {
-                                setPostContent(e.target.value);
-                                autoResize();
-                            }}
+                            onChange={ handlePostContent }
                             style={{ resize: 'none' }}
                         ></textarea>
                         <div className='add-photo'>
-                            <input type="file" name="addPhoto" id="addPhoto" hidden />
+                            <input 
+                                type="file" 
+                                name="addPhoto" 
+                                id="addPhoto"
+                                onChange={ handlePostImage }
+                                hidden
+                            />
                             <label htmlFor="addPhoto">
-                                <div className='input'>
-                                    <span><IoMdPhotos size={ 26 } /></span>
-                                    <h3>Ajouter des photos/vidéos</h3>
-                                </div>
+                                { !hasImage ?
+                                    <div className='input'>
+                                        <span><IoMdPhotos size={ 26 } /></span>
+                                        <h3>Ajouter des photos/vidéos</h3>
+                                    </div>
+                                    :
+                                    <img 
+                                        src={ URL.createObjectURL(postImage) }
+                                        alt='post image'
+                                    />
+                                }
                             </label>
                         </div>
                     </div>
                 </div>
                 <div className='footer'>
                     <button 
-                        disabled={ postContent === '' }
+                        disabled={ 
+                            (postContent === '' && postImage === null) ||
+                            (postImage !== null && loading !== 100)
+                        }
                         onClick={ handleSubmitPost }
                     >Publier</button>
                 </div>
