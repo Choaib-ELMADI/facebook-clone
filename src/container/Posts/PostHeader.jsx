@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import moment from "moment";
 import { TbDots } from 'react-icons/tb';
 import { CgClose } from 'react-icons/cg';
 import { IoEarth } from 'react-icons/io5';
@@ -33,7 +34,7 @@ const UserModel = ({ post, userModelRef }) => {
                         Page
                     </p>
                     <a 
-                        href='https://choaibelmadi.netlify.app'
+                        href='https://elmadichoaib.vercel.app'
                         target='_blank'
                         rel='noreferror'
                     >
@@ -107,10 +108,8 @@ const PostHeader = ({ post, setHidePost }) => {
             <div className='post-header__user-date'>
                 <p>{ name }</p>
                 <p>
-                    {
-                        Math.floor((new Date().getTime() - time) / 1000)
-                    }
-                    { 's.' }
+                    { moment(time).fromNow() }
+                    { '.' }
                     <IoEarth />
                 </p>
             </div>

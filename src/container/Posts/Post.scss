@@ -143,12 +143,14 @@
                     font-weight: bold;
                     text-transform: capitalize;
                 }
-
+                
                 p:nth-child(2) {
                     color: var(--gray_color);
+                    font-size: calc(var(--small__size) - 2px);
                     display: flex;
                     gap: .25rem;
                     align-items: center;
+                    text-transform: capitalize;
                 }
             }
 
