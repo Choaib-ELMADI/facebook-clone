@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { BiLike } from 'react-icons/bi';
 import { FaRegCommentAlt } from 'react-icons/fa';
 import { RiShareForwardLine } from 'react-icons/ri';
@@ -8,7 +8,7 @@ import { Care, Funny, Grrr, Like, Love, Sad, Wouah } from '../../components/inde
 const containerVariants = {
     hidden: {
         opacity: 0,
-        y: '2rem',
+        y: '1rem',
     },
     visible: {
         opacity: 1,
@@ -16,8 +16,7 @@ const containerVariants = {
         transition: {
             duration: .45,
             type: 'spring',
-            siftness: 120,
-            staggerChild: .2
+            delay: .2,
         }
     },
 };
@@ -33,8 +32,8 @@ const GiveReaction = ({ setGiveReaction }) => {
             initial='hidden'
             animate='visible'
         >
-            <Like />
-            <Love />
+            <Like animate={ true } />
+            <Love animate={ true } />
             <Care />
             <Grrr />
         </motion.div>
