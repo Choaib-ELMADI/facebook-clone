@@ -7,9 +7,13 @@ import { TbWorld } from 'react-icons/tb';
 import { FaCalendarCheck } from 'react-icons/fa';
 import { BsMessenger } from 'react-icons/bs';
 
+import images from '../../constants/images';
+
 
 
 const UserModel = ({ post, userModelRef }) => {
+    const { postContent, email, name, time, hasImage } = post;
+
     return (
         <div 
             className='user-model'
@@ -18,12 +22,12 @@ const UserModel = ({ post, userModelRef }) => {
             <div className='user-model__details'>
                 <div className='profile'>
                     <img 
-                        src={ post.userProfile } 
-                        alt={ post.userName }
+                        src={ images.user_1 } 
+                        alt={ name }
                     />
                 </div>
                 <div className='info'>
-                    <h2>{ post.userName }</h2>
+                    <h2>{ name }</h2>
                     <p>
                         <AiFillInfoCircle size={ 25 } />
                         Page
@@ -61,6 +65,8 @@ const PostHeader = ({ post, setHidePost }) => {
     const headerProfileRef = useRef(null);
     const userModelRef = useRef(null);
 
+    const { postContent, email, name, time, hasImage } = post;
+
     useEffect(() => {
         const headerProfile = headerProfileRef.current;
         const userModel = userModelRef.current;
@@ -87,7 +93,7 @@ const PostHeader = ({ post, setHidePost }) => {
         >
             { viewUserModel && 
                 <UserModel 
-                    post={ post} 
+                    post={ post } 
                     userModelRef={ userModelRef } 
                 /> 
             }
@@ -96,12 +102,15 @@ const PostHeader = ({ post, setHidePost }) => {
                 className='post-header__profile'
                 ref={ headerProfileRef }
             >
-                <img src={ post.userProfile } alt={ post.userName } />
+                <img src={ images.user_1 } alt={ name } />
             </div>
             <div className='post-header__user-date'>
-                <p>{ post.userName }</p>
+                <p>{ name }</p>
                 <p>
-                    { post.date }{ '.' }
+                    {
+                        Math.floor((new Date().getTime() - time) / 1000)
+                    }
+                    { 's.' }
                     <IoEarth />
                 </p>
             </div>

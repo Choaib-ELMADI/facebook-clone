@@ -2,26 +2,34 @@ import React from 'react';
 
 import './Post.scss';
 import Post from './Post';
-import images from '../../constants/images';
-
-const post = {
-    userName: 'user name',
-    userProfile: images.user_2,
-    postContent: 'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Asperiores, possimus?',
-    hasImage: true,
-    postImage: images.user_2,
-    date: '1h 20min'
-}
 
 
 
-const Posts = () => {
+const PostModel = () => {
+    return (
+        <h1>loading...</h1>
+    );
+};
+
+const NoPost = () => {
+    return (
+        <h1>No Posts Yet</h1>
+    );
+};
+
+const Posts = ({ loading, posts }) => {
     return (
         <div className='posts-container'>
-            <Post post={ post } />
-            <Post post={ post } />
-            <Post post={ post } />
-            <Post post={ post } />
+            {   loading ?
+                <PostModel />
+                :
+                posts.length < 1 ?
+                <NoPost />
+                :
+                posts.map(post => (
+                    <Post key={ post.id } post={ post } />
+                ))
+            }
         </div>
     );
 };

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FaRegCommentAlt } from 'react-icons/fa';
 import { RiShareForwardLine } from 'react-icons/ri';
 import { motion } from 'framer-motion';
-import { AiOutlineLike, AiFillLike } from 'react-icons/ai';
+import { AiOutlineLike } from 'react-icons/ai';
 
 import { Care, Funny, Grrr, Like, Love } from '../../components/index';
 const containerVariants = {

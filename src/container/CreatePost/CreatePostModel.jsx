@@ -10,8 +10,9 @@ import images from '../../constants/images';
 
 
 
-const CreatePostModel = ({ setViewCreatingPostModel }) => {
+const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts }) => {
     const [postContent, setPostContent] = useState('');
+    const [hasImage, setHasImage] = useState(false);
     const inputRef = useRef(null);
     const { user } = useAuth();
 
@@ -20,15 +21,20 @@ const CreatePostModel = ({ setViewCreatingPostModel }) => {
         input.style.height = 'auto';
         input.style.height = `${ input.scrollHeight }px`;
     };
+
     const handleSubmitPost = () => {
         const id = new Date().getTime() + '__' + user.email.split('@')[0];
         setDoc(doc(db, 'posts', id), {
-            post: postContent,
+            postContent: postContent,
             email: user.email,
-            name: user.displayName
+            name: user.displayName || 'User',
+            time: new Date().getTime(),
+            hasImage: false,
         })
         .then(() => {
             setPostContent('');
+            setViewCreatingPostModel(false);
+            fetchPosts();
         })
         .catch((err) => console.error(err));
     };

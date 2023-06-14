@@ -10,7 +10,7 @@ import CreatePostModel from './CreatePostModel';
 
 
 
-const CreatePost = () => {
+const CreatePost = ({ fetchPosts }) => {
     const [viewCreatingPostModel, setViewCreatingPostModel] = useState(false);
     const { user } = useAuth();
 
@@ -53,7 +53,10 @@ const CreatePost = () => {
             </div>
 
             { viewCreatingPostModel &&
-                <CreatePostModel setViewCreatingPostModel={ setViewCreatingPostModel } />
+                <CreatePostModel 
+                    setViewCreatingPostModel={ setViewCreatingPostModel }
+                    fetchPosts={ fetchPosts } 
+                />
             }
         </div>
     );
