@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import './Post.scss';
 import PostHeader from './PostHeader';
 import PostBody from './PostBody';
+import PostFooter from './PostFooter';
 
 
 
@@ -15,6 +16,7 @@ const Post = ({ post }) => {
                 <>
                     <PostHeader post={ post } setHidePost={ setHidePost } />
                     <PostBody post={ post } />
+                    <PostFooter />
                 </>
                 :
                 <div className='post-hided'>
