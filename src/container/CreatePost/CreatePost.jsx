@@ -24,7 +24,7 @@ const CreatePost = ({ fetchPosts }) => {
                 <button
                     onClick={ () => setViewCreatingPostModel(true) }
                 >
-                    { `Quoi de neuf, ${ user && user?.displayName ? user?.displayName : 'User' }` }
+                    { `Quoi de neuf, ${ user && user?.displayName ? user?.displayName : 'User' } ?` }
                 </button>
             </div>
             <div className='line' />

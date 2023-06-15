@@ -46,8 +46,7 @@ const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts }) => {
         .catch((err) => console.error(err));
     };
 
-    const handlePostContent = (e) => {
-        setPostContent(e.target.value);
+    const handlePostContent = () => {
         autoResize();
         setPostDetails(
             (prev) => ({ ...prev, postContent: postContent })
@@ -57,6 +56,12 @@ const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts }) => {
     const handlePostImage = (e) => {
         setPostImage(e.target.files[0]);
     };
+
+    useEffect(() => {
+        setPostDetails(
+            (prev) => ({ ...prev, postContent: postContent })
+        );
+    }, [postContent]);
 
     useEffect(() => {
         const uploadPostImage = () => {
@@ -84,7 +89,6 @@ const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts }) => {
         };
         postImage && uploadPostImage();
     }, [postImage]);
-    
     
     return (
         <div className='create-new-post-wrapper'>
@@ -116,7 +120,10 @@ const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts }) => {
                             name='postContent'
                             ref={ inputRef }
                             value={ postContent }
-                            onChange={ handlePostContent }
+                            onChange={ (e) => {
+                                setPostContent(e.target.value);
+                                handlePostContent();
+                            }}
                             style={{ resize: 'none' }}
                         ></textarea>
                         <div className='add-photo'>
