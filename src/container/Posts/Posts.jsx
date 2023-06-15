@@ -7,7 +7,7 @@ import NoPost from './utils/NoPost';
 
 
 
-const Posts = ({ loading, posts }) => {
+const Posts = ({ loading, posts, fecthPosts }) => {
     return (
         <div className='posts-container'>
             {   loading ?
@@ -20,7 +20,11 @@ const Posts = ({ loading, posts }) => {
                 <NoPost />
                 :
                 posts.toReversed().map(post => (
-                    <Post key={ post.id } post={ post } />
+                    <Post 
+                        key={ post.id } 
+                        post={ post } 
+                        fecthPosts={ fecthPosts }
+                    />
                 ))
             }
         </div>

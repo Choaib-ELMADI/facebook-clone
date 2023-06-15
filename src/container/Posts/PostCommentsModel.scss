@@ -77,7 +77,10 @@
                     height: 100%;
                     background: var(--gray_color_3);
                     padding: .5rem;
+                    padding-bottom: 2rem;
                     border-radius: 10px;
+
+                    position: relative;
                     
                     textarea {
                         width: 100%;
@@ -86,6 +89,20 @@
                         background: transparent;
                         font-size: var(--small__size);
                         resize: none;
+                    }
+
+                    button {
+                        position: absolute;
+                        right: .75rem;
+                        bottom: .5rem;
+                        background: transparent;
+                        border: 0;
+                        outline: none;
+                        cursor: pointer;
+
+                        &:disabled {
+                            display: none;
+                        }
                     }
                 }
             }

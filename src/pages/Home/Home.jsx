@@ -39,7 +39,11 @@ export default function Home() {
         <div className='home__main-section-content'>
           <StoriesAndReels />
           <CreatePost fetchPosts={ fetchPosts } />
-          <Posts loading={ loading } posts={ posts } />
+          <Posts 
+            loading={ loading } 
+            posts={ posts } 
+            fetchPosts={ fetchPosts }
+          />
         </div>
       </div>
       <RightSidebar />

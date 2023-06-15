@@ -1,6 +1,10 @@
 import React, { useState, useRef } from 'react';
 import { CgClose } from 'react-icons/cg';
+import { IoSend } from 'react-icons/io5';
+import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 
+import { db } from '../../config/firebase';
+import { useAuth } from '../../context/AuthContext';
 import './PostCommentsModel.scss';
 import Post from './Post';
 import images from '../../constants/images';
@@ -10,6 +14,7 @@ import images from '../../constants/images';
 const PostCommentsModel = ({ post, setViewPostCommentsModel }) => {
     const [comment, setComment] = useState('');
     const commentInputRef = useRef(null);
+    const { user } = useAuth();
 
     const handleCommentChange = (e) => {
         setComment(e.target.value);
@@ -21,6 +26,20 @@ const PostCommentsModel = ({ post, setViewPostCommentsModel }) => {
         const current = item.current;
         current.style.height = 'auto';
         current.style.height = `${ current.scrollHeight }px`;
+    };
+
+    const handleAddComment = () => {
+        updateDoc(doc(db, 'posts', post.id), {
+            comments: arrayUnion(
+                {
+                    userName: user.displayName || 'User',
+                    time: new Date().getTime(),
+                    comment: comment,
+                }
+            ),
+        })
+            .then(() => setComment(''))
+            .catch((err) => console.error(err));
     };
 
     return (
@@ -61,6 +80,12 @@ const PostCommentsModel = ({ post, setViewPostCommentsModel }) => {
                                 required
                             >
                             </textarea>
+                            <button
+                                disabled={ comment === '' }
+                                onClick={ handleAddComment }
+                            >
+                                <IoSend size={ 20 } color='var(--main_bleu_color)' />
+                            </button>
                         </div>
                     </div>
                 </div>

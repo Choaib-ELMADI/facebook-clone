@@ -8,7 +8,7 @@ import PostCommentsModel from './PostCommentsModel';
 
 
 
-const Post = ({ post, inTheComments }) => {
+const Post = ({ post, inTheComments, fetchPosts }) => {
     const [hidePost, setHidePost] = useState(false);
     const [viewPostCommentsModel, setViewPostCommentsModel] = useState(false);
 
@@ -51,6 +51,7 @@ const Post = ({ post, inTheComments }) => {
                 <PostCommentsModel 
                     post={ post }
                     setViewPostCommentsModel={ setViewPostCommentsModel }
+                    fetchPosts={ fetchPosts }
                 />
             }
         </div>
