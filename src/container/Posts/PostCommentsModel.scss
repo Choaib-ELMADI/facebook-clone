@@ -7,9 +7,8 @@
     width: 100%;
     height: 100%;
     min-height: 100vh;
-    padding: 6rem 1rem;
+    padding: 1rem 1rem 0 1rem;
     background: var(--white_color_trs);
-    overflow-y: scroll;
     
     &::-webkit-scrollbar {
         width: 8px;
@@ -32,9 +31,76 @@
     &__container {
         width: 100%;
         max-width: 800px;
-        padding-bottom: 1rem;
         border-radius: 12px;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         background: var(--white_color);
+
+        .post-owner {
+            text-align: center;
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray_color_2);
+            font-size: var(--normal__size);
+        }
+
+        .post-comment-group {
+            height: 400px;
+            overflow-y: scroll;
+
+            &::-webkit-scrollbar {
+                width: 8px;
+                background: transparent;
+            }
+            &::-webkit-scrollbar-thumb {
+                background: transparent;
+                border-radius: 8px;
+            }
+        
+            &:hover {
+                &::-webkit-scrollbar-thumb {
+                    background: var(--gray_color_2);
+                }
+            }
+        }
+
+        .add-new-comment {
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+            border-top: 1.5px solid var(--gray_color_2);
+            height: 80px;
+            background: var(--white_color);
+            box-shadow: rgba(0, 0, 0, .5) 0px -25px 20px -35px;
+            padding: .5rem 1rem;
+
+            display: flex;
+            gap: .5rem;
+
+            &__user-profile {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                overflow: hidden;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+
+            &__input {
+                width: 100%;
+                height: 100%;
+                background: var(--gray_color_3);
+                padding: .5rem;
+                border-radius: 10px;
+                
+                input {
+                    border: 0;
+                    outline: none;
+                    background: transparent;
+                    font-size: var(--small__size);
+                }
+            }
+        }
     }
 }
