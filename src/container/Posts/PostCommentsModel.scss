@@ -40,6 +40,64 @@
         .post-comment-group {
             height: 400px;
             overflow-y: scroll;
+
+            .comments-group {
+                display: flex;
+                flex-direction: column;
+                gap: 1.5rem;
+                padding: .5rem 1rem;
+
+                &__comment {
+                    display: flex;
+                    gap: .5rem;
+
+                    .comment-owner-profile {
+                        width: 35px;
+                        height: 35px;
+                        border-radius: 50%;
+                        overflow: hidden;
+
+                        img {
+                            width: 100%;
+                            height: 100%;
+                            object-fit: cover;
+                        }
+                    }
+
+                    .comment-details {
+                        div:nth-child(1) {
+                            background: var(--gray_color_2);
+                            border-radius: 10px;
+                            padding: .5rem;
+                            
+                            p:nth-child(1) {
+                                font-weight: bold;
+                                margin-bottom: .15rem;
+                            }
+                        }
+
+                        .time {
+                            font-size: var(--verysmall__size);
+                            margin-top: .25rem;
+                            text-transform: capitalize;
+                        }
+                    }
+
+                    &:last-child {
+                        margin-bottom: 1rem;
+                    }
+                }
+
+                &__no-comment {
+                    color: var(--gray_color);
+                    text-align: center;
+                    margin-bottom: 2rem;
+                    background: var(--gray_color_2);
+                    padding: 1rem;
+                    border-radius: 10px;
+                    font-size: calc(var(--normal__size) + 4px);
+                }
+            }
         }
 
         .add-new-comment {

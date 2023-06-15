@@ -7,7 +7,7 @@ import NoPost from './utils/NoPost';
 
 
 
-const Posts = ({ loading, posts, fecthPosts }) => {
+const Posts = ({ loading, posts, fetchPosts }) => {
     return (
         <div className='posts-container'>
             {   loading ?
@@ -23,7 +23,7 @@ const Posts = ({ loading, posts, fecthPosts }) => {
                     <Post 
                         key={ post.id } 
                         post={ post } 
-                        fecthPosts={ fecthPosts }
+                        fetchPosts={ fetchPosts }
                     />
                 ))
             }

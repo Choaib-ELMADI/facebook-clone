@@ -12,7 +12,12 @@ const PostBody = ({ post }) => {
             }
             <div className='post-body__image'>
                 { hasImage &&
-                    <img src={ post.image } alt="post image" draggable='false' />
+                    <img 
+                        src={ post.image } 
+                        loading='lazy'
+                        alt="post image" 
+                        draggable='false' 
+                    />
                 }
             </div>
         </div>

@@ -1,4 +1,5 @@
 import React, { useState, useRef } from 'react';
+import moment from 'moment';
 import { CgClose } from 'react-icons/cg';
 import { IoSend } from 'react-icons/io5';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
@@ -11,7 +12,7 @@ import images from '../../constants/images';
 
 
 
-const PostCommentsModel = ({ post, setViewPostCommentsModel }) => {
+const PostCommentsModel = ({ post, setViewPostCommentsModel, fetchPosts }) => {
     const [comment, setComment] = useState('');
     const commentInputRef = useRef(null);
     const { user } = useAuth();
@@ -38,7 +39,10 @@ const PostCommentsModel = ({ post, setViewPostCommentsModel }) => {
                 }
             ),
         })
-            .then(() => setComment(''))
+            .then(() => {
+                setComment('');
+                fetchPosts();
+            })
             .catch((err) => console.error(err));
     };
 
@@ -58,10 +62,25 @@ const PostCommentsModel = ({ post, setViewPostCommentsModel }) => {
                         inTheComments={ true }
                     />
                     <div className='comments-group'>
-                        <p>comment</p>
-                        <p>comment</p>
-                        <p>comment</p>
-                        <p>comment</p>
+                        {
+                            !post.comments ?
+                            <div className='comments-group__no-comment'>No comments yet</div>
+                            :
+                            post.comments.map((comment, i) => (
+                                <div key={ `comment-${ i }` } className='comments-group__comment'>
+                                    <div className='comment-owner-profile'>
+                                        <img src={ images.user_1 } alt="user profile" />
+                                    </div>
+                                    <div className='comment-details'>
+                                        <div>
+                                            <p>{ comment.userName }</p>
+                                            <p>{ comment.comment }</p>
+                                        </div>
+                                        <p className='time'>{ moment(comment.time).fromNow() }</p>
+                                    </div>                                    
+                                </div>
+                            ))
+                        }
                     </div>
                 </div>
                 <div className='add-new-comment'>
