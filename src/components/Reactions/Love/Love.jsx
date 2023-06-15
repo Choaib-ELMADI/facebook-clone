@@ -17,7 +17,7 @@ const loveVariants = {
 
 
 
-const Love = ({ zIndex, animate, setUserReaction, setGiveReaction }) => {
+const Love = ({ zIndex, animate, setUserReaction, setGiveReaction, handleUserReaction }) => {
     return (
         <div 
             className='reaction love-reaction' 
@@ -25,6 +25,7 @@ const Love = ({ zIndex, animate, setUserReaction, setGiveReaction }) => {
             onClick={ () => {
                 setGiveReaction(false);
                 setUserReaction('love');
+                handleUserReaction();
             }}
         >
             { animate ? 

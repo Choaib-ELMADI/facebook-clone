@@ -19,7 +19,7 @@ const Posts = ({ loading, posts }) => {
                 posts.length < 1 ?
                 <NoPost />
                 :
-                posts.map(post => (
+                posts.toReversed().map(post => (
                     <Post key={ post.id } post={ post } />
                 ))
             }

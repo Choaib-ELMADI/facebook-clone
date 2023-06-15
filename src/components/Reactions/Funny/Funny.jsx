@@ -4,7 +4,7 @@ import './Funny.scss';
 
 
 
-const Funny = ({ zIndex, setUserReaction, setGiveReaction }) => {
+const Funny = ({ zIndex, setUserReaction, setGiveReaction, handleUserReaction }) => {
     return (
         <div 
             className='reaction funny-reaction'
@@ -12,6 +12,7 @@ const Funny = ({ zIndex, setUserReaction, setGiveReaction }) => {
             onClick={ () => {
                 setGiveReaction(false);
                 setUserReaction('funny');
+                handleUserReaction();
             }}
         >
             <div className="eye left" />

@@ -4,7 +4,7 @@ import './Grrr.scss';
 
 
 
-const Grrr = ({ zIndex, setUserReaction, setGiveReaction }) => {
+const Grrr = ({ zIndex, setUserReaction, setGiveReaction, handleUserReaction }) => {
     return (
         <div
             className='reaction grrr-reaction' 
@@ -12,6 +12,7 @@ const Grrr = ({ zIndex, setUserReaction, setGiveReaction }) => {
             onClick={ () => {
                 setGiveReaction(false);
                 setUserReaction('grrr');
+                handleUserReaction();
             }}
         >
             <div className="face">

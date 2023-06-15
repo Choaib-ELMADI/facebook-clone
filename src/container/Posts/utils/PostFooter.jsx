@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaRegCommentAlt } from 'react-icons/fa';
 import { RiShareForwardLine } from 'react-icons/ri';
 import { motion } from 'framer-motion';
 import { AiOutlineLike } from 'react-icons/ai';
+import { updateDoc, doc, getDoc } from 'firebase/firestore';
 
+import { db } from '../../../config/firebase';
 import { Care, Funny, Grrr, Like, Love } from '../../../components/index';
 const containerVariants = {
     hidden: {
@@ -50,7 +52,7 @@ const reactions = {
 
 
 
-const GiveReaction = ({ setGiveReaction, setUserReaction }) => {
+const GiveReaction = ({ setGiveReaction, setUserReaction, handleUserReaction }) => {
     return (
         <motion.div 
             className='give-reaction-wrapper'
@@ -63,23 +65,28 @@ const GiveReaction = ({ setGiveReaction, setUserReaction }) => {
                 animate={ true } 
                 setUserReaction={ setUserReaction } 
                 setGiveReaction={ setGiveReaction } 
+                handleUserReaction={ handleUserReaction }
             />
             <Love 
                 animate={ true } 
                 setUserReaction={ setUserReaction } 
                 setGiveReaction={ setGiveReaction } 
+                handleUserReaction={ handleUserReaction }
             />
             <Care 
                 setUserReaction={ setUserReaction } 
                 setGiveReaction={ setGiveReaction } 
+                handleUserReaction={ handleUserReaction }
             />
             <Funny 
                 setUserReaction={ setUserReaction } 
                 setGiveReaction={ setGiveReaction } 
+                handleUserReaction={ handleUserReaction }
             />
             <Grrr 
                 setUserReaction={ setUserReaction } 
                 setGiveReaction={ setGiveReaction } 
+                handleUserReaction={ handleUserReaction }
             />
         </motion.div>
     )
@@ -88,6 +95,18 @@ const GiveReaction = ({ setGiveReaction, setUserReaction }) => {
 const PostFooter = ({ post, inTheComments, setViewPostCommentsModel }) => {
     const [giveReaction, setGiveReaction] = useState(false);
     const [userReaction, setUserReaction] = useState(null);
+
+    useEffect(() => {
+        handleUserReaction();
+    }, [userReaction]);
+
+    const handleUserReaction = () => {
+        // updateDoc(doc(db, 'posts', post.id), {
+        //     reaction: userReaction,
+        // })
+        //     .then(() => {})
+        //     .catch((err) => console.error(err));
+    };
 
     return (
         <div 
@@ -120,6 +139,7 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel }) => {
                             setUserReaction(null);
                         } else {
                             setUserReaction('like');
+                            handleUserReaction();
                         }
                         setGiveReaction(false);
                     }}
@@ -131,10 +151,7 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel }) => {
                     { userReaction ? reactions[userReaction].title : "J'aime" }
                 </button>
                 <button
-                    onClick={ () => {
-                        setViewPostCommentsModel(true);
-                        console.log(post.id);
-                    }}
+                    onClick={ () => setViewPostCommentsModel(true) }
                     disabled={ inTheComments }
                 >
                     <FaRegCommentAlt size={ 20 } />
@@ -150,6 +167,7 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel }) => {
                 <GiveReaction 
                     setGiveReaction={ setGiveReaction } 
                     setUserReaction={ setUserReaction } 
+                    handleUserReaction={ handleUserReaction }
                 />
             }
         </div>
