@@ -48,7 +48,10 @@ const Post = ({ post, inTheComments }) => {
             }
             {
                 viewPostCommentsModel &&
-                <PostCommentsModel post={ post } />
+                <PostCommentsModel 
+                    post={ post }
+                    setViewPostCommentsModel={ setViewPostCommentsModel }
+                />
             }
         </div>
     );

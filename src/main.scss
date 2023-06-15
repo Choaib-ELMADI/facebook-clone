@@ -41,13 +41,22 @@
     font-family: var(--main_font);
 
     &::-webkit-scrollbar {
-        width: 8px;
-        background: transparent;
+        display: none;
     }
-    &::-webkit-scrollbar-thumb {
-        background: yellow;
-        border-radius: 5px;
-    }
+    // &::-webkit-scrollbar {
+    //     width: 8px;
+    //     background: transparent;
+    // }
+    // &::-webkit-scrollbar-thumb {
+    //     background: transparent;
+    //     border-radius: 8px;
+    // }
+
+    // &:hover {
+    //     &::-webkit-scrollbar-thumb {
+    //         background: var(--gray_color_2);
+    //     }
+    // }
 }
 
 body {
