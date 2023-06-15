@@ -8,7 +8,7 @@ import { TbWorld } from 'react-icons/tb';
 import { FaCalendarCheck } from 'react-icons/fa';
 import { BsMessenger } from 'react-icons/bs';
 
-import images from '../../constants/images';
+import images from '../../../constants/images';
 
 
 
@@ -61,7 +61,7 @@ const UserModel = ({ post, userModelRef }) => {
     );
 };
 
-const PostHeader = ({ post, setHidePost }) => {
+const PostHeader = ({ post, setHidePost, inTheComments }) => {
     const [viewUserModel, setViewUserModel] = useState(false);
     const headerProfileRef = useRef(null);
     const userModelRef = useRef(null);
@@ -117,7 +117,12 @@ const PostHeader = ({ post, setHidePost }) => {
             <div 
                 className='post-header__remove'
                 onClick={ () => setHidePost(true) }
-            ><CgClose size={ 26 } /></div>
+                style={{
+                    display: inTheComments ? 'none' : ''
+                }}
+            >
+                <CgClose size={ 26 } />
+            </div>
         </div>
     );
 };

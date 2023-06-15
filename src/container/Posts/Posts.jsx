@@ -1,9 +1,9 @@
 import React from 'react';
 
-import './Post.scss';
+import './Posts.scss';
 import Post from './Post';
-import PostModel from './PostModel';
-import NoPost from './NoPost';
+import PostModel from './utils/PostModel';
+import NoPost from './utils/NoPost';
 
 
 

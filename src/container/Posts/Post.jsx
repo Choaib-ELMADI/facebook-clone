@@ -1,22 +1,38 @@
 import React, { useState } from 'react';
 
 import './Post.scss';
-import PostHeader from './PostHeader';
-import PostBody from './PostBody';
-import PostFooter from './PostFooter';
+import PostHeader from './utils/PostHeader';
+import PostBody from './utils/PostBody';
+import PostFooter from './utils/PostFooter';
+import PostCommentsModel from './PostCommentsModel';
 
 
 
-const Post = ({ post }) => {
+const Post = ({ post, inTheComments }) => {
     const [hidePost, setHidePost] = useState(false);
+    const [viewPostCommentsModel, setViewPostCommentsModel] = useState(false);
 
     return (
-        <div className='posts-container__post'>
+        <div 
+            className='posts-container__post'
+            style={{
+                boxShadow: inTheComments ? 'none' : 'rgba(0, 0, 0, 0.24) 0px 3px 8px'
+            }}
+        >
             { !hidePost ?
                 <>
-                    <PostHeader post={ post } setHidePost={ setHidePost } />
+                    <PostHeader 
+                        post={ post } 
+                        setHidePost={ setHidePost }
+                        setViewPostCommentsModel={ setViewPostCommentsModel }
+                        inTheComments={ inTheComments }
+                    />
                     <PostBody post={ post } />
-                    <PostFooter />
+                    <PostFooter 
+                        post={ post }
+                        inTheComments={ inTheComments }
+                        setViewPostCommentsModel={ setViewPostCommentsModel }
+                    />
                 </>
                 :
                 <div className='post-hided'>
@@ -29,6 +45,10 @@ const Post = ({ post }) => {
                         onClick={ () => setHidePost(false) }
                     >Annuler</button>
                 </div>
+            }
+            {
+                viewPostCommentsModel &&
+                <PostCommentsModel post={ post } />
             }
         </div>
     );

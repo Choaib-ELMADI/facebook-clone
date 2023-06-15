@@ -50,12 +50,12 @@
         gap: .1rem;
 
         .post-type {
-            font-size: calc(var(--small__size) + 2px);
+            font-size: clamp(.95rem, .15vw, 1rem);
             font-weight: bold;
             color: var(--gray_color);
             opacity: .8;
             flex-grow: 1;
-            padding: .5rem;
+            padding: .5rem clamp(.2rem, .25vw, .5rem);
             transition: .2s;
             cursor: pointer;
             border-radius: 8px;
@@ -63,10 +63,16 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            gap: .5rem;
+            gap: clamp(.25rem, .15vw, .5rem);
 
             &:hover {
                 background: var(--gray_color_3);
+            }
+
+            @media screen and (width <= 510px) {
+                &:nth-child(1) {
+                    display: none;
+                }
             }
         }
     }

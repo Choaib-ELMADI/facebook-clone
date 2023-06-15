@@ -4,7 +4,7 @@ import { RiShareForwardLine } from 'react-icons/ri';
 import { motion } from 'framer-motion';
 import { AiOutlineLike } from 'react-icons/ai';
 
-import { Care, Funny, Grrr, Like, Love } from '../../components/index';
+import { Care, Funny, Grrr, Like, Love } from '../../../components/index';
 const containerVariants = {
     hidden: {
         opacity: 0,
@@ -85,7 +85,7 @@ const GiveReaction = ({ setGiveReaction, setUserReaction }) => {
     )
 };
 
-const PostFooter = () => {
+const PostFooter = ({ post, inTheComments, setViewPostCommentsModel }) => {
     const [giveReaction, setGiveReaction] = useState(false);
     const [userReaction, setUserReaction] = useState(null);
 
@@ -130,7 +130,13 @@ const PostFooter = () => {
                     { userReaction ? reactions[userReaction].icon : <AiOutlineLike size={ 24 } /> }
                     { userReaction ? reactions[userReaction].title : "J'aime" }
                 </button>
-                <button>
+                <button
+                    onClick={ () => {
+                        setViewPostCommentsModel(true);
+                        console.log(post.id);
+                    }}
+                    disabled={ inTheComments }
+                >
                     <FaRegCommentAlt size={ 20 } />
                     Commenter
                 </button>
