@@ -86,6 +86,7 @@
                 p:nth-child(1) {
                     font-weight: bold;
                     font-size: calc(var(--small__size) + 1px);
+                    text-transform: capitalize;
                 }
 
                 p:nth-child(2) {

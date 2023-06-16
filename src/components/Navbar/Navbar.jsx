@@ -148,10 +148,13 @@ const Navbar = () => {
                 >
                     <img
                         className='image'
+                        src={ user && user?.photoURL ? user?.photoURL : images.user_1 } 
+                        alt=''
+                        loading='lazy'
+                        referrerPolicy='no-referrer'
+                        style={{ background: 'var(--gray_color)' }}
                         width={ 40 }
                         height={ 40 }
-                        alt={ user?.displayName ? user?.displayName : 'user' }
-                        src={ user?.photoURL ? user?.photoURL : images.user_1 }
                     />
                 </div>
             </div>

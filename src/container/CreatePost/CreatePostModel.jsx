@@ -22,6 +22,7 @@ const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts }) => {
         hasImage: false,
         email: user.email,
         name: user.displayName || 'User',
+        profile: user.photoURL,
         time: new Date().getTime(),
     });
 
@@ -104,11 +105,14 @@ const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts }) => {
                 </div>
                 <div className="user">
                     <img 
-                        src={ user && user?.photoURL ? user.photoURL : images.user_1 } 
-                        alt={ user && user?.displayName ? user.displayName : 'user profile' } 
+                        src={ user && user?.photoURL ? user?.photoURL : images.user_1 } 
+                        alt=''
+                        loading='lazy'
+                        referrerPolicy="no-referrer"
+                        style={{ background: 'var(--gray_color)' }}
                     />
                     <div className='user__details'>
-                        <p>{ user && user?.displayName ? user.displayName : 'user' }</p>
+                        <p>{ user && user?.displayName ? user?.displayName : 'user' }</p>
                         <p>Public</p>
                     </div>
                 </div>
@@ -116,7 +120,7 @@ const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts }) => {
                     <div className='container'>
                         <textarea 
                             type="text" 
-                            placeholder={ `Quoi de neuf, ${ user && user?.displayName ? user.displayName : 'User' }` }
+                            placeholder={ `Quoi de neuf, ${ user && user?.displayName ? user.displayName : 'User' } ?` }
                             name='postContent'
                             ref={ inputRef }
                             value={ postContent }

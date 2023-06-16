@@ -13,7 +13,7 @@ import images from '../../../constants/images';
 
 
 const UserModel = ({ post, userModelRef }) => {
-    const { postContent, email, name, time, hasImage } = post;
+    const { postContent, email, name, profile, time, hasImage } = post;
 
     return (
         <div 
@@ -23,8 +23,11 @@ const UserModel = ({ post, userModelRef }) => {
             <div className='user-model__details'>
                 <div className='profile'>
                     <img 
-                        src={ images.user_1 } 
-                        alt={ name }
+                        src={ profile ? profile : images.user_1 } 
+                        alt=''
+                        loading='lazy'
+                        referrerPolicy="no-referrer"
+                        style={{ background: 'var(--gray_color)' }}
                     />
                 </div>
                 <div className='info'>
@@ -66,7 +69,7 @@ const PostHeader = ({ post, setHidePost, inTheComments }) => {
     const headerProfileRef = useRef(null);
     const userModelRef = useRef(null);
 
-    const { postContent, email, name, time, hasImage } = post;
+    const { postContent, email, name, profile, time, hasImage } = post;
 
     useEffect(() => {
         const headerProfile = headerProfileRef.current;
@@ -103,7 +106,13 @@ const PostHeader = ({ post, setHidePost, inTheComments }) => {
                 className='post-header__profile'
                 ref={ headerProfileRef }
             >
-                <img src={ images.user_1 } alt={ name } />
+                <img 
+                    src={ profile ? profile : images.user_1 } 
+                    alt=''
+                    loading='lazy'
+                    referrerPolicy="no-referrer"
+                    style={{ background: 'var(--gray_color)' }}
+                />
             </div>
             <div className='post-header__user-date'>
                 <p>{ name }</p>

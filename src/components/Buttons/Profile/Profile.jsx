@@ -31,8 +31,11 @@ const Profile = () => {
                 <Link to='/home' className='header'>
                     <img 
                         className='image'
-                        alt={ user.displayName ? user.displayName : 'user' }
-                        src={ !user.photoURL ? images.user_1 : user.photoURL }
+                        src={ user && user?.photoURL ? user?.photoURL : images.user_1 } 
+                        alt=''
+                        loading='lazy'
+                        referrerPolicy="no-referrer"
+                        style={{ background: 'var(--gray_color)' }}
                     />
                     <p>{ user.displayName ? user.displayName : 'User' }</p>
                 </Link>

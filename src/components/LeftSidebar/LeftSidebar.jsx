@@ -73,10 +73,13 @@ const LeftSidebar = () => {
             <div className='left-sidebar-content'>
                 <Link to='#' className='left-sidebar-content__item'>
                     <img 
-                        src={ user && user?.photoURL ? user.photoURL : images.user_1 } 
-                        alt={ user && user?.displayName ? user.displayName : 'user profile' }
+                        src={ user && user?.photoURL ? user?.photoURL : images.user_1 } 
+                        alt=''
+                        loading='lazy'
+                        referrerPolicy="no-referrer"
+                        style={{ background: 'var(--gray_color)' }}
                     />
-                    <p>{ user && user?.displayName ? user.displayName : 'user profile' }</p>
+                    <p>{ user && user?.displayName ? user?.displayName : 'user profile' }</p>
                 </Link>
                 {
                     links.map((link) => (

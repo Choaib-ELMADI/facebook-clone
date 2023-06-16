@@ -165,8 +165,10 @@ const StoriesAndReels = () => {
                     <div className='story create-story'>
                         <div className='user-create-story'>
                             <img 
-                                src={ user && user?.photoURL ? user.photoURL : images.user_1 } 
-                                alt={ user && user?.displayName ? user.displayName : 'user profile' }
+                                src={ user && user?.photoURL ? user?.photoURL : images.user_1 } 
+                                alt=''
+                                loading='lazy'
+                                referrerPolicy="no-referrer"
                             />
                         </div>
                         <p>Créer une story</p>

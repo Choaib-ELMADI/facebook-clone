@@ -19,7 +19,10 @@ const CreatePost = ({ fetchPosts }) => {
             <div className='user-select'>
                 <img 
                     src={ user && user?.photoURL ? user?.photoURL : images.user_1 } 
-                    alt={ user && user?.displayName ? user?.displayName : 'user profile' }
+                    alt=''
+                    loading='lazy'
+                    referrerPolicy="no-referrer"
+                    style={{ background: 'var(--gray_color)' }}
                 />
                 <button
                     onClick={ () => setViewCreatingPostModel(true) }

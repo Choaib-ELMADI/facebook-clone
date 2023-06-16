@@ -29,6 +29,11 @@
             border-radius: 8px;
             transition: .2s;
 
+            &:nth-child(1) {
+                p {
+                    text-transform: capitalize;
+                }
+            }
             
             img {
                 width: 35px;
