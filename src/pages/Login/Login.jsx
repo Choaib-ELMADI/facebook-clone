@@ -87,27 +87,6 @@ export default function Login() {
             });
     };
 
-    const signInWithFacebook = () => {
-        signInWithPopup(auth, facebookProvider)
-            .then((userCredentials) => {
-                const user = userCredentials.user;
-                return user;
-            })
-            .then((user) => {
-                setDoc(doc(db, "users", user.uid), {
-                    id: user.uid,
-                    name: user.displayName,
-                    email: user.email,
-                    photo: user.photoURL
-                });
-
-                navigate('/home');
-            })
-            .catch((err) => {
-                console.error(err);
-            });
-    };
-
     return (
         <div className='login-page'>
             <div className='welcoming'>
@@ -149,20 +128,16 @@ export default function Login() {
                         </span>
                     </div>
                     <button type='submit'>Créer compte</button>
-                    <button 
-                        type='button'
-                        onClick={ handleSignIn }
-                    >Se connecter</button>
                 </form>
 
                 <div className='line' />
 
-                <button
-                    onClick={ signInWithFacebook }
-                    style={{ background: '#0177fd33' }}
+                <button 
+                    type='button'
+                    onClick={ handleSignIn }
                 >
-                    <FaFacebook color='#0178fd' size={ 25 } />
-                    Se connecter avec Facebook
+                    Se connecter
+                    <span>(déjà compte)</span>
                 </button>
 
                 <button
