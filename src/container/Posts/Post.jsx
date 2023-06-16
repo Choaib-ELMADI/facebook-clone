@@ -32,6 +32,7 @@ const Post = ({ post, inTheComments, fetchPosts }) => {
                         post={ post }
                         inTheComments={ inTheComments }
                         setViewPostCommentsModel={ setViewPostCommentsModel }
+                        fetchPosts={ fetchPosts }
                     />
                 </>
                 :

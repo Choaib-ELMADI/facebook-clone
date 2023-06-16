@@ -3,10 +3,11 @@ import { FaRegCommentAlt } from 'react-icons/fa';
 import { RiShareForwardLine } from 'react-icons/ri';
 import { motion } from 'framer-motion';
 import { AiOutlineLike } from 'react-icons/ai';
-import { updateDoc, doc, getDoc } from 'firebase/firestore';
+import { updateDoc, doc, getDoc, arrayUnion } from 'firebase/firestore';
 
 import { db } from '../../../config/firebase';
 import { Care, Funny, Grrr, Like, Love } from '../../../components/index';
+import { useAuth } from '../../../context/AuthContext';
 const containerVariants = {
     hidden: {
         opacity: 0,
@@ -92,20 +93,62 @@ const GiveReaction = ({ setGiveReaction, setUserReaction, handleUserReaction }) 
     )
 };
 
-const PostFooter = ({ post, inTheComments, setViewPostCommentsModel }) => {
+const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, fetchPosts }) => {
+    const { user } = useAuth();
     const [giveReaction, setGiveReaction] = useState(false);
-    const [userReaction, setUserReaction] = useState(null);
+    const [userReaction, setUserReaction] = useState(
+        post.reactions[
+            post.reactions.findIndex(
+                (reaction) => reaction.userId === user.uid
+            )
+        ].reactionType
+    );
 
     useEffect(() => {
         handleUserReaction();
-    }, [userReaction]);
-
+    }, [userReaction]); 
+    
     const handleUserReaction = () => {
-        // updateDoc(doc(db, 'posts', post.id), {
-        //     reaction: userReaction,
-        // })
-        //     .then(() => {})
-        //     .catch((err) => console.error(err));
+        const reaction = {
+            postId: post.id,
+            userId: user.uid,
+            reactionType: userReaction,
+        };
+    
+        const postRef = doc(db, 'posts', post.id);
+    
+        getDoc(postRef)
+            .then((docSnapshot) => {
+                if (docSnapshot.exists()) {
+                    const existingReactions = docSnapshot.data().reactions || [];
+    
+                    const reactionIndex = existingReactions.findIndex(
+                        (reaction) => reaction.userId === user.uid
+                    );
+    
+                    if (reactionIndex > -1) {
+                        existingReactions[reactionIndex].reactionType = userReaction;
+                    } else {
+                        existingReactions.push(reaction);
+                    }
+    
+                    updateDoc(postRef, {
+                        reactions: existingReactions,
+                    })
+                        .then(() => fetchPosts())
+                        .catch((err) => console.error(err));
+                }
+            })
+            .catch((err) => console.error(err));
+    };
+
+    const handleLikeReaction = () => {
+        if (userReaction) {
+            setUserReaction(null);
+        } else {
+            setUserReaction('like');
+        }
+        setGiveReaction(false);
     };
 
     return (
@@ -125,7 +168,7 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel }) => {
                         <FaRegCommentAlt size={ 17 } />
                     </p>
                     <p className='share'>
-                        10
+                        100
                         <RiShareForwardLine size={ 24 } />
                     </p>
                 </div>
@@ -134,15 +177,7 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel }) => {
             <div className='action-buttons'>
                 <button
                     onPointerEnter={ () => setGiveReaction(true) }
-                    onClick={ () => {
-                        if (userReaction) {
-                            setUserReaction(null);
-                        } else {
-                            setUserReaction('like');
-                            handleUserReaction();
-                        }
-                        setGiveReaction(false);
-                    }}
+                    onClick={ handleLikeReaction }
                     style={{
                         color: userReaction ? reactions[userReaction].color : ''
                     }}
