@@ -96,14 +96,14 @@ const GiveReaction = ({ setGiveReaction, setUserReaction, handleUserReaction }) 
 const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, fetchPosts }) => {
     const { user } = useAuth();
     const [giveReaction, setGiveReaction] = useState(false);
-    const reactionCounts = {
-        like: 0,
-        love: 0,
-        care: 0,
-        sad: 0,
-        funny: 0,
-        grrr: 0,
-    };
+    const [reactionCounts, setReactionCounts] = useState([
+        {type: 'like',  count: 0},
+        {type: 'love',  count: 0},
+        {type: 'care',  count: 0},
+        {type: 'sad',   count: 0},
+        {type: 'grrr',  count: 0},
+        {type: 'wouah', count: 0},
+    ]);
     const [userReaction, setUserReaction] = useState(
         post.reactions[
             post.reactions.findIndex(
@@ -114,7 +114,11 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, fetchPosts 
 
     useEffect(() => {
         handleUserReaction();
-    }, [userReaction, reactionCounts]); 
+    }, [userReaction]);
+
+    // useEffect(() => {
+    //     handleReactionCounts();
+    // }, [userReaction]); 
     
     const handleUserReaction = () => {
         const reaction = {
@@ -130,19 +134,6 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, fetchPosts 
                 if (docSnapshot.exists()) {
                     const existingReactions = docSnapshot.data().reactions || [];
 
-                    const availableReactions = [];
-                    existingReactions.forEach(reaction => {
-                        availableReactions.push(reaction.reactionType);
-                    })
-                    for (let i = 0; i < availableReactions.length; i++) {
-                        const reaction = availableReactions[i];
-                
-                        if (reactionCounts.hasOwnProperty(reaction)) {
-                                reactionCounts[reaction]++;
-                        }
-                    }
-                    console.table(reactionCounts);
-    
                     const reactionIndex = existingReactions.findIndex(
                         (reaction) => reaction.userId === user.uid
                     );
@@ -172,6 +163,35 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, fetchPosts 
         setGiveReaction(false);
     };
 
+    // const handleReactionCounts = () => {    
+    //     const postRef = doc(db, 'posts', post.id);
+    
+    //     getDoc(postRef)
+    //         .then((docSnapshot) => {
+    //             if (docSnapshot.exists()) {
+    //                 const existingReactions = docSnapshot.data().reactions || [];
+
+    //                 const availableReactions = [];
+    //                 existingReactions.forEach(reaction => {
+    //                     availableReactions.push(reaction.reactionType);
+    //                 })
+
+    //                 for (let i = 0; i < availableReactions.length; i++) {
+    //                     const reaction = availableReactions[i];
+    //                     const reactionObj = reactionCounts.find(obj => obj.type === reaction);
+
+    //                     if (reactionObj) {
+    //                         setReactionCounts([
+    //                             ...reactionCounts,
+    //                             { type: reactionObj.type, count: reactionObj.count++ }
+    //                         ]);
+    //                     }
+    //                 }
+    //             }
+    //         })
+    //         .catch((err) => console.error(err));
+    // };
+
     return (
         <div 
             className='post-footer'
@@ -179,6 +199,7 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, fetchPosts 
         >
             <div className='post-numbers'>
                 <div className='reactions'>
+                    { console.table(reactionCounts) }
                     <Like zIndex={ 3 } />
                     <Love zIndex={ 2 } />
                     <Care zIndex={ 1 } />
