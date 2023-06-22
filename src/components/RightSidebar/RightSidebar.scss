@@ -1,6 +1,7 @@
 .sidebar.right {
     width: 300px;
     height: calc(100vh - 65px);
+    padding-top: 1rem;
     overflow-y: scroll;
 
     &::-webkit-scrollbar-thumb {

@@ -1,6 +1,7 @@
 .sidebar.left {
     width: 300px;
     height: calc(100vh - 65px);
+    padding-top: 1rem;
     overflow-y: scroll;
 
     .left-sidebar-content {
@@ -15,7 +16,7 @@
             padding: .45rem;
             text-decoration: none;
             color: var(--gray_color);
-            font-size: calc(var(--normal__size) - 2.8px);
+            font-size: calc(var(--normal__size) - 5px);
             font-weight: 600;
             border-radius: 8px;
             transition: .2s;
@@ -56,7 +57,7 @@
 
             h2 {
                 color: var(--gray_color);
-                font-size: var(--normal__size);
+                font-size: calc(var(--normal__size) - 2px);
                 margin-block: .75rem;
             }
 
@@ -80,6 +81,7 @@
                 & > * {
                     color: var(--gray_color);
                     text-decoration: none;
+                    font-size: calc(var(--verysmall__size) + 2px);
                 }
 
                 a {
