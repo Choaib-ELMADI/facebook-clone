@@ -22,7 +22,7 @@ import { Notification, Messenger, Profile, Menu } from '../index';
 const links = [
     {
         name: 'home',
-        link: 'home',
+        link: '',
         fill: <AiFillHome size={ 30 } />,
         outline: <AiOutlineHome size={ 30 } />
     },
@@ -92,11 +92,12 @@ const Navbar = () => {
     return (
         <nav className="navbar">
             <div className='search-section'>
-                <Link to='/home' className='logo'>
+                <Link to='/' className='logo'>
                     <img 
                         className='image'
                         src={ images.facebook_logo }
                         alt='Facebook'
+                        draggable='false'
                     />
                 </Link>
                 <div 
@@ -155,6 +156,7 @@ const Navbar = () => {
                         style={{ background: 'var(--gray_color)' }}
                         width={ 40 }
                         height={ 40 }
+                        draggable='false'
                     />
                 </div>
             </div>

@@ -12,12 +12,20 @@ const StoryOrReel = ({ props }) => {
             className='story-reel-wrapper'
         >
             <div className='overlay' />
-            <img src={ props.cover } alt={ props.userName } />
+            <img 
+                src={ props.cover } 
+                alt={ props.userName } 
+                draggable='false'
+            />
             { props.type === 'stories' ?
                 <>
                     <p className='display-user-name'>{ props.userName }</p> 
                     <div className='display-user-profile'>
-                        <img src={ props.userProfile } alt={ props.userName } />
+                        <img 
+                            src={ props.userProfile } 
+                            alt={ props.userName } 
+                            draggable='false'
+                        />
                     </div>
                 </> 
                 :

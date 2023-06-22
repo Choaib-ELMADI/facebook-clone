@@ -28,7 +28,7 @@ const Profile = () => {
     return (
         <div className='profile-container'>
             <div className='profiles'>
-                <Link to='/home' className='header'>
+                <Link to='/' className='header'>
                     <img 
                         className='image'
                         src={ user && user?.photoURL ? user?.photoURL : images.user_1 } 
@@ -36,6 +36,7 @@ const Profile = () => {
                         loading='lazy'
                         referrerPolicy="no-referrer"
                         style={{ background: 'var(--gray_color)' }}
+                        draggable='false'
                     />
                     <p>{ user.displayName ? user.displayName : 'User' }</p>
                 </Link>

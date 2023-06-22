@@ -101,7 +101,7 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, fetchPosts 
             post.reactions.findIndex(
                 (reaction) => reaction.userId === user.uid
             )
-        ].reactionType
+        ]?.reactionType || null
     );
 
     useEffect(() => {

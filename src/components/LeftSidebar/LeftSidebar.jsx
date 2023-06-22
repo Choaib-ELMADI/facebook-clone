@@ -78,6 +78,7 @@ const LeftSidebar = () => {
                         loading='lazy'
                         referrerPolicy="no-referrer"
                         style={{ background: 'var(--gray_color)' }}
+                        draggable='false'
                     />
                     <p>{ user && user?.displayName ? user?.displayName : 'user profile' }</p>
                 </Link>

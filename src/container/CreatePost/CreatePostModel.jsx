@@ -22,6 +22,7 @@ const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts }) => {
         hasImage: false,
         email: user.email,
         name: user.displayName || 'User',
+        reactions: [],
         profile: user.photoURL,
         time: new Date().getTime(),
     });
@@ -110,6 +111,7 @@ const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts }) => {
                         loading='lazy'
                         referrerPolicy="no-referrer"
                         style={{ background: 'var(--gray_color)' }}
+                        draggable='false'
                     />
                     <div className='user__details'>
                         <p>{ user && user?.displayName ? user?.displayName : 'user' }</p>

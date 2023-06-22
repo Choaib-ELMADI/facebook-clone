@@ -10,24 +10,24 @@ const RequireAuth = ({ children }) => {
   const { user } = useAuth();
 
   return (
-    user ? children : <Navigate to='/' />
+    user ? children : <Navigate to='/login' />
   )
 };
 const RequireLogOut = ({ children }) => {
   const { user } = useAuth();
 
   return (
-    !user ? children : <Navigate to='/home' />
+    !user ? children : <Navigate to='/' />
   )
 };
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/'>
-      <Route index element={ <RequireLogOut><Login /></RequireLogOut>} />
+      <Route index element={ <RequireAuth><Home /></RequireAuth>} />
 
-      <Route path='home'>
-        <Route index element={ <RequireAuth><Home /></RequireAuth> } />
+      <Route path='login'>
+        <Route index element={ <RequireLogOut><Login /></RequireLogOut> } />
       </Route>
 
       <Route path='friends'>

@@ -169,6 +169,7 @@ const StoriesAndReels = () => {
                                 alt=''
                                 loading='lazy'
                                 referrerPolicy="no-referrer"
+                                draggable='false'
                             />
                         </div>
                         <p>Créer une story</p>

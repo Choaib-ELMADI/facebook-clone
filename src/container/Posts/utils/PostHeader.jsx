@@ -28,6 +28,7 @@ const UserModel = ({ post, userModelRef }) => {
                         loading='lazy'
                         referrerPolicy="no-referrer"
                         style={{ background: 'var(--gray_color)' }}
+                        draggable='false'
                     />
                 </div>
                 <div className='info'>
@@ -112,6 +113,7 @@ const PostHeader = ({ post, setHidePost, inTheComments }) => {
                     loading='lazy'
                     referrerPolicy="no-referrer"
                     style={{ background: 'var(--gray_color)' }}
+                    draggable='false'
                 />
             </div>
             <div className='post-header__user-date'>

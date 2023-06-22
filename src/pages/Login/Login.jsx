@@ -1,12 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
-import { FaFacebook } from 'react-icons/fa';
 import { AiOutlineEyeInvisible, AiOutlineEye } from 'react-icons/ai';
 import { createUserWithEmailAndPassword, signInWithPopup, signInWithEmailAndPassword } from 'firebase/auth';
 import { setDoc, doc } from "firebase/firestore";
 
-import { auth, googleProvider, facebookProvider, db } from '../../config/firebase';
+import { auth, googleProvider, db } from '../../config/firebase';
 import './Login.scss';
 
 
@@ -40,7 +39,7 @@ export default function Login() {
                     photo: user.photoURL
                 });
 
-                navigate('/home');
+                navigate('/');
             })
             .catch((err) => console.log(err));
     };
@@ -59,7 +58,7 @@ export default function Login() {
                     photo: user.photoURL
                 });
 
-                navigate('/home');
+                navigate('/');
             })
             .catch((err) => {
                 console.error(err);
@@ -80,7 +79,7 @@ export default function Login() {
                     photo: user.photoURL
                 });
 
-                navigate('/home');
+                navigate('/');
             })
             .catch((err) => {
                 console.error(err);

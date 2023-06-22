@@ -23,6 +23,7 @@ const CreatePost = ({ fetchPosts }) => {
                     loading='lazy'
                     referrerPolicy="no-referrer"
                     style={{ background: 'var(--gray_color)' }}
+                    draggable='false'
                 />
                 <button
                     onClick={ () => setViewCreatingPostModel(true) }
