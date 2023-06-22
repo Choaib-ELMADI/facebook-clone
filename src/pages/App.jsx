@@ -1,7 +1,7 @@
 import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider, Navigate } from 'react-router-dom';
 
 import { AuthContextProvider } from '../context/AuthContext';
-import { Login, Home, Friends, Watch, Marketplace, Games, Bookmarks } from './index';
+import { Login, Home, Friends, Watch, Marketplace, Games, Bookmarks, NotFound } from './index';
 import { useAuth } from '../context/AuthContext';
 
 
@@ -49,6 +49,8 @@ const router = createBrowserRouter(
       <Route path='bookmarks'>
         <Route index element={ <RequireAuth><Bookmarks /></RequireAuth> } />
       </Route>
+
+      <Route path='*' element={ <RequireAuth><NotFound /></RequireAuth> } />
     </Route>
   )
 );

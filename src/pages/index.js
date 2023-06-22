@@ -7,3 +7,5 @@ export { default as Watch }       from './Watch/Watch';
 export { default as Marketplace } from './Marketplace/Marketplace';
 export { default as Games }       from './Games/Games';
 export { default as Bookmarks }   from './Bookmarks/Bookmarks';
+
+export { default as NotFound  }   from './404/404';
