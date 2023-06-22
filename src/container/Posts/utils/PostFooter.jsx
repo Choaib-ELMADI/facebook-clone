@@ -114,7 +114,7 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, fetchPosts 
 
     useEffect(() => {
         handleUserReaction();
-    }, [userReaction]); 
+    }, [userReaction, reactionCounts]); 
     
     const handleUserReaction = () => {
         const reaction = {
