@@ -85,7 +85,7 @@ const PostCommentsModel = ({ post, setViewPostCommentsModel, fetchPosts }) => {
                                         <div className='comment-details__user-name-comment'>
                                             <div className='is-owner'>
                                                 <p>{ comment.userName }</p>
-                                                { user.uid === comment.userId && <p>Auteur</p>}
+                                                { post.userId === comment.userId && <p>Auteur</p>}
                                             </div>
                                             <p>{ comment.comment }</p>
                                         </div>

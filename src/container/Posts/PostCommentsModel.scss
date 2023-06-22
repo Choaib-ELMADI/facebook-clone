@@ -18,7 +18,7 @@
         width: 100%;
         max-width: 700px;
         height: max-content;
-        max-height: 600px;
+        max-height: 580px;
         border-radius: 12px;
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         background: var(--white_color);
@@ -81,10 +81,9 @@
                                 }
 
                                 p:nth-child(2) {
-                                    background: var(--gray_color_1);
                                     background: var(--main_bleu_background);
-                                    padding: .2rem .25rem .1rem .25rem;
                                     border-radius: 4px;
+                                    padding: .1rem .35rem;
                                     font-size: calc(var(--verysmall__size) + 3px);
                                     color: var(--main_bleu_color);
                                 }

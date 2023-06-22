@@ -19,12 +19,13 @@ const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts }) => {
     const inputRef = useRef(null);
     const { user } = useAuth();
     const [postDetails, setPostDetails] = useState({
-        hasImage: false,
-        email: user.email,
         name: user.displayName || 'User',
-        reactions: [],
+        email: user.email,
         profile: user.photoURL,
+        userId: user.uid,
         time: new Date().getTime(),
+        hasImage: false,
+        reactions: [],
         reactionTypes: {
             like: 0,
             love: 0,
