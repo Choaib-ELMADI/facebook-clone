@@ -34,8 +34,11 @@ const PostCommentsModel = ({ post, setViewPostCommentsModel, fetchPosts }) => {
             comments: arrayUnion(
                 {
                     userName: user.displayName || 'User',
-                    time: new Date().getTime(),
+                    userProfile: user.photoURL,
+                    userId: user.uid,
+                    postId: post.id,
                     comment: comment,
+                    time: new Date().getTime(),
                 }
             ),
         })
@@ -69,11 +72,21 @@ const PostCommentsModel = ({ post, setViewPostCommentsModel, fetchPosts }) => {
                             post.comments.toReversed().map((comment, i) => (
                                 <div key={ `comment-${ i }` } className='comments-group__comment'>
                                     <div className='comment-owner-profile'>
-                                        <img src={ images.user_1 } alt="user profile" />
+                                        <img 
+                                            src={ comment.userProfile ? comment.userProfile : images.user_1 } 
+                                            alt=''
+                                            loading='lazy'
+                                            referrerPolicy='no-referrer'
+                                            style={{ background: 'var(--gray_color)' }}
+                                            draggable='false'
+                                        />
                                     </div>
                                     <div className='comment-details'>
-                                        <div>
-                                            <p>{ comment.userName }</p>
+                                        <div className='comment-details__user-name-comment'>
+                                            <div className='is-owner'>
+                                                <p>{ comment.userName }</p>
+                                                { user.uid === comment.userId && <p>Auteur</p>}
+                                            </div>
                                             <p>{ comment.comment }</p>
                                         </div>
                                         <p className='time'>{ moment(comment.time).fromNow() }</p>
@@ -86,7 +99,14 @@ const PostCommentsModel = ({ post, setViewPostCommentsModel, fetchPosts }) => {
                 <div className='add-new-comment'>
                     <div className='add-new-comment__wrapper'>
                         <div className='add-new-comment__wrapper__user-profile'>
-                            <img src={ images.user_1 } alt="user profile" />
+                            <img 
+                                src={ user?.photoURL ? user?.photoURL : images.user_1 } 
+                                alt=''
+                                loading='lazy'
+                                referrerPolicy='no-referrer'
+                                style={{ background: 'var(--gray_color)' }}
+                                draggable='false'
+                            />
                         </div>
                         <div className='add-new-comment__wrapper__input'>
                             <textarea

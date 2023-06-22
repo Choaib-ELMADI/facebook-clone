@@ -164,12 +164,8 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, fetchPosts 
                 </div>
                 <div className='comments-share'>
                     <p className='comments'>
-                        10
+                        { post.comments ? post.comments.length : 0 }
                         <FaRegCommentAlt size={ 17 } />
-                    </p>
-                    <p className='share'>
-                        100
-                        <RiShareForwardLine size={ 24 } />
                     </p>
                 </div>
             </div>

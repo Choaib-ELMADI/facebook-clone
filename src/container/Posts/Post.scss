@@ -284,17 +284,13 @@
                 p {
                     display: flex;
                     align-items: center;
-                    gap: .25rem;
+                    gap: .5rem;
                     color: var(--gray_color_1);
                     font-size: calc(var(--small__size) + 1px);
                     cursor: pointer;
 
                     &:hover {
                         text-decoration: underline;
-                    }
-
-                    &:nth-child(2) {
-                        gap: 0;
                     }
                 }
             }

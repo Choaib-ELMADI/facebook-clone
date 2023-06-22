@@ -65,14 +65,29 @@
                     }
 
                     .comment-details {
-                        div:nth-child(1) {
-                            background: var(--gray_color_2);
+                        &__user-name-comment {
+                            background: var(--gray_color_3);
                             border-radius: 10px;
                             padding: .5rem;
-                            
-                            p:nth-child(1) {
-                                font-weight: bold;
-                                margin-bottom: .15rem;
+
+                            .is-owner {
+                                display: flex;
+                                align-items: center;
+                                gap: .5rem;
+                                margin-bottom: .25rem;
+
+                                p:nth-child(1) {
+                                    font-weight: bold;
+                                }
+
+                                p:nth-child(2) {
+                                    background: var(--gray_color_1);
+                                    background: var(--main_bleu_background);
+                                    padding: .2rem .25rem .1rem .25rem;
+                                    border-radius: 4px;
+                                    font-size: calc(var(--verysmall__size) + 3px);
+                                    color: var(--main_bleu_color);
+                                }
                             }
                         }
 
