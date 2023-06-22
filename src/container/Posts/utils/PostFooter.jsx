@@ -103,9 +103,12 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, fetchPosts 
             )
         ]?.reactionType || null
     );
+    const [previousUserReaction, setPreviousUserReaction] = useState(null);
 
     useEffect(() => {
         handleUserReaction();
+        // handleReactionTypes(previousUserReaction, userReaction);
+        setPreviousUserReaction(userReaction);
     }, [userReaction]); 
     
     const handleUserReaction = () => {
@@ -150,6 +153,35 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, fetchPosts 
         }
         setGiveReaction(false);
     };
+
+    // const handleReactionTypes = (previousUserReaction, userReaction) => {
+    //     if (userReaction === null){
+    //         return;
+    //     }
+
+    //     const postRef = doc(db, 'posts', post.id);
+        
+    //     if ((previousUserReaction === null) && (userReaction !== null)) {
+    //         updateDoc(postRef, {
+    //             reactionTypes: {
+    //                 ...post.reactionTypes,
+    //                 [userReaction]: post.reactionTypes[userReaction] < 1 ? 0 : post.reactionTypes[userReaction] - 1,
+    //             }
+    //         })
+    //             .then(() => console.log('Reaction counts updated'))
+    //             .catch((err) => console.error(err));
+    //     } else {
+    //         updateDoc(postRef, {
+    //             reactionTypes: {
+    //                 ...post.reactionTypes,
+    //                 [previousUserReaction]: post.reactionTypes[previousUserReaction] < 1 ? 0 : post.reactionTypes[previousUserReaction] - 1,
+    //                 [userReaction]: post.reactionTypes[userReaction] + 1,
+    //             }
+    //         })
+    //             .then(() => console.log('Reaction counts updated'))
+    //             .catch((err) => console.error(err));
+    //     }
+    // }
 
     return (
         <div 

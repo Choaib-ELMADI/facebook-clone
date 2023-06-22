@@ -25,6 +25,14 @@ const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts }) => {
         reactions: [],
         profile: user.photoURL,
         time: new Date().getTime(),
+        reactionTypes: {
+            like: 0,
+            love: 0,
+            care: 0,
+            sad: 0,
+            grrr: 0,
+            wouah: 0
+        },
     });
 
     const autoResize = () => {

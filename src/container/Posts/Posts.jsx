@@ -8,25 +8,36 @@ import NoPost from './utils/NoPost';
 
 
 const Posts = ({ loading, posts, fetchPosts }) => {
-    return (
-        <div className='posts-container'>
-            {   loading ?
+    const renderContent = () => {
+        if (loading) {
+            return (
                 <>
                     <PostModel />
                     <PostModel />
                 </>
-                :
-                posts.length < 1 ?
+            );
+        }
+
+        if (posts.length < 1) {
+            return (
                 <NoPost />
-                :
-                posts.toReversed().map(post => (
-                    <Post 
-                        key={ post.id } 
-                        post={ post } 
-                        fetchPosts={ fetchPosts }
-                    />
-                ))
-            }
+            );
+        }
+
+        return (
+            posts.toReversed().map(post => (
+                <Post 
+                    key={ post.id } 
+                    post={ post } 
+                    fetchPosts={ fetchPosts }
+                />
+            ))
+        );
+    };
+
+    return (
+        <div className='posts-container'>
+            { renderContent() }
         </div>
     );
 };
