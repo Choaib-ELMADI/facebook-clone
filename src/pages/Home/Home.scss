@@ -20,7 +20,7 @@
         .home__main-section-content {
             margin: 0 auto;
             width: 100%;
-            max-width: 600px;
+            max-width: 550px;
             height: max-content;
             padding-bottom: 2rem;
             
@@ -36,12 +36,12 @@
         
     }
 
-    @media screen and (width <= 1250px) {
+    @media screen and (width <= 1100px) {
         .sidebar.left {
             display: none;
         }
     }
-    @media screen and (width <= 1000px) {
+    @media screen and (width <= 900px) {
         justify-content: center;
 
         .sidebar.right {

@@ -1,16 +1,7 @@
 .sidebar.left {
-    width: 340px;
+    width: 300px;
     height: calc(100vh - 65px);
     overflow-y: scroll;
-
-    &::-webkit-scrollbar-thumb {
-        background: transparent;
-    }
-    &:hover {
-        &::-webkit-scrollbar-thumb {
-            background: var(--gray_color_2);
-        }
-    }
 
     .left-sidebar-content {
         width: 100%;
