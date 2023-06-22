@@ -26,14 +26,6 @@ const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts }) => {
         time: new Date().getTime(),
         hasImage: false,
         reactions: [],
-        reactionTypes: {
-            like: 0,
-            love: 0,
-            care: 0,
-            sad: 0,
-            grrr: 0,
-            wouah: 0
-        },
     });
 
     const autoResize = () => {

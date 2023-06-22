@@ -3,7 +3,7 @@ import { FaRegCommentAlt } from 'react-icons/fa';
 import { RiShareForwardLine } from 'react-icons/ri';
 import { motion } from 'framer-motion';
 import { AiOutlineLike } from 'react-icons/ai';
-import { updateDoc, doc, getDoc, arrayUnion } from 'firebase/firestore';
+import { updateDoc, doc, getDoc, arrayUnion, collection } from 'firebase/firestore';
 
 import { db } from '../../../config/firebase';
 import { Care, Funny, Grrr, Like, Love } from '../../../components/index';
@@ -96,6 +96,14 @@ const GiveReaction = ({ setGiveReaction, setUserReaction, handleUserReaction }) 
 const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, fetchPosts }) => {
     const { user } = useAuth();
     const [giveReaction, setGiveReaction] = useState(false);
+    const reactionCounts = {
+        like: 0,
+        love: 0,
+        care: 0,
+        sad: 0,
+        funny: 0,
+        grrr: 0,
+    };
     const [userReaction, setUserReaction] = useState(
         post.reactions[
             post.reactions.findIndex(
@@ -121,6 +129,19 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, fetchPosts 
             .then((docSnapshot) => {
                 if (docSnapshot.exists()) {
                     const existingReactions = docSnapshot.data().reactions || [];
+
+                    const availableReactions = [];
+                    existingReactions.forEach(reaction => {
+                        availableReactions.push(reaction.reactionType);
+                    })
+                    for (let i = 0; i < availableReactions.length; i++) {
+                        const reaction = availableReactions[i];
+                
+                        if (reactionCounts.hasOwnProperty(reaction)) {
+                                reactionCounts[reaction]++;
+                        }
+                    }
+                    console.table(reactionCounts);
     
                     const reactionIndex = existingReactions.findIndex(
                         (reaction) => reaction.userId === user.uid
