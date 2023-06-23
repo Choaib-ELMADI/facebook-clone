@@ -35,7 +35,8 @@ const SpecificCommentResponses = ({ comment, targetComment, setTargetComment }) 
                 onClick={ () => setTargetComment(comment.time) }
             >
                 <BsArrowReturnRight size={ 20 } />
-                { `Voir les ${ responses.length } réponses` }
+                { responses.length === 1 && 'Voir la réponse' }
+                { responses.length > 1   && `Voir les ${ responses.length } réponses` }
             </button>
         )
     );
