@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { getDocs, collection } from 'firebase/firestore';
 
+import { db } from '../../config/firebase';
 import './Post.scss';
 import { PostHeader, PostBody, PostFooter, PostCommentsModel } from './utils/index';
 
@@ -8,6 +10,25 @@ import { PostHeader, PostBody, PostFooter, PostCommentsModel } from './utils/ind
 const Post = ({ post, inTheComments, fetchPosts }) => {
     const [hidePost, setHidePost] = useState(false);
     const [viewPostCommentsModel, setViewPostCommentsModel] = useState(false);
+    const [responsesNumber, setResponsesNumber] = useState(0);
+
+    useEffect(() => {
+        fetchResponsesNumber();
+    }, []);
+
+    const fetchResponsesNumber = () => {
+        let i=0;
+        getDocs(collection(db, 'responses'))
+            .then((res) => {
+                if (res) {
+                    res.forEach((doc) => {
+                        i++;
+                    })
+                    setResponsesNumber(i);
+                }
+            })
+            .catch((err) => console.error(err));
+    };
 
     return (
         <div 
@@ -30,6 +51,7 @@ const Post = ({ post, inTheComments, fetchPosts }) => {
                         inTheComments={ inTheComments }
                         setViewPostCommentsModel={ setViewPostCommentsModel }
                         fetchPosts={ fetchPosts }
+                        responsesNumber={ responsesNumber }
                     />
                 </>
             )}
@@ -52,6 +74,7 @@ const Post = ({ post, inTheComments, fetchPosts }) => {
                     post={ post }
                     setViewPostCommentsModel={ setViewPostCommentsModel }
                     fetchPosts={ fetchPosts }
+                    fetchResponsesNumber={ fetchResponsesNumber }
                 />
             )}
         </div>

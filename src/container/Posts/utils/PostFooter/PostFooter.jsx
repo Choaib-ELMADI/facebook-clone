@@ -3,7 +3,7 @@ import { FaRegCommentAlt } from 'react-icons/fa';
 import { RiShareForwardLine } from 'react-icons/ri';
 import { motion } from 'framer-motion';
 import { AiOutlineLike } from 'react-icons/ai';
-import { updateDoc, doc, getDoc } from 'firebase/firestore';
+import { updateDoc, doc, getDoc, collection, getDocs } from 'firebase/firestore';
 
 import './PostFooter.scss';
 import { db } from '../../../../config/firebase';
@@ -94,7 +94,7 @@ const GiveReaction = ({ setGiveReaction, setUserReaction, handleUserReaction }) 
     )
 };
 
-const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, fetchPosts }) => {
+const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, fetchPosts, responsesNumber }) => {
     const { user } = useAuth();
     const [giveReaction, setGiveReaction] = useState(false);
     const [reactionCounts, setReactionCounts] = useState([
@@ -116,10 +116,6 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, fetchPosts 
     useEffect(() => {
         handleUserReaction();
     }, [userReaction]);
-
-    // useEffect(() => {
-    //     handleReactionCounts();
-    // }, [userReaction]); 
     
     const handleUserReaction = () => {
         const reaction = {
@@ -164,35 +160,6 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, fetchPosts 
         setGiveReaction(false);
     };
 
-    // const handleReactionCounts = () => {    
-    //     const postRef = doc(db, 'posts', post.id);
-    
-    //     getDoc(postRef)
-    //         .then((docSnapshot) => {
-    //             if (docSnapshot.exists()) {
-    //                 const existingReactions = docSnapshot.data().reactions || [];
-
-    //                 const availableReactions = [];
-    //                 existingReactions.forEach(reaction => {
-    //                     availableReactions.push(reaction.reactionType);
-    //                 })
-
-    //                 for (let i = 0; i < availableReactions.length; i++) {
-    //                     const reaction = availableReactions[i];
-    //                     const reactionObj = reactionCounts.find(obj => obj.type === reaction);
-
-    //                     if (reactionObj) {
-    //                         setReactionCounts([
-    //                             ...reactionCounts,
-    //                             { type: reactionObj.type, count: reactionObj.count++ }
-    //                         ]);
-    //                     }
-    //                 }
-    //             }
-    //         })
-    //         .catch((err) => console.error(err));
-    // };
-
     return (
         <div 
             className='post-footer'
@@ -206,7 +173,7 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, fetchPosts 
                 </div>
                 <div className='comments-share'>
                     <p className='comments'>
-                        { post.comments ? post.comments.length : 0 }
+                        { post.comments ? post.comments.length + responsesNumber : 0 }
                         <FaRegCommentAlt size={ 17 } />
                     </p>
                 </div>

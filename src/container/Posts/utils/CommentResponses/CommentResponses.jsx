@@ -10,7 +10,7 @@ import { useAuth } from '../../../../context/AuthContext';
 
 
 
-const CommentResponses = ({ post, autoResize, showTextInput, setShowTextInput, targetComment }) => {
+const CommentResponses = ({ post, autoResize, fetchResponsesNumber, targetComment }) => {
     const { user } = useAuth();
     const responseInputRef = useRef(null);
 
@@ -29,6 +29,7 @@ const CommentResponses = ({ post, autoResize, showTextInput, setShowTextInput, t
 
     useEffect(() => {
         fetchResponses();
+        fetchResponsesNumber();
     }, []);    
 
     const handleResponseChange = (e) => {
@@ -48,6 +49,7 @@ const CommentResponses = ({ post, autoResize, showTextInput, setShowTextInput, t
             .then(() => {
                 setResponse('');
                 fetchResponses();
+                fetchResponsesNumber();
             })
             .catch((err) => console.error(err));
     };

@@ -14,7 +14,7 @@ import Post from '../../Post';
 
 
 
-const PostCommentsModel = ({ post, setViewPostCommentsModel, fetchPosts }) => {
+const PostCommentsModel = ({ post, setViewPostCommentsModel, fetchPosts, fetchResponsesNumber }) => {
     const [comment, setComment] = useState('');
     const commentInputRef = useRef(null);
     const [showTextInput, setShowTextInput] = useState(false);
@@ -123,6 +123,7 @@ const PostCommentsModel = ({ post, setViewPostCommentsModel, fetchPosts }) => {
                                                 showTextInput={ showTextInput }
                                                 setShowTextInput={ setShowTextInput }
                                                 targetComment={ targetComment }
+                                                fetchResponsesNumber={ fetchResponsesNumber }
                                             />
                                         )}
                                     </div>                                   
