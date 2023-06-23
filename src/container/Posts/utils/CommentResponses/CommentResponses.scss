@@ -1,0 +1,53 @@
+.comment-responses {
+    margin-top: .5rem;
+
+    .add-response {
+        display: flex;
+        gap: .25rem;
+        margin-top: .5rem;
+        width: 100%;
+
+        img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        &__input {
+            position: relative;
+            width: 100%;
+
+            textarea {
+                width: 100%;
+                height: 100%;
+                padding: .5rem;
+                padding-bottom: 1.5rem;
+                resize: none;
+                border: 0;
+                outline: none;
+                background: var(--gray_color_4);
+                border-radius: 12px;
+                font-size: var(--small__size);
+            }
+
+            button {
+                position: absolute;
+                bottom: .75rem;
+                right: .75rem;
+
+                background: transparent;
+                border: 0;
+                outline: none;
+                cursor: pointer;
+
+                display: grid;
+                place-items: center;
+
+                &:disabled {
+                    display: none;
+                }
+            }
+        }
+    }
+}

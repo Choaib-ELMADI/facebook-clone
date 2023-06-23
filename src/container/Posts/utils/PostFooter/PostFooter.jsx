@@ -200,7 +200,6 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, fetchPosts 
         >
             <div className='post-numbers'>
                 <div className='reactions'>
-                    { console.table(reactionCounts) }
                     <Like zIndex={ 3 } />
                     <Love zIndex={ 2 } />
                     <Care zIndex={ 1 } />

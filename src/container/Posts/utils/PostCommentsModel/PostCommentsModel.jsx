@@ -2,19 +2,23 @@ import React, { useState, useRef } from 'react';
 import moment from 'moment';
 import { CgClose } from 'react-icons/cg';
 import { IoSend } from 'react-icons/io5';
+import { GiMicrophone } from 'react-icons/gi';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 
-import { db } from '../../../../config/firebase';
+import CommentResponses from '../CommentResponses/CommentResponses';
 import { useAuth } from '../../../../context/AuthContext';
+import images from '../../../../constants/images';
+import { db } from '../../../../config/firebase';
 import './PostCommentsModel.scss';
 import Post from '../../Post';
-import images from '../../../../constants/images';
 
 
 
 const PostCommentsModel = ({ post, setViewPostCommentsModel, fetchPosts }) => {
     const [comment, setComment] = useState('');
     const commentInputRef = useRef(null);
+    const [showTextInput, setShowTextInput] = useState(false);
+    const [targetComment, setTargetComment] = useState(null);
     const { user } = useAuth();
 
     const handleCommentChange = (e) => {
@@ -47,6 +51,11 @@ const PostCommentsModel = ({ post, setViewPostCommentsModel, fetchPosts }) => {
                 fetchPosts();
             })
             .catch((err) => console.error(err));
+    };
+
+    const handleCommentResponse = (id) => {
+        setShowTextInput(true);
+        setTargetComment(id);
     };
 
     return (
@@ -82,15 +91,41 @@ const PostCommentsModel = ({ post, setViewPostCommentsModel, fetchPosts }) => {
                                         />
                                     </div>
                                     <div className='comment-details'>
-                                        <div className='comment-details__user-name-comment'>
+                                        <div className={
+                                                `${ 
+                                                    comment.time === targetComment ? 
+                                                    'comment-details__user-name-comment active' : 
+                                                    'comment-details__user-name-comment' 
+                                                }`
+                                            }>
                                             <div className='is-owner'>
+                                                { post.userId === comment.userId && (
+                                                    <p className='for-owner'>
+                                                        <GiMicrophone />
+                                                        Author
+                                                    </p>
+                                                )}
                                                 <p>{ comment.userName }</p>
-                                                { post.userId === comment.userId && <p>Auteur</p>}
                                             </div>
                                             <p>{ comment.comment }</p>
                                         </div>
-                                        <p className='time'>{ moment(comment.time).fromNow() }</p>
-                                    </div>                                    
+                                        <div className='response'>
+                                            <p className='time'>{ moment(comment.time).fromNow() }</p>
+                                            <button
+                                                onClick={ () => handleCommentResponse(comment.time) }
+                                            >Répondre</button>
+                                        </div>
+
+                                        { (comment.time === targetComment) && (
+                                            <CommentResponses
+                                                post={ post }
+                                                autoResize={ autoResize }
+                                                showTextInput={ showTextInput }
+                                                setShowTextInput={ setShowTextInput }
+                                                targetComment={ targetComment }
+                                            />
+                                        )}
+                                    </div>                                   
                                 </div>
                             ))
                         }
