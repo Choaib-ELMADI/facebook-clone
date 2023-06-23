@@ -6,6 +6,7 @@ import './UserProfile.scss';
 import { Navbar } from '../index';
 import { db } from '../../config/firebase';
 import images from '../../constants/images';
+import { Header } from './utils/index';
 
 
 
@@ -18,7 +19,9 @@ const UserProfile = () => {
                 <div className='user-profile-page'>
                     <Navbar />
                     <div className='user-profile-page__content'>
-                        <h1>{ userInfo.userName ? userInfo.userName : 'User' }</h1>
+                        <Header userInfo={ userInfo } />
+
+                        {/* <h1>{ userInfo.userName ? userInfo.userName : 'User' }</h1>
                         <h2>{ userInfo.userLink }</h2>
                         <h3>{ userInfo.userEmail }</h3>
                         <h4>{ userInfo.userId }</h4>
@@ -30,7 +33,7 @@ const UserProfile = () => {
                             width={ 100 }
                             height={ 100 }
                             draggable='false'
-                        />
+                        /> */}
                     </div>
                 </div>
             )}

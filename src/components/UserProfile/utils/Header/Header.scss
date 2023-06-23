@@ -1,0 +1,130 @@
+.user-profile-page__content__header {
+    .profile-banner {
+        width: 100%;
+        aspect-ratio: 2.3;
+        object-fit: cover;
+        border-radius: 12px;
+    }
+
+    .header-info {
+        width: 100%;
+        max-width: 880px;
+        margin: 0 auto;
+        margin-top: .5rem;
+
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+
+        .user-profile {
+            width: 164px;
+            height: 164px;
+            border-radius: 50%;
+            border: 4px solid var(--main_background_color);
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                border-radius: 50%;
+            }
+        }
+
+        .user-data {
+            display: flex;
+            flex-direction: column;
+
+            .user-name {
+                display: flex;
+                flex-direction: column;
+
+                h1 {
+                    text-transform: capitalize;
+                }
+
+                h2 {
+                    font-weight: 500;
+                    text-transform: lowercase;
+                }
+            }
+
+            p {
+                color: var(--gray_color);
+                margin-block: .5rem;
+
+                span {
+                    cursor: pointer;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+
+            .friends-placeholder {
+                display: flex;
+
+                .friend {
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 50%;
+                    border: 2px solid var(--main_background_color);
+
+                    img {
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        border-radius: 50%;
+                    }
+                }
+            }
+        }
+
+        .action-btns {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+
+            button {
+                padding: .5rem .75rem;
+                border-radius: 4px;
+                cursor: pointer;
+                border: 0;
+                outline: none;
+                background: var(--gray_color_2);
+                font-size: calc(var(--small__size) - 1px);
+                color: var(--black_color);
+                font-weight: 600;
+
+                display: flex;
+                align-items: center;
+                gap: .35rem;
+
+                &.message {
+                    background: var(--main_bleu_color);
+                    color: var(--white_color);
+                    margin-left: .5rem;
+                }
+            }
+        }
+
+        @media screen and (width <= 900px) {
+            flex-direction: column;
+            transform: translateY(-90px);
+
+            .user-data {
+                align-items: center;
+
+                .user-name {
+                    flex-direction: row;
+                    align-items: center;
+                    gap: .25rem;
+                }
+            }
+
+            .action-btns {
+                margin-left: 0;
+            }
+        }
+    }
+}
