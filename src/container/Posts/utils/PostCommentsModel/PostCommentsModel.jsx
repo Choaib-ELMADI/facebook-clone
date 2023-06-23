@@ -4,11 +4,11 @@ import { CgClose } from 'react-icons/cg';
 import { IoSend } from 'react-icons/io5';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 
-import { db } from '../../config/firebase';
-import { useAuth } from '../../context/AuthContext';
+import { db } from '../../../../config/firebase';
+import { useAuth } from '../../../../context/AuthContext';
 import './PostCommentsModel.scss';
-import Post from './Post';
-import images from '../../constants/images';
+import Post from '../../Post';
+import images from '../../../../constants/images';
 
 
 

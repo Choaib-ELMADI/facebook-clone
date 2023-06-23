@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './Grrr.scss';
+import '../reaction.scss';
 
 
 

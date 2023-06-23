@@ -1,6 +1,7 @@
 import React from 'react';
 
 import './Funny.scss';
+import '../reaction.scss';
 
 
 

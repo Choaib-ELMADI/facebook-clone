@@ -3,6 +3,7 @@ import { AiFillHeart } from 'react-icons/ai';
 import { motion } from 'framer-motion';
 
 import './Love.scss';
+import '../reaction.scss';
 const loveVariants = {
     visible: {
         scale: [1, .8, 1.1],

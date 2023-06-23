@@ -3,6 +3,7 @@ import { AiFillLike } from 'react-icons/ai';
 import { motion } from 'framer-motion';
 
 import './Like.scss';
+import '../reaction.scss';
 const likeVariants = {
     visible: {
         scale: [1, .8, 1.1],

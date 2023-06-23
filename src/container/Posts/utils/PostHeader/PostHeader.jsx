@@ -8,12 +8,13 @@ import { TbWorld } from 'react-icons/tb';
 import { FaCalendarCheck } from 'react-icons/fa';
 import { BsMessenger } from 'react-icons/bs';
 
-import images from '../../../constants/images';
+import images from '../../../../constants/images';
+import './PostHeader.scss';
 
 
 
 const UserModel = ({ post, userModelRef }) => {
-    const { postContent, email, name, profile, time, hasImage } = post;
+    const { name, profile } = post;
 
     return (
         <div 
@@ -70,7 +71,7 @@ const PostHeader = ({ post, setHidePost, inTheComments }) => {
     const headerProfileRef = useRef(null);
     const userModelRef = useRef(null);
 
-    const { postContent, email, name, profile, time, hasImage } = post;
+    const { name, profile, time } = post;
 
     useEffect(() => {
         const headerProfile = headerProfileRef.current;
@@ -96,12 +97,12 @@ const PostHeader = ({ post, setHidePost, inTheComments }) => {
             className='post-header'
             onPointerLeave={ () => setViewUserModel(false) }
         >
-            { viewUserModel && 
+            { viewUserModel && (
                 <UserModel 
                     post={ post } 
                     userModelRef={ userModelRef } 
                 /> 
-            }
+            )}
 
             <div 
                 className='post-header__profile'

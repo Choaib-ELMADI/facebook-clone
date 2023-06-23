@@ -2,6 +2,7 @@ import React from 'react';
 import { AiFillHeart } from 'react-icons/ai';
 
 import './Care.scss';
+import '../reaction.scss';
 
 
 

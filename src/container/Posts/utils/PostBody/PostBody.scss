@@ -1,0 +1,24 @@
+.posts-container__post {
+    .post-body {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+
+        p {
+            font-size: calc(var(--normal__size) - 1px);
+            color: var(--black_color);
+            opacity: .95;
+            margin: 0 1rem;
+        }
+
+        &__image {
+            width: 100%;
+            overflow: hidden;
+
+            img {
+                width: 100%;
+                object-fit: cover;
+            }
+        }
+    }
+}

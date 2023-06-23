@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
 
 import './Post.scss';
-import PostHeader from './utils/PostHeader';
-import PostBody from './utils/PostBody';
-import PostFooter from './utils/PostFooter';
-import PostCommentsModel from './PostCommentsModel';
+import { PostHeader, PostBody, PostFooter, PostCommentsModel } from './utils/index';
 
 
 
@@ -19,7 +16,7 @@ const Post = ({ post, inTheComments, fetchPosts }) => {
                 boxShadow: inTheComments ? 'none' : 'rgba(0, 0, 0, 0.24) 0px 3px 8px'
             }}
         >
-            { !hidePost ?
+            { !hidePost && (
                 <>
                     <PostHeader 
                         post={ post } 
@@ -35,7 +32,9 @@ const Post = ({ post, inTheComments, fetchPosts }) => {
                         fetchPosts={ fetchPosts }
                     />
                 </>
-                :
+            )}
+
+            { hidePost && (
                 <div className='post-hided'>
                     <span>X</span>
                     <div>
@@ -46,15 +45,15 @@ const Post = ({ post, inTheComments, fetchPosts }) => {
                         onClick={ () => setHidePost(false) }
                     >Annuler</button>
                 </div>
-            }
-            {
-                viewPostCommentsModel &&
+            )}
+
+            { viewPostCommentsModel && (
                 <PostCommentsModel 
                     post={ post }
                     setViewPostCommentsModel={ setViewPostCommentsModel }
                     fetchPosts={ fetchPosts }
                 />
-            }
+            )}
         </div>
     );
 };

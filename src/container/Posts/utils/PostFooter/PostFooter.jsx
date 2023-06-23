@@ -3,11 +3,12 @@ import { FaRegCommentAlt } from 'react-icons/fa';
 import { RiShareForwardLine } from 'react-icons/ri';
 import { motion } from 'framer-motion';
 import { AiOutlineLike } from 'react-icons/ai';
-import { updateDoc, doc, getDoc, arrayUnion, collection } from 'firebase/firestore';
+import { updateDoc, doc, getDoc } from 'firebase/firestore';
 
-import { db } from '../../../config/firebase';
-import { Care, Funny, Grrr, Like, Love } from '../../../components/index';
-import { useAuth } from '../../../context/AuthContext';
+import './PostFooter.scss';
+import { db } from '../../../../config/firebase';
+import { Care, Funny, Grrr, Like, Love } from '../../../../components/index';
+import { useAuth } from '../../../../context/AuthContext';
 const containerVariants = {
     hidden: {
         opacity: 0,
@@ -236,13 +237,13 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, fetchPosts 
                 </button>
             </div>
 
-            { giveReaction &&
+            { giveReaction && (
                 <GiveReaction 
                     setGiveReaction={ setGiveReaction } 
                     setUserReaction={ setUserReaction } 
                     handleUserReaction={ handleUserReaction }
                 />
-            }
+            )}
         </div>
     );
 };

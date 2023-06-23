@@ -1,25 +1,28 @@
 import React from 'react';
 
+import './PostBody.scss';
+
 
 
 const PostBody = ({ post }) => {
-    const { postContent, email, name, time, hasImage } = post;
+    const { postContent, hasImage } = post;
 
     return (
         <div className='post-body'>
-            { postContent !== '' &&
+            { postContent !== '' && (
                 <p>{ postContent }</p>
-            }
-            <div className='post-body__image'>
-                { hasImage &&
+            )}
+            
+            { hasImage && (
+                <div className='post-body__image'>
                     <img 
                         src={ post.image } 
                         loading='lazy'
                         alt="post image" 
                         draggable='false' 
                     />
-                }
-            </div>
+                </div>
+            )}
         </div>
     );
 };

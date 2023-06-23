@@ -2,8 +2,7 @@ import React from 'react';
 
 import './Posts.scss';
 import Post from './Post';
-import PostModel from './utils/PostModel';
-import NoPost from './utils/NoPost';
+import { NoPost, PostModel } from './utils/index';
 
 
 
