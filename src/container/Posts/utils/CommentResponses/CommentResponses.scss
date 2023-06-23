@@ -1,6 +1,68 @@
 .comment-responses {
     margin-top: .5rem;
 
+    &__loading {
+        display: flex;
+        gap: .25rem;
+        margin-bottom: .5rem;
+
+        .profile-model {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--gray_color);
+        }
+
+        .response-model {
+            background: var(--gray_color_3);
+            padding: .5rem;
+            border-radius: 12px;
+
+            div {
+                width: 150px;
+                height: 15px;
+                background: var(--gray_color_1);
+                border-radius: 4px;
+
+                &:nth-child(1) {
+                    margin-bottom: .35rem;
+                    width: 100px;
+                }
+            }
+        }
+    }
+
+    &__response {
+        display: flex;
+        gap: .25rem;
+        width: 100%;
+        margin-bottom: .5rem;
+
+        img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .response-wrapper {
+            .res {
+                background: var(--gray_color_3);
+                padding: .5rem;
+                border-radius: 12px;
+
+                p:nth-child(1) {
+                    font-weight: 600;
+                }
+            }
+
+            .time {
+                font-size: var(--verysmall__size);
+                text-transform: capitalize;
+            }
+        }
+    }
+
     .add-response {
         display: flex;
         gap: .25rem;
@@ -26,7 +88,7 @@
                 resize: none;
                 border: 0;
                 outline: none;
-                background: var(--gray_color_4);
+                background: var(--gray_color_3);
                 border-radius: 12px;
                 font-size: var(--small__size);
             }

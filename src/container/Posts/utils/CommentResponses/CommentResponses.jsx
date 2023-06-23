@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
+import moment from 'moment/moment';
 import { IoSend } from 'react-icons/io5';
-import { setDoc, doc, arrayUnion, collection, updateDoc } from 'firebase/firestore';
+import { setDoc, doc, where, collection, getDocs, query } from 'firebase/firestore';
 
 import { db } from '../../../../config/firebase';
 import images from '../../../../constants/images';
@@ -10,7 +11,12 @@ import { useAuth } from '../../../../context/AuthContext';
 
 
 const CommentResponses = ({ post, autoResize, showTextInput, setShowTextInput, targetComment }) => {
+    const { user } = useAuth();
+    const responseInputRef = useRef(null);
+
     const [response, setResponse] = useState('');
+    const [responses, setResponses] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     const target = post.comments[
         post.comments?.findIndex(
@@ -18,11 +24,12 @@ const CommentResponses = ({ post, autoResize, showTextInput, setShowTextInput, t
         )
     ];
 
-    const { user } = useAuth();
-    const responseInputRef = useRef(null);
-
     useEffect(() => {
     }, [response]);
+
+    useEffect(() => {
+        fetchResponses();
+    }, []);    
 
     const handleResponseChange = (e) => {
         setResponse(e.target.value);
@@ -30,33 +37,108 @@ const CommentResponses = ({ post, autoResize, showTextInput, setShowTextInput, t
     };
 
     const handleAddResponse = () => {
-        setDoc(doc(db, 'responses', target.time), {
-            responses: arrayUnion({
-                responderName: user?.displayName || 'User',
-                responderProfile: user?.photoURL,
-                response: response,
-                commentId: target.time,
-                commentOwner: target.userName,
-                time: new Date().getTime(),
-            })
+        setDoc(doc(db, 'responses', (new Date().getTime()).toString()), {
+            responderName: user?.displayName || 'User',
+            responderProfile: user?.photoURL,
+            response: response,
+            commentId: target.time,
+            commentOwner: target.userName,
+            time: new Date().getTime(),
         })
-            .then(() => setResponse(''))
+            .then(() => {
+                setResponse('');
+                fetchResponses();
+            })
             .catch((err) => console.error(err));
-    }
+    };
+
+    const fetchResponses = () => {
+        const q = query(collection(db, "responses"), where("commentId", "==", targetComment));
+        let existingResponses = [];
+
+        getDocs(q)
+            .then((res) => {
+                res.forEach((document) => {
+                    existingResponses.push({ ...document.data() });
+                })
+                setResponses(existingResponses);
+                setLoading(false);
+            })
+            .catch((err) => console.error(err));
+    };
+
+    const renderContent = () => {
+        if (loading) {
+            return (
+                <div className='comment-responses__loading'>
+                    <div className='profile-model' />
+                    <div className='response-model'>
+                        <div />
+                        <div />
+                    </div>
+                </div>
+            );
+        }
+
+        if (responses.length < 1) {
+            return (
+                <div>Be the first person to respond.</div>
+            );
+        }
+
+        return (
+            responses.map((res, i) => (
+                <div 
+                    key={ `response-${ i+1 }` }
+                    className='comment-responses__response'
+                >
+                    <div style={{
+                        width: '30px',
+                        height: '30px',
+                        background: 'var(--gray_color)',
+                        borderRadius: '50%'
+                    }}>
+                        <img
+                            src={ res.responderProfile ? res.responderProfile : images.user_1 } 
+                            alt=''
+                            loading='lazy'
+                            referrerPolicy='no-referrer'
+                            style={{ background: 'var(--gray_color)' }}
+                            draggable='false'
+                        />
+                    </div>
+                    <div className='response-wrapper'>
+                        <div className='res'>
+                            <p>{ res.responderName }</p>
+                            <p>{ res.response }</p>
+                        </div>
+                        <p className='time'>{ moment().fromNow(res.time) }</p>
+                    </div>
+                </div>
+            ))
+        );
+    };
 
     return (
         <div className='comment-responses'>
-            CommentResponses
+            { renderContent() }
 
             <div className='add-response'>
-                <img 
-                    src={ user?.photoURL ? user?.photoURL : images.user_1 } 
-                    alt=''
-                    loading='lazy'
-                    referrerPolicy='no-referrer'
-                    style={{ background: 'var(--gray_color)' }}
-                    draggable='false'
-                />
+                <div style={{
+                    width: '30px',
+                    height: '30px',
+                    background: 'var(--gray_color)',
+                    borderRadius: '50%'
+                }}>
+                    <img 
+                        src={ user?.photoURL ? user?.photoURL : images.user_1 } 
+                        alt=''
+                        loading='lazy'
+                        referrerPolicy='no-referrer'
+                        style={{ background: 'var(--gray_color)' }}
+                        draggable='false'
+                    />
+                </div>
 
                 <div className='add-response__input'>
                     <textarea
