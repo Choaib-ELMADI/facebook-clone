@@ -127,24 +127,6 @@
                                 }
                             }
                         }
-
-                        button {
-                            background: transparent;
-                            border: 0;
-                            outline: none;
-                            cursor: pointer;
-                            margin-top: .5rem;
-                            font-size: calc(var(--small__size) - 1px);
-                            color: var(--gray_color);
-
-                            display: flex;
-                            align-items: center;
-                            gap: .25rem;
-
-                            &:hover {
-                                text-decoration: underline;
-                            }
-                        }
                     }
 
                     &:last-child {

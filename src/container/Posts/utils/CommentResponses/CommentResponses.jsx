@@ -7,6 +7,7 @@ import { db } from '../../../../config/firebase';
 import images from '../../../../constants/images';
 import './CommentResponses.scss';
 import { useAuth } from '../../../../context/AuthContext';
+import { Response } from '../index';
 
 
 
@@ -90,33 +91,7 @@ const CommentResponses = ({ post, autoResize, fetchResponsesNumber, targetCommen
 
         return (
             responses.map((res, i) => (
-                <div 
-                    key={ `response-${ i+1 }` }
-                    className='comment-responses__response'
-                >
-                    <div style={{
-                        width: '30px',
-                        height: '30px',
-                        background: 'var(--gray_color)',
-                        borderRadius: '50%'
-                    }}>
-                        <img
-                            src={ res.responderProfile ? res.responderProfile : images.user_1 } 
-                            alt=''
-                            loading='lazy'
-                            referrerPolicy='no-referrer'
-                            style={{ background: 'var(--gray_color)' }}
-                            draggable='false'
-                        />
-                    </div>
-                    <div className='response-wrapper'>
-                        <div className='res'>
-                            <p>{ res.responderName }</p>
-                            <p>{ res.response }</p>
-                        </div>
-                        <p className='time'>{ moment(res.time).fromNow() }</p>
-                    </div>
-                </div>
+                <Response key={ `response-${ i+1 }` } res={ res } />
             ))
         );
     };
@@ -126,12 +101,7 @@ const CommentResponses = ({ post, autoResize, fetchResponsesNumber, targetCommen
             { renderContent() }
 
             <div className='add-response'>
-                <div style={{
-                    width: '30px',
-                    height: '30px',
-                    background: 'var(--gray_color)',
-                    borderRadius: '50%'
-                }}>
+                <div className='prof'>
                     <img 
                         src={ user?.photoURL ? user?.photoURL : images.user_1 } 
                         alt=''
