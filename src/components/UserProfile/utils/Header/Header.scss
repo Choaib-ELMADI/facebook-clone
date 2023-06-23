@@ -2,6 +2,7 @@
     .profile-banner {
         width: 100%;
         aspect-ratio: 2.3;
+        min-height: 200px;
         object-fit: cover;
         border-radius: 12px;
     }
@@ -108,6 +109,19 @@
             }
         }
 
+        @media screen and (width > 1400px) {
+            transform: translateY(-50px);
+            align-items: end;
+
+            .user-data {
+                .user-name {
+                    flex-direction: row;
+                    align-items: center;
+                    gap: .25rem;
+                }
+            }
+        }
+
         @media screen and (width <= 900px) {
             flex-direction: column;
             transform: translateY(-90px);
@@ -124,6 +138,14 @@
 
             .action-btns {
                 margin-left: 0;
+            }
+        }
+
+        @media screen and (width <= 450px) {
+            .user-data {
+                .user-name {
+                    flex-direction: column;
+                }
             }
         }
     }
