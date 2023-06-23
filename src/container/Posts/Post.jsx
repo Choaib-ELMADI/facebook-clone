@@ -14,7 +14,7 @@ const Post = ({ post, inTheComments, fetchPosts }) => {
 
     useEffect(() => {
         fetchResponsesNumber();
-    }, []);
+    }, [responsesNumber]);
 
     const fetchResponsesNumber = () => {
         let i=0;

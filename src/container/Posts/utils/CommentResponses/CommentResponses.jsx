@@ -114,7 +114,7 @@ const CommentResponses = ({ post, autoResize, fetchResponsesNumber, targetCommen
                             <p>{ res.responderName }</p>
                             <p>{ res.response }</p>
                         </div>
-                        <p className='time'>{ moment().fromNow(res.time) }</p>
+                        <p className='time'>{ moment(res.time).fromNow() }</p>
                     </div>
                 </div>
             ))

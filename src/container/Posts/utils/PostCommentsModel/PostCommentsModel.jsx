@@ -1,9 +1,10 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import moment from 'moment';
 import { CgClose } from 'react-icons/cg';
 import { IoSend } from 'react-icons/io5';
 import { GiMicrophone } from 'react-icons/gi';
-import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
+import { BsArrowReturnRight } from 'react-icons/bs';
+import { arrayUnion, doc, updateDoc, query, collection, getDocs, where } from 'firebase/firestore';
 
 import CommentResponses from '../CommentResponses/CommentResponses';
 import { useAuth } from '../../../../context/AuthContext';
@@ -18,6 +19,7 @@ const PostCommentsModel = ({ post, setViewPostCommentsModel, fetchPosts, fetchRe
     const [comment, setComment] = useState('');
     const commentInputRef = useRef(null);
     const [showTextInput, setShowTextInput] = useState(false);
+    const [responses, setResponses] = useState([]);
     const [targetComment, setTargetComment] = useState(null);
     const { user } = useAuth();
 
@@ -58,6 +60,25 @@ const PostCommentsModel = ({ post, setViewPostCommentsModel, fetchPosts, fetchRe
         setTargetComment(id);
     };
 
+    const fetchResponses = () => {
+        const q = query(collection(db, "responses"), where("commentId", "==", 1687476178791));
+        let existingResponses = [];
+
+        getDocs(q)
+            .then((res) => {
+                res.forEach((document) => {
+                    existingResponses.push({ ...document.data() });
+                })
+                setResponses(existingResponses);
+            })
+            .catch((err) => console.error(err));
+    };
+
+    useEffect(() => {
+        fetchResponses();
+    }, []);
+    
+
     return (
         <div className='post-comments-model'>
             <div className='post-comments-model__container'>
@@ -79,7 +100,9 @@ const PostCommentsModel = ({ post, setViewPostCommentsModel, fetchPosts, fetchRe
                             <div className='comments-group__no-comment'>No comments yet</div>
                             :
                             post.comments.toReversed().map((comment, i) => (
-                                <div key={ `comment-${ i }` } className='comments-group__comment'>
+                                <div 
+                                    key={ `comment-${ i }` } className='comments-group__comment'
+                                >
                                     <div className='comment-owner-profile'>
                                         <img 
                                             src={ comment.userProfile ? comment.userProfile : images.user_1 } 
@@ -126,7 +149,16 @@ const PostCommentsModel = ({ post, setViewPostCommentsModel, fetchPosts, fetchRe
                                                 fetchResponsesNumber={ fetchResponsesNumber }
                                             />
                                         )}
-                                    </div>                                   
+                                        
+                                        { (comment.time !== targetComment) && responses.length >= 1 && (
+                                            <button
+                                                onClick={ () => setTargetComment(comment.time) }
+                                            >
+                                                <BsArrowReturnRight size={ 20 } />
+                                                { `Voir les ${ responses.length } réponses` }
+                                            </button>
+                                        )}
+                                    </div>                                    
                                 </div>
                             ))
                         }
