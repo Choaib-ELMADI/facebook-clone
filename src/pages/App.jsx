@@ -3,6 +3,7 @@ import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider, N
 import { AuthContextProvider } from '../context/AuthContext';
 import { Login, Home, Friends, Watch, Marketplace, Games, Bookmarks, NotFound } from './index';
 import { useAuth } from '../context/AuthContext';
+import { UserProfile } from '../components/index';
 
 
 
@@ -25,6 +26,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/'>
       <Route index element={ <RequireAuth><Home /></RequireAuth>} />
+      <Route path=':userName' element={ <RequireAuth><UserProfile /></RequireAuth> } />
 
       <Route path='login'>
         <Route index element={ <RequireLogOut><Login /></RequireLogOut> } />
