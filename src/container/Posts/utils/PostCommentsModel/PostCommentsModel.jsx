@@ -74,13 +74,12 @@ const PostCommentsModel = ({ post, setViewPostCommentsModel, fetchPosts, fetchRe
                         inTheComments={ true }
                     />
                     <div className='comments-group'>
-                        {
-                            !post.comments ?
+                        { !post.comments ?
                             <div className='comments-group__no-comment'>No comments yet</div>
                             :
                             post.comments.toReversed().map((comment, i) => (
-                                <div 
-                                    key={ `comment-${ i }` } className='comments-group__comment'
+                                <div className='comments-group__comment'
+                                    key={ `comment-${ i }` } 
                                 >
                                     <div className='comment-owner-profile'>
                                         <img 

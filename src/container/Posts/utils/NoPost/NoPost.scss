@@ -5,7 +5,7 @@
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
     h1 {
-        font-size: var(--medium__size);
+        font-size: calc(var(--normal__size) + 2px);
         color: var(--gray_color_1);
         text-align: center;
         margin-bottom: 2rem;
