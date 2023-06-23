@@ -27,25 +27,22 @@ const RequireLogOut = ({ children }) => {
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/'>
-      <Route index             element={ <RequireAuth><Home /></RequireAuth>} />
+      <Route index              element={ <RequireAuth><Home /></RequireAuth>        }  />
       
-      <Route path='login'      element={ <RequireLogOut><Login /></RequireLogOut> } />
+      <Route path='login'       element={ <RequireLogOut><Login /></RequireLogOut>   }  />
 
-      <Route path='friends'    element={ <RequireAuth><Friends /></RequireAuth> } />
-      <Route path='watch'      element={ <RequireAuth><Watch /></RequireAuth> } />
-      <Route path='marketplace'element={ <RequireAuth><Marketplace /></RequireAuth> } />
-      <Route path='games'      element={ <RequireAuth><Games /></RequireAuth> } />
-      <Route path='bookmarks'  element={ <RequireAuth><Bookmarks /></RequireAuth> } />
+      <Route path='friends'     element={ <RequireAuth><Friends /></RequireAuth>     }  />
+      <Route path='watch'       element={ <RequireAuth><Watch /></RequireAuth>       }  />
+      <Route path='marketplace' element={ <RequireAuth><Marketplace /></RequireAuth> }  />
+      <Route path='games'       element={ <RequireAuth><Games /></RequireAuth>       }  />
+      <Route path='bookmarks'   element={ <RequireAuth><Bookmarks /></RequireAuth>   }  />
 
       <Route path='users'>
-        <Route 
-          path=':userLink'  
-          element={ <RequireAuth><UserProfile /></RequireAuth> } 
-          loader={ UserProfileLoader }
-        />
+        <Route index            element={ <RequireAuth><NotFound /></RequireAuth>    }  />
+        <Route path=':userLink' element={ <RequireAuth><UserProfile /></RequireAuth> } loader={ UserProfileLoader } />
       </Route>
 
-      <Route path='*'          element={ <RequireAuth><NotFound /></RequireAuth> } />
+      <Route path='*'           element={ <RequireAuth><NotFound /></RequireAuth>    } />
     </Route>
   )
 );
