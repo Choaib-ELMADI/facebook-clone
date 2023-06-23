@@ -144,7 +144,9 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, fetchPosts,
                     updateDoc(postRef, {
                         reactions: existingReactions,
                     })
-                        .then(() => fetchPosts())
+                        .then(() => {
+                            fetchPosts();
+                        })
                         .catch((err) => console.error(err));
                 }
             })

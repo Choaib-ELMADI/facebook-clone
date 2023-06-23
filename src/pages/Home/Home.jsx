@@ -14,8 +14,8 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-      fetchPosts();
-  }, []);
+    fetchPosts();
+  }, [posts]);
 
   const fetchPosts = () => {
     let availablePosts = [];
