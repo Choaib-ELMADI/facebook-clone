@@ -46,7 +46,7 @@ const Photos = ({ userInfo }) => {
         }
 
         return (
-            photos.map((photo, i) => (
+            photos.slice(0, 4).map((photo, i) => (
                 <div key={ `image-${ i }` } className='image'>
                     <img
                         src={ photo }
