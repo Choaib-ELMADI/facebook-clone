@@ -1,0 +1,46 @@
+.user-profile__photos {
+    margin-top: 1rem;
+
+    .user-profile__photos-container {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-gap: .5rem;
+        margin-top: .5rem;
+
+        .image {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--gray_color_2);
+
+            img {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+        }
+
+        .placeholder {
+            aspect-ratio: 1;
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--gray_color_2);
+        }
+
+        @media screen and (width <= 900px) {
+            grid-template-columns: repeat(4, 1fr);
+        }
+
+        @media screen and (width <= 650px) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        @media screen and (width <= 500px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        @media screen and (width <= 300px) {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+}

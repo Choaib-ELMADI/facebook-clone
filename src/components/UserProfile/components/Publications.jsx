@@ -1,8 +1,8 @@
 import React from 'react';
 import { useOutletContext } from 'react-router-dom';
 
+import { Card, Filter, Posts, UserPhotos } from '../utils/index';
 import './Publications.scss';
-import { Card, Filter, Posts } from '../utils/index';
 
 
 
@@ -12,10 +12,10 @@ const Publications = () => {
   return (
       <div className='user-profile__publications'>
         <div className='user-profile__publications__left'>
-          <Card height={ 200 } title='Intro' />
-          <Card height={ 200 } title='Photos' />
-          <Card height={ 200 } title='Amis' />
-          <Card height={ 200 } title='Évènements marquants' />
+          <Card       height={ 200 }        title='Intro' />
+          <UserPhotos userInfo={ userInfo } />
+          <Card       height={ 200 }        title='Amis' />
+          <Card       height={ 200 }        title='Évènements marquants' />
         </div>
         <div className='user-profile__publications__right'>
           <Filter />

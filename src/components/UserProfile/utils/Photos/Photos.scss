@@ -1,0 +1,57 @@
+.card.user-photos {
+    width: 340px;
+
+    .photos-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .photos-link {
+            text-decoration: none;
+            color: var(--main_bleu_color);
+
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .photos-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: .25rem;
+
+        margin-top: .5rem;
+        border-radius: 8px;
+        overflow: hidden;
+
+        .image {
+            background: var(--gray_color_2);
+
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+
+    @media screen and (width <= 900px) {
+        width: 100%;
+
+        .photos-container {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    @media screen and (width <= 550px) {
+        .photos-container {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media screen and (width <= 340px) {
+        .photos-container {
+            grid-template-columns: repeat(1, 1fr);
+        }
+    }
+}
