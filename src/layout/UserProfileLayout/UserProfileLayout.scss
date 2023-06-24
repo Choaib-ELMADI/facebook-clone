@@ -21,9 +21,9 @@
         width: 100%;
         max-width: 950px;
         margin: 0 auto;
-
+        
         &__actuel {
-            width: 100%;
+            width: calc(100% - 1.5rem);
             max-width: 880px;
             margin-inline: auto;
 

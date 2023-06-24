@@ -1,12 +1,13 @@
 .user-profile-page__content__navbar {
     margin-top: 1rem;
     background: var(--white_color);
-    width: 100%;
+    width: calc(100% - 1.5rem);
     max-width: 880px;
     margin-inline: auto;
     border-top: 1px solid var(--black_color_trs);
     border-bottom: 1px solid var(--black_color_trs);
-    padding: .2rem 0;
+    padding: .2rem;
+    border-radius: 4px;
 
     display: flex;
     align-items: center;
@@ -15,7 +16,7 @@
     .navlink {
         text-decoration: none;
         color: var(--gray_color);
-        padding: 1rem;
+        padding: 1rem clamp(.25rem, 2vw, 1rem);
         font-weight: 600;
         border-radius: 4px;
         transition: .2s;
@@ -49,6 +50,50 @@
             display: flex;
             align-items: center;
             gap: .25rem;
+
+            position: relative;
+
+            .little-navbar {
+                position: absolute;
+                bottom: -.15rem;
+                left: 0;
+                z-index: 2;
+                transform: translateY(100%);
+
+                width: max-content;
+                background: var(--white_color);
+                border-radius: 4px;
+                box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+                padding: .25rem;
+
+                display: flex;
+                flex-direction: column;
+                
+                .navlink {
+                    width: 100%;
+                    min-width: 145px;
+                    padding: .75rem;
+
+                    &.current {
+                        color: var(--main_bleu_color);
+                        position: relative;
+        
+                        &::after {
+                            position: absolute;
+                            content: '✓';
+                            bottom: 50%;
+                            right: .75rem;
+                            transform: translateY(50%);
+
+                            color: var(--main_bleu_color);
+                        }
+                    }
+                }
+            }
+
+            @media screen and (width >= 720px) {
+                display: none;
+            }
         }
 
         &.dots {
@@ -57,10 +102,15 @@
             cursor: pointer;
             padding: .5rem 1rem;
             height: max-content;
-            margin-right: .2rem;
 
             display: grid;
             place-items: center;
+        }
+
+        @media screen and (width < 720px) {
+            &.reels, &.videos, &.photos {
+                display: none;
+            }
         }
     }
 
