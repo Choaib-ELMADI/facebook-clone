@@ -51,7 +51,7 @@ const Photos = () => {
       }
 
       return (
-          photos.map((photo, i) => (
+          photos.toReversed().map((photo, i) => (
               <div key={ `image-${ i }` } className='image'>
                   <img
                     src={ photo }
