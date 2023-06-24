@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import moment from "moment";
 import { TbDots } from 'react-icons/tb';
 import { CgClose } from 'react-icons/cg';
@@ -8,6 +9,7 @@ import { TbWorld } from 'react-icons/tb';
 import { FaCalendarCheck } from 'react-icons/fa';
 import { BsMessenger } from 'react-icons/bs';
 
+import { useAuth } from '../../../../context/AuthContext';
 import images from '../../../../constants/images';
 import './PostHeader.scss';
 
@@ -33,7 +35,12 @@ const UserModel = ({ post, userModelRef }) => {
                     />
                 </div>
                 <div className='info'>
-                    <h2>{ name }</h2>
+                    <Link
+                        to={ `/users/${ post.email.split('@')[0] }` }
+                        style={{ textDecoration: 'none', color: 'var(--black_color)' }}
+                    >
+                        <h2>{ name }</h2>
+                    </Link>
                     <p>
                         <AiFillInfoCircle size={ 25 } />
                         Page
@@ -99,7 +106,7 @@ const PostHeader = ({ post, setHidePost, inTheComments }) => {
         >
             { viewUserModel && (
                 <UserModel 
-                    post={ post } 
+                    post={ post }
                     userModelRef={ userModelRef } 
                 /> 
             )}
@@ -118,7 +125,12 @@ const PostHeader = ({ post, setHidePost, inTheComments }) => {
                 />
             </div>
             <div className='post-header__user-date'>
-                <p>{ name }</p>
+                <Link  
+                    to={ `/users/${ post.email.split('@')[0] }` }
+                    style={{ textDecoration: 'none', color: 'var(--black_color)' }}
+                >
+                    <p>{ name }</p>
+                </Link>
                 <p>
                     { moment(time).fromNow() }
                     { '.' }

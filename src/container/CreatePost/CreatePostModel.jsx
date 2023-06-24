@@ -69,7 +69,7 @@ const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts }) => {
 
     useEffect(() => {
         const uploadPostImage = () => {
-            const postImageRef = ref(store, `/postImages/${ new Date().getTime() }__${ postImage.name }`);
+            const postImageRef = ref(store, `/${ user.uid }/${ new Date().getTime() }__${ postImage.name }`);
             const uploadTask = uploadBytesResumable(postImageRef, postImage);
 
             uploadTask.on('state_changed', 
