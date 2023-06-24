@@ -2,7 +2,9 @@ import React from 'react'
 
 const Publications = () => {
   return (
-    <div>Publications</div>
+    <div
+      style={{ height: '2000px' }}
+    >Publications</div>
   )
 }
 

@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { TbTriangleInvertedFilled } from 'react-icons/tb';
 import { BsThreeDots } from 'react-icons/bs';
 
+import images from '../../../../constants/images';
 import './Navbar.scss';
 const navbarItems = [
     {
@@ -55,9 +56,10 @@ const LittleNav = ({ activeLink, setActiveLink, setViewLittleNav }) => {
 
 
 
-const Navbar = () => {
+const Navbar = ({ userInfo }) => {
     const [activeLink, setActiveLink] = useState('');
     const [viewLittleNav, setViewLittleNav] = useState(false);
+    const [scrollTop, setScrollTop] = useState(0);
     const location = useLocation();
 
     useEffect(() => {
@@ -68,8 +70,35 @@ const Navbar = () => {
         }
     }, [location]);
 
+    useEffect(() => {
+        const handleScroll = () => {
+            setScrollTop(window.scrollY);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
     return (
-        <div className='user-profile-page__content__navbar'>
+        <div className={ scrollTop > 540 ? 'user-profile-page__content__navbar sticky' : 'user-profile-page__content__navbar' }>
+            <a 
+                className='navlink profile-link'
+                href='#'
+            >
+                <img 
+                    src={ userInfo.userProfile ? userInfo.userProfile : images.user_1 } 
+                    alt=""
+                    loading='lazy'
+                    referrerPolicy='no-referrer'
+                    draggable='false'
+                    width={ 35 }
+                    height={ 35 }
+                />
+                { userInfo.userName ? userInfo.userName : 'Facebook User' }
+            </a>
             {
                 navbarItems.map((item, i) => (
                     <Link 

@@ -13,7 +13,7 @@ const UserProfileLayout = ({ userInfo }) => {
             <Navbar />
             <div className='user-profile-page__content'>
                 <Header userInfo={ userInfo } />
-                <ProfileNavbar />
+                <ProfileNavbar userInfo={ userInfo } />
 
                 <div className='user-profile-page__content__actuel'>
                     <Outlet />
