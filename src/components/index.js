@@ -15,3 +15,8 @@ export { default as Funny        } from './Reactions/Funny/Funny';
 
 export { default as UserProfile  } from './UserProfile/UserProfile';
 export { default as Publications } from './UserProfile/components/Publications';
+export { default as About        } from './UserProfile/components/About';
+export { default as Videos       } from './UserProfile/components/Videos';
+export { default as Photos       } from './UserProfile/components/Photos';
+export { default as UserFriends  } from './UserProfile/components/Friends';
+export { default as Reels        } from './UserProfile/components/Reels';

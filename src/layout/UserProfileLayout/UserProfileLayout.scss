@@ -21,5 +21,19 @@
         width: 100%;
         max-width: 950px;
         margin: 0 auto;
+
+        &__actuel {
+            width: 100%;
+            max-width: 880px;
+            margin-inline: auto;
+
+            @media screen and (width > 1400px) {
+                transform: translateY(-50px);
+            }
+        
+            @media screen and (width <= 900px) {
+                transform: translateY(-90px);
+            }
+        }
     }
 }

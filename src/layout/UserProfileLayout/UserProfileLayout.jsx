@@ -15,7 +15,9 @@ const UserProfileLayout = ({ userInfo }) => {
                 <Header userInfo={ userInfo } />
                 <ProfileNavbar />
 
-                <Outlet />
+                <div className='user-profile-page__content__actuel'>
+                    <Outlet />
+                </div>
             </div>
         </div>
     );
