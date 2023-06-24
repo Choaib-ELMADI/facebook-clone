@@ -4,8 +4,7 @@
         position: relative;
 
         .post-numbers {
-            padding: .5rem 0;
-
+            margin-bottom: .5rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -55,7 +54,7 @@
         }
 
         .action-buttons {
-            padding: .5rem 0;
+            padding: .25rem 0;
             display: flex;
             gap: .2rem;
 
