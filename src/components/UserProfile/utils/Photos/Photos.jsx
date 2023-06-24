@@ -46,8 +46,8 @@ const Photos = ({ userInfo }) => {
         }
 
         return (
-            photos.map(photo => (
-                <div className='image'>
+            photos.map((photo, i) => (
+                <div key={ `image-${ i }` } className='image'>
                     <img
                         src={ photo }
                         alt=''
