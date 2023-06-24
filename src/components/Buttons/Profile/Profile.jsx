@@ -28,7 +28,7 @@ const Profile = () => {
     return (
         <div className='profile-container'>
             <div className='profiles'>
-                <Link to='/' className='header'>
+                <Link to={ `/users/${ user.email.split('@')[0] }` } className='header'>
                     <img 
                         className='image'
                         src={ user && user?.photoURL ? user?.photoURL : images.user_1 } 
