@@ -1,5 +1,5 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { TbTriangleInvertedFilled } from 'react-icons/tb';
 import { BsThreeDots } from 'react-icons/bs';
 
@@ -7,7 +7,7 @@ import './Navbar.scss';
 const navbarItems = [
     {
         title: 'Publications',
-        link: 'publications',
+        link: '',
     },
     {
         title: 'A propos',
@@ -15,7 +15,7 @@ const navbarItems = [
     },
     {
         title: 'Amis',
-        link: '#',
+        link: 'friends',
     },
     {
         title: 'Photos',
@@ -34,17 +34,28 @@ const navbarItems = [
 
 
 const Navbar = () => {
+    const [activeLink, setActiveLink] = useState('');
+    const location = useLocation();
+
+    useEffect(() => {
+        if (location.pathname.split('/').length === 3) {
+            setActiveLink('');
+        } else {
+            setActiveLink(location.pathname.split('/')[3]);
+        }
+    }, [location]);
+
     return (
         <div className='user-profile-page__content__navbar'>
             {
                 navbarItems.map((item, i) => (
-                    <NavLink 
+                    <Link 
                         key={ `link-${ i+1 }` }
-                        className='navlink'
+                        className={ activeLink === item.link ? 'navlink active' : 'navlink' }
                         to={ item.link }
                     >
                         { item.title }
-                    </NavLink>
+                    </Link>
                 ))
             }
             <div className='navlink plus'>

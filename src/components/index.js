@@ -13,4 +13,5 @@ export { default as Care         } from './Reactions/Care/Care';
 export { default as Grrr         } from './Reactions/Grrr/Grrr';
 export { default as Funny        } from './Reactions/Funny/Funny';
 
-export { default as UserProfile  } from './UserProfile/UserProfile'; 
+export { default as UserProfile  } from './UserProfile/UserProfile';
+export { default as Publications } from './UserProfile/components/Publications';

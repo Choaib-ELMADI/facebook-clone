@@ -3,7 +3,7 @@ import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider, N
 import { AuthContextProvider } from '../context/AuthContext';
 import { Login, Home, Friends, Watch, Marketplace, Games, Bookmarks, NotFound } from './index';
 import { useAuth } from '../context/AuthContext';
-import { UserProfile } from '../components/index';
+import { Publications, UserProfile } from '../components/index';
 import { UserProfileLoader } from '../components/UserProfile/UserProfile';
 
 
@@ -39,7 +39,16 @@ const router = createBrowserRouter(
 
       <Route path='users'>
         <Route index            element={ <RequireAuth><NotFound /></RequireAuth>    }  />
-        <Route path=':userLink' element={ <RequireAuth><UserProfile /></RequireAuth> } loader={ UserProfileLoader } />
+
+        <Route path=':userLink' element={ <RequireAuth><UserProfile /></RequireAuth> } loader={ UserProfileLoader }>
+          <Route index          element={ <Publications /> } />
+
+          <Route path='about'   element={ <Publications /> } />
+          <Route path='friends' element={ <Publications /> } />
+          <Route path='photos'  element={ <Publications /> } />
+          <Route path='videos'  element={ <Publications /> } />
+          <Route path='reels'   element={ <Publications /> } />
+        </Route>
       </Route>
 
       <Route path='*'           element={ <RequireAuth><NotFound /></RequireAuth>    } />

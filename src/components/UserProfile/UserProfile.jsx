@@ -2,10 +2,8 @@ import React from 'react';
 import { Navigate, useLoaderData } from 'react-router-dom';
 import { getDoc, doc } from 'firebase/firestore';
 
-import './UserProfile.scss';
-import { Navbar } from '../index';
 import { db } from '../../config/firebase';
-import { Header, ProfileNavbar } from './utils/index';
+import { UserProfileLayout } from '../../layout/index';
 
 
 
@@ -15,13 +13,7 @@ const UserProfile = () => {
     return (
         <>
             { userInfo && (
-                <div className='user-profile-page'>
-                    <Navbar />
-                    <div className='user-profile-page__content'>
-                        <Header userInfo={ userInfo } />
-                        <ProfileNavbar />
-                    </div>
-                </div>
+                <UserProfileLayout userInfo={ userInfo } />
             )}
             { !userInfo && (
                 <Navigate to='/404' />
