@@ -41,7 +41,7 @@ const Header = ({ userInfo }) => {
                         <h2>({ userInfo.userLink })</h2>
                     </div>
                     <p>
-                        <span>3,2 K amis</span> • <span>12 en commun</span>
+                        <span>65 amis</span> • <span>4 en commun</span>
                     </p>
                     <div className='friends-placeholder'>
                         {

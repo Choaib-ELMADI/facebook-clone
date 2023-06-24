@@ -94,17 +94,17 @@ const GiveReaction = ({ setGiveReaction, setUserReaction, handleUserReaction }) 
     )
 };
 
-const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, fetchPosts, responsesNumber }) => {
+const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, responsesNumber }) => {
     const { user } = useAuth();
     const [giveReaction, setGiveReaction] = useState(false);
-    const [reactionCounts, setReactionCounts] = useState([
-        {type: 'like',  count: 0},
-        {type: 'love',  count: 0},
-        {type: 'care',  count: 0},
-        {type: 'sad',   count: 0},
-        {type: 'grrr',  count: 0},
-        {type: 'wouah', count: 0},
-    ]);
+    // const [reactionCounts, setReactionCounts] = useState([
+    //     {type: 'like',  count: 0},
+    //     {type: 'love',  count: 0},
+    //     {type: 'care',  count: 0},
+    //     {type: 'sad',   count: 0},
+    //     {type: 'grrr',  count: 0},
+    //     {type: 'wouah', count: 0},
+    // ]);
     const [userReaction, setUserReaction] = useState(
         post.reactions[
             post.reactions.findIndex(
@@ -144,9 +144,7 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, fetchPosts,
                     updateDoc(postRef, {
                         reactions: existingReactions,
                     })
-                        .then(() => {
-                            fetchPosts();
-                        })
+                        .then(() => {})
                         .catch((err) => console.error(err));
                 }
             })

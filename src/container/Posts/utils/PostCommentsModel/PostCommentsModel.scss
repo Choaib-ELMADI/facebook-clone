@@ -73,6 +73,7 @@
                             padding: .5rem .5rem .35rem .5rem;
                             width: max-content;
                             min-width: 180px;
+                            max-width: 100%;
 
                             &.active {
                                 background: var(--main_bleu_background);
@@ -100,6 +101,10 @@
                                     align-items: center;
                                     gap: .25rem;
                                 }
+                            }
+
+                            .actuel-comment {
+                                width: 100%;
                             }
                         }
 

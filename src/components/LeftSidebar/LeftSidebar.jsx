@@ -71,7 +71,10 @@ const LeftSidebar = () => {
     return (
         <div className='sidebar left'>
             <div className='left-sidebar-content'>
-                <Link to='#' className='left-sidebar-content__item'>
+                <Link 
+                    to={ `/users/${ user.email.split('@')[0] }` } 
+                    className='left-sidebar-content__item'
+                >
                     <img 
                         src={ user && user?.photoURL ? user?.photoURL : images.user_1 } 
                         alt=''

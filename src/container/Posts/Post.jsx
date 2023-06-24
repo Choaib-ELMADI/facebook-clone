@@ -7,7 +7,7 @@ import { PostHeader, PostBody, PostFooter, PostCommentsModel } from './utils/ind
 
 
 
-const Post = ({ post, inTheComments, fetchPosts }) => {
+const Post = ({ post, inTheComments }) => {
     const [hidePost, setHidePost] = useState(false);
     const [viewPostCommentsModel, setViewPostCommentsModel] = useState(false);
     const [responsesNumber, setResponsesNumber] = useState(0);
@@ -50,7 +50,6 @@ const Post = ({ post, inTheComments, fetchPosts }) => {
                         post={ post }
                         inTheComments={ inTheComments }
                         setViewPostCommentsModel={ setViewPostCommentsModel }
-                        fetchPosts={ fetchPosts }
                         responsesNumber={ responsesNumber }
                     />
                 </>
@@ -73,7 +72,6 @@ const Post = ({ post, inTheComments, fetchPosts }) => {
                 <PostCommentsModel 
                     post={ post }
                     setViewPostCommentsModel={ setViewPostCommentsModel }
-                    fetchPosts={ fetchPosts }
                     fetchResponsesNumber={ fetchResponsesNumber }
                 />
             )}

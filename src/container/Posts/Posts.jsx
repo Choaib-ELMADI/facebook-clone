@@ -6,7 +6,7 @@ import { NoPost, PostModel } from './utils/index';
 
 
 
-const Posts = ({ loading, posts, fetchPosts }) => {
+const Posts = ({ loading, posts }) => {
     const renderContent = () => {
         if (loading) {
             return (
@@ -27,8 +27,7 @@ const Posts = ({ loading, posts, fetchPosts }) => {
             posts.toReversed().map(post => (
                 <Post 
                     key={ post.id } 
-                    post={ post } 
-                    fetchPosts={ fetchPosts }
+                    post={ post }
                 />
             ))
         );

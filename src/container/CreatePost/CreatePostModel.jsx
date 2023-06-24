@@ -38,6 +38,7 @@ const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts }) => {
         const id = new Date().getTime() + '__' + user.email.split('@')[0];
         setDoc(doc(db, 'posts', id), {
             ...postDetails,
+            id: id,
             hasImage: hasImage,
         })
         .then(() => {

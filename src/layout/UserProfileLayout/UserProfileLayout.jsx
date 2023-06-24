@@ -16,7 +16,7 @@ const UserProfileLayout = ({ userInfo }) => {
                 <ProfileNavbar userInfo={ userInfo } />
 
                 <div className='user-profile-page__content__actuel'>
-                    <Outlet />
+                    <Outlet context={ userInfo } />
                 </div>
             </div>
         </div>

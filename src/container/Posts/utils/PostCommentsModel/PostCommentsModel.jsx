@@ -14,7 +14,7 @@ import Post from '../../Post';
 
 
 
-const PostCommentsModel = ({ post, setViewPostCommentsModel, fetchPosts, fetchResponsesNumber }) => {
+const PostCommentsModel = ({ post, setViewPostCommentsModel, fetchResponsesNumber }) => {
     const [comment, setComment] = useState('');
     const commentInputRef = useRef(null);
     const [showTextInput, setShowTextInput] = useState(false);
@@ -48,7 +48,6 @@ const PostCommentsModel = ({ post, setViewPostCommentsModel, fetchPosts, fetchRe
         })
             .then(() => {
                 setComment('');
-                fetchPosts();
             })
             .catch((err) => console.error(err));
     };
@@ -108,7 +107,7 @@ const PostCommentsModel = ({ post, setViewPostCommentsModel, fetchPosts, fetchRe
                                                 )}
                                                 <p>{ comment.userName }</p>
                                             </div>
-                                            <p>{ comment.comment }</p>
+                                            <p className='actuel-comment'>{ comment.comment }</p>
                                         </div>
                                         <div className='response'>
                                             <p className='time'>{ moment(comment.time).fromNow() }</p>

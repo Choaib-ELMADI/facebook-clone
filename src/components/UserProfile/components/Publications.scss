@@ -1,0 +1,22 @@
+.user-profile__publications {
+    display: flex;
+    padding-top: 1rem;
+    gap: .75rem;
+
+    &__left {
+        display: flex;
+        flex-direction: column;
+        gap: .75rem;
+    }
+
+    &__right {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        gap: .75rem;
+    }
+
+    @media screen and (width <= 900px) {
+        flex-direction: column;
+    }
+}

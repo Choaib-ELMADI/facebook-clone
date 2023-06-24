@@ -41,8 +41,7 @@ export default function Home() {
           <CreatePost fetchPosts={ fetchPosts } />
           <Posts 
             loading={ loading } 
-            posts={ posts } 
-            fetchPosts={ fetchPosts }
+            posts={ posts }
           />
         </div>
       </div>
