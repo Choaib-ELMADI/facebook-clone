@@ -1,6 +1,8 @@
 import React from 'react';
-import { BsFillPersonCheckFill, BsMessenger } from 'react-icons/bs';
+import { BsFillPersonCheckFill, BsMessenger, BsPlus, BsPencilFill } from 'react-icons/bs';
+import { IoCamera } from 'react-icons/io5';
 
+import { useAuth } from '../../../../context/AuthContext';
 import './Header.scss';
 import images from '../../../../constants/images';
 const friendsPlaceholder = [
@@ -15,6 +17,8 @@ const friendsPlaceholder = [
 
 
 const Header = ({ userInfo }) => {
+    const { user } = useAuth();
+
     return (
         <div className='user-profile-page__content__header'>
             <img 
@@ -34,6 +38,11 @@ const Header = ({ userInfo }) => {
                         draggable='false'
                         referrerPolicy='no-referrer'
                     />
+                    { userInfo.userId === user.uid && (
+                        <button className='update-profile'>
+                            <IoCamera size={ 26 } />
+                        </button>
+                    )}
                 </div>
                 <div className='user-data'>
                     <div className='user-name'>
@@ -61,14 +70,30 @@ const Header = ({ userInfo }) => {
                     </div>
                 </div>
                 <div className='action-btns'>
-                    <button>
-                        <BsFillPersonCheckFill size={ 20 } />
-                        Amis
-                    </button>
-                    <button className='message'>
-                        <BsMessenger size={ 18 } />
-                        Message
-                    </button>
+                    { userInfo.userId === user.uid && (
+                        <>
+                            <button className='add'>
+                                <BsPlus size={ 20 } />
+                                Ajouter à la story
+                            </button>
+                            <button className='change-profile'>
+                                <BsPencilFill size={ 16 } />
+                                Modifier le profil
+                            </button>
+                        </>
+                    )}
+                    { userInfo.userId !== user.uid && (
+                        <>
+                            <button>
+                                <BsFillPersonCheckFill size={ 20 } />
+                                Amis
+                            </button>
+                            <button className='message'>
+                                <BsMessenger size={ 18 } />
+                                Message
+                            </button>
+                        </>
+                    )}
                 </div>
             </div>
         </div>

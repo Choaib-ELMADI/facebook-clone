@@ -22,12 +22,30 @@
             height: 164px;
             border-radius: 50%;
             border: 4px solid var(--main_background_color);
+            position: relative;
 
             img {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
                 border-radius: 50%;
+            }
+
+            .update-profile {
+                position: absolute;
+                bottom: .5rem;
+                right: .5rem;
+
+                background: var(--main_background_color);
+                box-shadow: 0 0 20px 8px rgba(0, 0, 0, .2);
+                width: 38px;
+                height: 38px;
+                color: var(--black_color);
+
+                border: 0;
+                outline: none;
+                border-radius: 50%;
+                cursor: pointer;
             }
         }
 
@@ -104,6 +122,15 @@
                 &.message {
                     background: var(--main_bleu_color);
                     color: var(--white_color);
+                    margin-left: .5rem;
+                }
+
+                &.add {
+                    background: var(--main_bleu_color);
+                    color: var(--white_color);
+                }
+
+                &.change-profile {
                     margin-left: .5rem;
                 }
             }

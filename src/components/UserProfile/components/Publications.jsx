@@ -3,10 +3,13 @@ import { useOutletContext } from 'react-router-dom';
 
 import { Card, Filter, Posts, UserPhotos } from '../utils/index';
 import './Publications.scss';
+import { useAuth } from '../../../context/AuthContext';
+import { CreatePost } from '../../../container/index';
 
 
 
 const Publications = () => {
+  const { user } = useAuth();
   const userInfo = useOutletContext();
 
   return (
@@ -18,6 +21,9 @@ const Publications = () => {
           <Card       height={ 200 }        title='Évènements marquants' />
         </div>
         <div className='user-profile__publications__right'>
+          { userInfo.userId === user.uid && (
+            <CreatePost />
+          )}
           <Filter />
           <Posts userInfo={ userInfo } />
         </div>
