@@ -1,0 +1,7 @@
+.empty-section {
+    height: 300px;
+    background: var(--gray_color_4);
+    border-radius: 12px;
+    margin-top: 1rem;
+    padding: 1rem;
+}

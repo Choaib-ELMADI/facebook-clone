@@ -1,7 +1,11 @@
 .user-profile__photos {
     margin-top: 1rem;
+    border-radius: 12px;
+    padding: 1rem;
+    min-height: 300px;
+    background: var(--gray_color_4);
 
-    .user-profile__photos-container {
+    &__container {
         display: grid;
         grid-template-columns: repeat(5, 1fr);
         grid-gap: .5rem;

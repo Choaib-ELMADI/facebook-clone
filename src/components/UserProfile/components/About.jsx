@@ -1,9 +1,13 @@
-import React from 'react'
+import React from 'react';
+
+import './empty.css';
+
+
 
 const About = () => {
   return (
-    <div>About</div>
-  )
-}
+    <div className='empty-section'><h3>About</h3></div>
+  );
+};
 
-export default About
+export default About;

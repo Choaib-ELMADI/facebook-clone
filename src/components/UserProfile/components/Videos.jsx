@@ -1,9 +1,13 @@
-import React from 'react'
+import React from 'react';
+
+import './empty.css';
+
+
 
 const Videos = () => {
   return (
-    <div>Videos</div>
-  )
-}
+    <div className='empty-section'><h3>Videos</h3></div>
+  );
+};
 
-export default Videos
+export default Videos;

@@ -67,8 +67,8 @@ const Photos = () => {
 
   return (
       <div className='user-profile__photos'>
-        <h3>Photos</h3>
-        <div className='user-profile__photos-container'>
+        <h3 className='user-profile__photos__title'>Photos</h3>
+        <div className='user-profile__photos__container'>
           { renderContent() }
         </div>
       </div>

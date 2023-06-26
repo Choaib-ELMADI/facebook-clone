@@ -24,6 +24,7 @@ const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts }) => {
         profile: user.photoURL,
         userId: user.uid,
         time: new Date().getTime(),
+        year: new Date().getFullYear(),
         hasImage: false,
         reactions: [],
     });
