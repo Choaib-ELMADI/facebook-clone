@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { FcPuzzle } from 'react-icons/fc';
 import { FaCalendarPlus } from 'react-icons/fa';
 import { BsFillPeopleFill, BsFillSaveFill, BsFillStarFill, BsFillPlayBtnFill } from "react-icons/bs";
@@ -7,6 +8,7 @@ import { HiUserGroup } from "react-icons/hi";
 import { BiJoystickAlt } from "react-icons/bi";
 import { GiGamepadCross, GiBackwardTime } from 'react-icons/gi';
 
+import { db } from '../../config/firebase';
 import './LeftSidebar.scss';
 import { useAuth } from '../../context/AuthContext';
 import images from '../../constants/images';
@@ -67,23 +69,39 @@ const links = [
 
 const LeftSidebar = () => {
     const { user } = useAuth();
+    const [userInfo, setUserInfo] = useState({});
+
+    useEffect(() => {
+        fetchUserInfo();
+    }, [user]);
+    
+    const fetchUserInfo = () => {
+        const q = query(collection(db, 'users'), where('userId', '==', user.uid));
+        getDocs(q)
+            .then(data => {
+                data.forEach(d => {
+                    setUserInfo({ ...d.data() })
+                })
+            })
+            .catch(err => console.error(err));
+    };
 
     return (
         <div className='sidebar left'>
             <div className='left-sidebar-content'>
                 <Link 
-                    to={ `/users/${ user.email.split('@')[0] }` } 
+                    to={ `/users/${ userInfo.userLink }` } 
                     className='left-sidebar-content__item'
                 >
                     <img 
-                        src={ user && user?.photoURL ? user?.photoURL : images.user_1 } 
+                        src={ userInfo.userProfile ? userInfo.userProfile : images.user_1 } 
                         alt=''
                         loading='lazy'
                         referrerPolicy="no-referrer"
                         style={{ background: 'var(--gray_color)' }}
                         draggable='false'
                     />
-                    <p>{ user && user?.displayName ? user?.displayName : 'user profile' }</p>
+                    <p>{ userInfo.userName ? userInfo.userName : 'user profile' }</p>
                 </Link>
                 {
                     links.map((link) => (

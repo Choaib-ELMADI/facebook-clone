@@ -33,8 +33,9 @@ const Header = ({ userInfo }) => {
         <div className='user-profile-page__content__header'>
             <img 
                 className='profile-banner'
-                src={ images.banner } 
+                src={ userInfo.userBanner ? userInfo.userBanner : images.banner } 
                 alt=""
+                referrerPolicy='no-referrer'
                 loading='lazy'
                 draggable='false'
             />

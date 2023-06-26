@@ -1,9 +1,10 @@
+import React, { useState, useEffect } from 'react';
+import { query, collection, where, getDocs, deleteDoc, doc } from 'firebase/firestore';
 import { IoSettingsSharp, IoLogOut } from 'react-icons/io5';
 import { BsChevronRight } from 'react-icons/bs';
 import { BsFillQuestionCircleFill, BsFillMoonFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
-import { signOut, deleteUser } from 'firebase/auth';
-import { deleteDoc, doc } from 'firebase/firestore';
+import { signOut } from 'firebase/auth';
 
 import './Profile.scss';
 import images from '../../../constants/images';
@@ -14,6 +15,22 @@ import { useAuth } from '../../../context/AuthContext';
 
 const Profile = () => {
     const { user } = useAuth();
+    const [userInfo, setUserInfo] = useState({});
+
+    useEffect(() => {
+        fetchUserInfo();
+    }, [user]);
+    
+    const fetchUserInfo = () => {
+        const q = query(collection(db, 'users'), where('userId', '==', user.uid));
+        getDocs(q)
+            .then(data => {
+                data.forEach(d => {
+                    setUserInfo({ ...d.data() })
+                })
+            })
+            .catch(err => console.error(err));
+    };
 
     const handleUserLogOut = () => {
         signOut(auth)
@@ -28,17 +45,17 @@ const Profile = () => {
     return (
         <div className='profile-container'>
             <div className='profiles'>
-                <Link to={ `/users/${ user.email.split('@')[0] }` } className='header'>
+                <Link to={ `/users/${ userInfo.userLink }` } className='header'>
                     <img 
                         className='image'
-                        src={ user && user?.photoURL ? user?.photoURL : images.user_1 } 
+                        src={ userInfo.userProfile ? userInfo.userProfile : images.user_1 } 
                         alt=''
                         loading='lazy'
                         referrerPolicy="no-referrer"
                         style={{ background: 'var(--gray_color)' }}
                         draggable='false'
                     />
-                    <p>{ user.displayName ? user.displayName : 'User' }</p>
+                    <p>{ userInfo.userName ? userInfo.userName : 'User' }</p>
                 </Link>
                 <div className='line' />
                 <button>Voir tous les profiles</button>

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { GoSearch } from 'react-icons/go';
 import { 
@@ -18,6 +19,7 @@ import images from '../../constants/images';
 import Searchbar from '../SearchBar/Searchbar';
 import { useAuth } from '../../context/AuthContext';
 import { Notification, Messenger, Profile, Menu } from '../index';
+import { db } from '../../config/firebase';
 
 const links = [
     {
@@ -78,6 +80,7 @@ const buttons = [
 const Navbar = () => {
     const [vueSearchList, setVueSearchList] = useState(false);
     const [clickedButton, setClickedButton] = useState(null);
+    const [userInfo, setUserInfo] = useState({});
     const { user } = useAuth();
     const location = useLocation();
 
@@ -87,6 +90,21 @@ const Navbar = () => {
         } else {
             setClickedButton(name);
         }
+    };
+
+    useEffect(() => {
+        fetchUserInfo();
+    }, [user]);
+    
+    const fetchUserInfo = () => {
+        const q = query(collection(db, 'users'), where('userId', '==', user.uid));
+        getDocs(q)
+            .then(data => {
+                data.forEach(d => {
+                    setUserInfo({ ...d.data() })
+                })
+            })
+            .catch(err => console.error(err));
     };
 
     return (
@@ -149,7 +167,7 @@ const Navbar = () => {
                 >
                     <img
                         className='image'
-                        src={ user && user?.photoURL ? user?.photoURL : images.user_1 } 
+                        src={ userInfo.userProfile ? userInfo.userProfile : images.user_1 } 
                         alt=''
                         loading='lazy'
                         referrerPolicy='no-referrer'
