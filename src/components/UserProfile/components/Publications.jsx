@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import moment from 'moment';
 import { useOutletContext } from 'react-router-dom';
-import { getDocs, collection, query, where } from 'firebase/firestore';
+import { getDocs, collection, query, where, and } from 'firebase/firestore';
 
 import './Publications.scss';
 import { db } from '../../../config/firebase';
@@ -20,35 +19,7 @@ const Publications = () => {
 
   useEffect(() => {
     filterUserPostsByYear(selectedYear);
-  }, [selectedYear]);
-
-  const fetchUserPosts = () => {
-      let availablePosts = [];
-
-      const q = query(collection(db, "posts"), where("userId", "==", userInfo.userId));
-      getDocs(q)
-          .then((data) => {
-              data.forEach((doc) => {
-                  availablePosts.push({ ...doc.data() });
-              })
-              setUserPosts(availablePosts);
-              setLoading(false);
-          })
-          .catch((err) => console.error(err));
-  };
-
-  const fetchByYear = (year) => {
-    fetchUserPosts();
-
-    const postsByYear = userPosts
-      .filter(post => {
-        (moment(0).add(post.time, 'milliseconds').year()) < year;
-      });
-
-    console.log(postsByYear);
-      
-    // setUserPosts(postsByYear);
-  };
+  }, []);
 
   const filterUserPostsByYear = (year) => {
     if (year === 'Année') {
@@ -56,6 +27,45 @@ const Publications = () => {
     } else {
       fetchByYear(year);
     }
+  };
+
+  const fetchUserPosts = () => {
+    const q = query(
+      collection(db, "posts"),
+      where("userId", "==", userInfo.userId)
+    );
+    
+    let availablePosts = [];
+    getDocs(q)
+      .then((data) => {
+          data.forEach((doc) => {
+              availablePosts.push({ ...doc.data() });
+          })
+          setUserPosts(availablePosts);
+          setLoading(false);
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const fetchByYear = (year) => {
+    const q = query(
+      collection(db, "posts"), 
+      and(
+        where("userId", "==", userInfo.userId), 
+        where("year", "==", year)
+      )
+    );
+
+    let availablePosts = [];
+    getDocs(q)
+        .then((data) => {
+            data.forEach((doc) => {
+                availablePosts.push({ ...doc.data() });
+            })
+            setUserPosts(availablePosts);
+            setLoading(false);
+        })
+        .catch((err) => console.error(err));
   };
 
   return (
