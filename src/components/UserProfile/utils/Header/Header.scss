@@ -5,30 +5,32 @@
         min-height: 200px;
         object-fit: cover;
         border-radius: 12px;
+        background: var(--gray_color_3);
     }
-
+    
     .header-info {
         width: 100%;
         max-width: 880px;
         margin: 0 auto;
         margin-top: .5rem;
-
+        
         display: flex;
         align-items: center;
         gap: 1rem;
-
+        
         .user-profile {
             width: 164px;
             height: 164px;
             border-radius: 50%;
             border: 4px solid var(--main_background_color);
             position: relative;
-
+            
             img {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
                 border-radius: 50%;
+                background: var(--gray_color_3);
             }
 
             .update-profile {

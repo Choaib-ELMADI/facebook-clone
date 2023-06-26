@@ -50,7 +50,9 @@ const Header = ({ userInfo }) => {
                         referrerPolicy='no-referrer'
                     />
                     { userInfo.userId === user.uid && (
-                        <button className='update-profile'>
+                        <button className='update-profile'
+                            onClick={ () => setShowUpdateProfileModel(true) }
+                        >
                             <IoCamera size={ 26 } />
                         </button>
                     )}

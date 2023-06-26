@@ -31,6 +31,7 @@ const UpdateProfile = ({ setShowUpdateProfileModel, userInfo }) => {
                             alt=""
                             draggable='false'
                             referrerPolicy='no-referrer'
+                            loading='lazy'
                         />
                     </div>
                 </div>
@@ -47,6 +48,7 @@ const UpdateProfile = ({ setShowUpdateProfileModel, userInfo }) => {
                             alt=""
                             draggable='false'
                             referrerPolicy='no-referrer'
+                            loading='lazy'
                         />
                     </div>
                 </div>
