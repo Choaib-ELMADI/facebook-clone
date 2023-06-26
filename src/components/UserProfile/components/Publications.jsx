@@ -84,6 +84,7 @@ const Publications = () => {
             filterUserPostsByYear={ filterUserPostsByYear }
             selectedYear={ selectedYear }
             setSelectedYear={ setSelectedYear }
+            setLoading={ setLoading }
           />
           <Posts 
             userPosts={ userPosts } 

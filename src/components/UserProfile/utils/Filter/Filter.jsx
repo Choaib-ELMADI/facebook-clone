@@ -6,7 +6,7 @@ import FilterModel from '../FilterModel/FilterModel';
 
 
 
-const Filter = ({ filterUserPostsByYear, selectedYear, setSelectedYear }) => {
+const Filter = ({ filterUserPostsByYear, selectedYear, setSelectedYear, setLoading }) => {
     const [viewModel, setViewModel] = useState(false);
 
     useEffect(() => {
@@ -22,7 +22,10 @@ const Filter = ({ filterUserPostsByYear, selectedYear, setSelectedYear }) => {
             <div className='filter-posts'>
                 <h3>Publications</h3>
                 <button
-                    onClick={ () => setViewModel(true) }
+                    onClick={ () => {
+                        setViewModel(true);
+                        setLoading(true);
+                    }}
                 >
                     <MdOutlineSettingsInputComponent />
                     Filter
