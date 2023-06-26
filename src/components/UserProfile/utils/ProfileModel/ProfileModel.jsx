@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { ref, uploadBytesResumable, getDownloadURL } from "firebase/storage";
-import { doc, updateDoc } from 'firebase/firestore';
+import { collection, doc, getDocs, query, updateDoc, where, writeBatch } from 'firebase/firestore';
 
 import './ProfileModel.scss';
 import { db, store } from '../../../../config/firebase';
@@ -19,15 +19,30 @@ const ProfileModel = ({ setViewProfileModel }) => {
         const uploadTask = uploadBytesResumable(storageRef, newProfile);
 
         uploadTask.on('state_changed', 
-            (snapshot) => {}, 
+            () => {}, 
             (error) => console.error(error), 
             () => {
                 getDownloadURL(uploadTask.snapshot.ref)
                     .then((downloadURL) => {
                         updateDoc(doc(db, 'users', user.email.split('@')[0]), {
                             userProfile: downloadURL
-                        })
-                            .then(() => setViewProfileModel(false))
+                        });
+
+                        const postsRef = query(collection(db, 'posts'), where('userId', '==', user.uid));
+                        getDocs(postsRef)
+                            .then((snapshot) => {
+                                const batch = writeBatch(db);
+
+                                snapshot.forEach((document) => {
+                                    batch.update(doc(db, 'posts', document.data().id), { profile: downloadURL });
+                                });
+
+                                return batch;
+                            })
+                            .then((batch) => {
+                                batch.commit();
+                                setViewProfileModel(false);
+                            })
                             .catch((err) => console.error(err));
                     });
             }

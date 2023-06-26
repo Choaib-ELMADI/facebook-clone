@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { RiVideoAddFill } from 'react-icons/ri';
 import { IoMdPhotos } from 'react-icons/io';
 import { CgSmileMouthOpen } from 'react-icons/cg';
 
 import './CreatePost.scss';
+import { db } from '../../config/firebase';
 import { useAuth } from '../../context/AuthContext';
 import images from '../../constants/images';
 import CreatePostModel from './CreatePostModel';
@@ -12,13 +14,29 @@ import CreatePostModel from './CreatePostModel';
 
 const CreatePost = ({ fetchPosts }) => {
     const [viewCreatingPostModel, setViewCreatingPostModel] = useState(false);
+    const [userInfo, setUserInfo] = useState({});
     const { user } = useAuth();
+    
+    useEffect(() => {
+        fetchUserInfo();
+    }, [user]);
+    
+    const fetchUserInfo = () => {
+        const q = query(collection(db, 'users'), where('userId', '==', user.uid));
+        getDocs(q)
+            .then(data => {
+                data.forEach(d => {
+                    setUserInfo({ ...d.data() })
+                })
+            })
+            .catch(err => console.error(err));
+    };
 
     return (
         <div className='create-post'>
             <div className='user-select'>
                 <img 
-                    src={ user && user?.photoURL ? user?.photoURL : images.user_1 } 
+                    src={ userInfo.userProfile ? userInfo.userProfile : images.user_1 } 
                     alt=''
                     loading='lazy'
                     referrerPolicy="no-referrer"
@@ -28,7 +46,7 @@ const CreatePost = ({ fetchPosts }) => {
                 <button
                     onClick={ () => setViewCreatingPostModel(true) }
                 >
-                    { `Quoi de neuf, ${ user && user?.displayName ? user?.displayName : 'User' } ?` }
+                    { `Quoi de neuf, ${ userInfo.userName ? userInfo.userName : 'User' } ?` }
                 </button>
             </div>
             <div className='line' />
@@ -60,6 +78,7 @@ const CreatePost = ({ fetchPosts }) => {
                 <CreatePostModel 
                     setViewCreatingPostModel={ setViewCreatingPostModel }
                     fetchPosts={ fetchPosts } 
+                    userInfo={ userInfo }
                 />
             }
         </div>

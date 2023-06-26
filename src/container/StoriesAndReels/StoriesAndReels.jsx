@@ -1,4 +1,5 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import { collection, getDocs, query, where } from 'firebase/firestore';
 import { FaBookOpen } from 'react-icons/fa';
 import { CgClapperBoard } from 'react-icons/cg';
 import { BsChevronLeft, BsChevronRight, BsArrowRight } from 'react-icons/bs';
@@ -7,6 +8,7 @@ import { Link } from 'react-router-dom';
 
 import './StoriesAndReels.scss';
 import images from '../../constants/images';
+import { db } from '../../config/firebase';
 import { useAuth } from '../../context/AuthContext';
 import StoryOrReel from './StoryOrReel';
 
@@ -120,6 +122,7 @@ const StoriesAndReels = () => {
     );
     const containerRef = useRef(null);
     const { user } = useAuth();
+    const [userInfo, setUserInfo] = useState({});
 
     const handleScroll = (direction) => {
         const { current } = containerRef;
@@ -128,7 +131,6 @@ const StoriesAndReels = () => {
         console.log(containerRef);
     };
 
-    
     const handleSelection = (type) => {
         setActiveSection(type);
         setSelectedSection(
@@ -136,6 +138,21 @@ const StoriesAndReels = () => {
                 item => item.type === type
             )
         );
+    };
+
+    useEffect(() => {
+        fetchUserInfo();
+    }, [user]);
+    
+    const fetchUserInfo = () => {
+        const q = query(collection(db, 'users'), where('userId', '==', user.uid));
+        getDocs(q)
+            .then(data => {
+                data.forEach(d => {
+                    setUserInfo({ ...d.data() })
+                })
+            })
+            .catch(err => console.error(err));
     };
 
     return (
@@ -165,7 +182,7 @@ const StoriesAndReels = () => {
                     <div className='story create-story'>
                         <div className='user-create-story'>
                             <img 
-                                src={ user && user?.photoURL ? user?.photoURL : images.user_1 } 
+                                src={ userInfo.userProfile ? userInfo.userProfile : images.user_1 } 
                                 alt=''
                                 loading='lazy'
                                 referrerPolicy="no-referrer"

@@ -11,7 +11,7 @@ import images from '../../constants/images';
 
 
 
-const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts }) => {
+const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts, userInfo }) => {
     const [postContent, setPostContent] = useState('');
     const [postImage, setPostImage] = useState(null);
     const [hasImage, setHasImage] = useState(false);
@@ -19,9 +19,9 @@ const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts }) => {
     const inputRef = useRef(null);
     const { user } = useAuth();
     const [postDetails, setPostDetails] = useState({
-        name: user.displayName || 'User',
-        email: user.email,
-        profile: user.photoURL,
+        name: userInfo.userName || 'User',
+        email: userInfo.userEmail,
+        profile: userInfo.userProfile,
         userId: user.uid,
         time: new Date().getTime(),
         year: new Date().getFullYear(),
@@ -109,7 +109,7 @@ const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts }) => {
                 </div>
                 <div className="user">
                     <img 
-                        src={ user && user?.photoURL ? user?.photoURL : images.user_1 } 
+                        src={ userInfo.userProfile ? userInfo.userProfile : images.user_1 } 
                         alt=''
                         loading='lazy'
                         referrerPolicy="no-referrer"
@@ -117,7 +117,7 @@ const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts }) => {
                         draggable='false'
                     />
                     <div className='user__details'>
-                        <p>{ user && user?.displayName ? user?.displayName : 'user' }</p>
+                        <p>{ userInfo.userName ? userInfo.userName : 'user' }</p>
                         <p>Public</p>
                     </div>
                 </div>
@@ -125,7 +125,7 @@ const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts }) => {
                     <div className='container'>
                         <textarea 
                             type="text" 
-                            placeholder={ `Quoi de neuf, ${ user && user?.displayName ? user.displayName : 'User' } ?` }
+                            placeholder={ `Quoi de neuf, ${ userInfo.userName ? userInfo.userName : 'User' } ?` }
                             name='postContent'
                             ref={ inputRef }
                             value={ postContent }
