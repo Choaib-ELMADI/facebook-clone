@@ -5,7 +5,7 @@ const datesList = ['Année', 2023, 2022, 2021, 2020, 2019];
 
 
 
-const FilterModel = ({ setViewModel, selectedYear, setSelectedYear, filterUserPostsByYear }) => {
+const FilterModel = ({ setViewModel, selectedYear, setSelectedYear, filterUserPostsByYear, setLoading }) => {
     const [viewList, setViewList] = useState(false);
 
     return (
@@ -13,7 +13,10 @@ const FilterModel = ({ setViewModel, selectedYear, setSelectedYear, filterUserPo
             <div className='filter-model-wrapper__content'>
                 <span 
                     className='close'
-                    onClick={ () => setViewModel(false) }
+                    onClick={ () => {
+                        setViewModel(false);
+                        setLoading(false);
+                    }}
                 >X</span>
                 <h3>Filtres de publication</h3>
                 <div className='filter-main-section'>
@@ -47,7 +50,10 @@ const FilterModel = ({ setViewModel, selectedYear, setSelectedYear, filterUserPo
                     </div>
                     <div className='confirm'>
                         <button
-                            onClick={ () => setViewModel(false) }
+                            onClick={ () => {
+                                setViewModel(false);
+                                setLoading(false);
+                            }}
                         >
                             Effacer
                         </button>

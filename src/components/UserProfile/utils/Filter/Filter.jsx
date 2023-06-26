@@ -38,6 +38,7 @@ const Filter = ({ filterUserPostsByYear, selectedYear, setSelectedYear, setLoadi
                     selectedYear={ selectedYear }
                     setSelectedYear={ setSelectedYear }
                     filterUserPostsByYear={ filterUserPostsByYear }
+                    setLoading={ setLoading }
                 />
             )}
         </>
