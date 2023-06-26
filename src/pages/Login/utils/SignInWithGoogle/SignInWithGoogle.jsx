@@ -1,7 +1,7 @@
 import React from 'react';
 import { signInWithPopup } from 'firebase/auth';
 import { FcGoogle } from 'react-icons/fc';
-import { setDoc, doc } from 'firebase/firestore';
+import { setDoc, doc, getDoc } from 'firebase/firestore';
 import { useNavigate } from 'react-router-dom';
 
 import { auth, googleProvider, db } from '../../../../config/firebase';
@@ -18,15 +18,21 @@ const SignInWithGoogle = () => {
                 return user;
             })
             .then((user) => {
-                setDoc(doc(db, 'users', user.email.split('@')[0]), {
-                    userId: user.uid,
-                    userName: user.displayName,
-                    userEmail: user.email,
-                    userProfile: user.photoURL,
-                    userLink: user.email.split('@')[0],
-                });
-
-                navigate('/');
+                getDoc(db, 'users', user.email.split('@')[0])
+                    .then((snapshot) => {
+                        if (snapshot.exists()) {
+                            return;
+                        } else {
+                            setDoc(doc(db, 'users', user.email.split('@')[0]), {
+                                userId: user.uid,
+                                userName: user.displayName,
+                                userEmail: user.email,
+                                userProfile: user.photoURL,
+                                userLink: user.email.split('@')[0],
+                            });
+                        }
+                        navigate('/');
+                    })
             })
             .catch((err) => {
                 console.error(err);
