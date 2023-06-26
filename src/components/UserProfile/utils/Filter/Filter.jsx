@@ -1,47 +1,23 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { MdOutlineSettingsInputComponent } from 'react-icons/md';
 
 import './Filter.scss';
-import FilterModel from '../FilterModel/FilterModel';
 
 
 
-const Filter = ({ filterUserPostsByYear, selectedYear, setSelectedYear, setLoading }) => {
-    const [viewModel, setViewModel] = useState(false);
-
-    useEffect(() => {
-        if (viewModel) {
-            document.body.style.overflow = 'hidden';
-        } else {
-            document.body.style.overflow = 'auto';
-        }
-    }, [viewModel]);
-
+const Filter = ({ setViewModel }) => {
     return (
-        <>
-            <div className='filter-posts'>
-                <h3>Publications</h3>
-                <button
-                    onClick={ () => {
-                        setViewModel(true);
-                        setLoading(true);
-                    }}
-                >
-                    <MdOutlineSettingsInputComponent />
-                    Filter
-                </button>
-            </div>
-
-            { viewModel && (
-                <FilterModel
-                    setViewModel={ setViewModel }
-                    selectedYear={ selectedYear }
-                    setSelectedYear={ setSelectedYear }
-                    filterUserPostsByYear={ filterUserPostsByYear }
-                    setLoading={ setLoading }
-                />
-            )}
-        </>
+        <div className='filter-posts'>
+            <h3>Publications</h3>
+            <button
+                onClick={ () => {
+                    setViewModel(true);
+                }}
+            >
+                <MdOutlineSettingsInputComponent />
+                Filter
+            </button>
+        </div>
         
     );
 };

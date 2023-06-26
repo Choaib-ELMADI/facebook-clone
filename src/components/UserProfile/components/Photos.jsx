@@ -10,7 +10,7 @@ import './Photos.scss';
 const Photos = () => {
   const [photos, setPhotos] = useState([]);
   const [loading, setLoading] = useState(true);
-  const userInfo = useOutletContext();
+  const [userInfo] = useOutletContext();
 
   useEffect(() => {
     fetchUserPhotos();

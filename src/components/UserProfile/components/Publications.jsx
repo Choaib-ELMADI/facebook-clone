@@ -1,9 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { useOutletContext } from 'react-router-dom';
-import { getDocs, collection, query, where, and } from 'firebase/firestore';
 
 import './Publications.scss';
-import { db } from '../../../config/firebase';
 import { Card, Filter, Posts, UserPhotos } from '../utils/index';
 import { useAuth } from '../../../context/AuthContext';
 import { CreatePost } from '../../../container/index';
@@ -12,61 +10,7 @@ import { CreatePost } from '../../../container/index';
 
 const Publications = () => {
   const { user } = useAuth();
-  const userInfo = useOutletContext();
-  const [userPosts, setUserPosts] = useState([]);
-  const [selectedYear, setSelectedYear] = useState('Année');
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    filterUserPostsByYear(selectedYear);
-  }, []);
-
-  const filterUserPostsByYear = (year) => {
-    if (year === 'Année') {
-      fetchUserPosts();
-    } else {
-      fetchByYear(year);
-    }
-  };
-
-  const fetchUserPosts = () => {
-    const q = query(
-      collection(db, "posts"),
-      where("userId", "==", userInfo.userId)
-    );
-    
-    let availablePosts = [];
-    getDocs(q)
-      .then((data) => {
-          data.forEach((doc) => {
-              availablePosts.push({ ...doc.data() });
-          })
-          setUserPosts(availablePosts);
-          setLoading(false);
-      })
-      .catch((err) => console.error(err));
-  };
-
-  const fetchByYear = (year) => {
-    const q = query(
-      collection(db, "posts"), 
-      and(
-        where("userId", "==", userInfo.userId), 
-        where("year", "==", year)
-      )
-    );
-
-    let availablePosts = [];
-    getDocs(q)
-        .then((data) => {
-            data.forEach((doc) => {
-                availablePosts.push({ ...doc.data() });
-            })
-            setUserPosts(availablePosts);
-            setLoading(false);
-        })
-        .catch((err) => console.error(err));
-  };
+  const [userInfo, setViewModel, userPosts, loading] = useOutletContext();
 
   return (
       <div className='user-profile__publications'>
@@ -80,12 +24,7 @@ const Publications = () => {
           { userInfo.userId === user.uid && (
             <CreatePost />
           )}
-          <Filter 
-            filterUserPostsByYear={ filterUserPostsByYear }
-            selectedYear={ selectedYear }
-            setSelectedYear={ setSelectedYear }
-            setLoading={ setLoading }
-          />
+          <Filter setViewModel={ setViewModel } />
           <Posts 
             userPosts={ userPosts } 
             loading={ loading } 
