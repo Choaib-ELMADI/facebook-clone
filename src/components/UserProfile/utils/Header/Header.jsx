@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BsFillPersonCheckFill, BsMessenger, BsPlus, BsPencilFill } from 'react-icons/bs';
 import { IoCamera } from 'react-icons/io5';
 
 import { useAuth } from '../../../../context/AuthContext';
 import './Header.scss';
 import images from '../../../../constants/images';
+import UpdateProfile from '../UpdateProfile/UpdateProfile';
 const friendsPlaceholder = [
     images.user_1, 
     images.user_2, 
@@ -18,6 +19,15 @@ const friendsPlaceholder = [
 
 const Header = ({ userInfo }) => {
     const { user } = useAuth();
+    const [showUpdateProfileModel, setShowUpdateProfileModel] = useState(false);
+
+    useEffect(() => {
+        if (showUpdateProfileModel) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+    }, [showUpdateProfileModel]);
 
     return (
         <div className='user-profile-page__content__header'>
@@ -76,7 +86,9 @@ const Header = ({ userInfo }) => {
                                 <BsPlus size={ 20 } />
                                 Ajouter à la story
                             </button>
-                            <button className='change-profile'>
+                            <button className='change-profile'
+                                onClick={ () => setShowUpdateProfileModel(true) }
+                            >
                                 <BsPencilFill size={ 16 } />
                                 Modifier le profil
                             </button>
@@ -96,6 +108,13 @@ const Header = ({ userInfo }) => {
                     )}
                 </div>
             </div>
+
+            { showUpdateProfileModel && (
+                <UpdateProfile
+                    setShowUpdateProfileModel={ setShowUpdateProfileModel }
+                    userInfo={ userInfo }
+                />
+            )}
         </div>
     );
 };

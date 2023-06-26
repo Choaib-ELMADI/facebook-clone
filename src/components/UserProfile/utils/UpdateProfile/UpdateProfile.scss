@@ -1,0 +1,103 @@
+.update-profile__wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    padding: 4rem .5rem;
+    overflow-y: scroll;
+    background: rgba(255, 255, 255, .8);
+    z-index: 100;
+
+    display: grid;
+    place-items: center;
+
+    .update-profile__container {
+        width: 100%;
+        max-width: 700px;
+        background: var(--white_color);
+        border-radius: 12px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 10px;
+
+        position: relative;
+
+        .close {
+            position: absolute;
+            top: 1.5rem;
+            right: .75rem;
+            transform: translateY(-50%);
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: var(--gray_color_3);
+            color: var(--gray_color);
+            font-weight: 600;
+            cursor: pointer;
+
+            display: grid;
+            place-items: center;
+        }
+
+        .title {
+            text-align: center;
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray_color_3);
+        }
+
+        .content {
+            header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                padding: 1rem;
+
+                button {
+                    background: transparent;
+                    border: 0;
+                    outline: none;
+                    padding: .5rem;
+                    border-radius: 4px;
+                    color: var(--main_bleu_color);
+                    font-size: var(--small__size);
+                    transition: .2s;
+                    cursor: pointer;
+                    
+                    &:hover {
+                        background: var(--gray_color_3);
+                    }
+                }
+            }
+
+            .image-container {
+                display: grid;
+                place-items: center;
+            }
+
+            &.profile {
+                .image-container {
+                    img {
+                        width: 170px;
+                        height: 170px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    }
+                }
+            }
+
+            &.cover {
+                padding-bottom: 2rem;
+
+                .image-container {
+                    img {
+                        width: calc(100% - .5rem);
+                        max-width: 500px;
+                        aspect-ratio: 2.5;
+                        border-radius: 8px;
+                        object-fit: cover;
+                    }
+                }
+            }
+        }
+    }
+}
