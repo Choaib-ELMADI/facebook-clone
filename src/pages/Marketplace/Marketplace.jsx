@@ -7,7 +7,7 @@ const Marketplace = () => {
   return (
     <main className="marketplace">
       <Navbar />
-      <h1>Marketplace Page</h1>
+      <h3>Marketplace Page</h3>
     </main>
   );
 };

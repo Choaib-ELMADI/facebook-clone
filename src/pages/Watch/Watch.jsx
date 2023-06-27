@@ -7,7 +7,7 @@ const Watch = () => {
   return (
     <main className="watch">
       <Navbar />
-      <h1>Watch Page</h1>
+      <h3>Watch Page</h3>
     </main>
   );
 };

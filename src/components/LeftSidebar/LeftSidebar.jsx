@@ -16,12 +16,12 @@ const links = [
     {
         icon: <BsFillPeopleFill color='#1a7fe9' size={ 24 } />,
         title: 'Amis',
-        link: '/'
+        link: '/friends'
     },
     {
         icon: <BsFillPlayBtnFill color='#1a7fe9' size={ 24 } />,
         title: 'Watch',
-        link: '/'
+        link: '/watch'
     },
     {
         icon: <FaCalendarPlus color="#e74a66" size={ 24 } />,
@@ -46,12 +46,12 @@ const links = [
     {
         icon: <GiGamepadCross color='#1a7fe9' size={ 24 } />,
         title: 'Vidéos de gaming',
-        link: '/'
+        link: '/games'
     },
     {
         icon: <BiJoystickAlt color='#1a7fe9' size={ 28 } />,
         title: 'Jouer à des jeux',
-        link: '/'
+        link: '/games'
     },
     {
         icon: <GiBackwardTime color='#1a7fe9' size={ 28 } />,

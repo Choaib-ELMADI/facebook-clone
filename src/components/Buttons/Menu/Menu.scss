@@ -160,4 +160,7 @@
         }
     }
 
+    @media screen and (width <= 900px) {
+        display: none;
+    }
 }

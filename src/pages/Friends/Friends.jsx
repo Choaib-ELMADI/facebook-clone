@@ -7,7 +7,7 @@ const Friends = () => {
   return (
     <main className="friends">
       <Navbar />
-      <h1>Friends Page</h1>
+      <h3>Friends Page</h3>
     </main>
   );
 };

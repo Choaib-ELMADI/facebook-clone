@@ -7,7 +7,7 @@ const Games = () => {
   return (
     <main className="games">
         <Navbar />
-        <h1>Games Page</h1>
+        <h3>Games Page</h3>
     </main>
   );
 };

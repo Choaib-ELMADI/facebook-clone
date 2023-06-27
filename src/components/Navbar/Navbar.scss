@@ -149,6 +149,12 @@
                 object-fit: cover;
                 border-radius: 50%;
             }
+
+            &:nth-child(1) {
+                @media screen and (width <= 900px) {
+                    display: none;
+                }
+            }
         }
     }
 }
