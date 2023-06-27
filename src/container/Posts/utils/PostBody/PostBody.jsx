@@ -10,7 +10,13 @@ const PostBody = ({ post }) => {
     return (
         <div className='post-body'>
             { postContent !== '' && (
-                <p>{ postContent }</p>
+                <>
+                    <p>{ postContent }</p>
+                    <input 
+                        type="checkbox"
+                        style={{ display: postContent.length > 130 ? '' : 'none' }}
+                    />
+                </>
             )}
             
             { hasImage && (
