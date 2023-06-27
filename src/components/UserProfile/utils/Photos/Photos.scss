@@ -26,11 +26,10 @@
         overflow: hidden;
 
         .image {
-            background: var(--gray_color_2);
-
             img {
                 width: 100%;
-                height: 100%;
+                aspect-ratio: 2.4;
+                background: var(--gray_color_2);
             }
         }
     }

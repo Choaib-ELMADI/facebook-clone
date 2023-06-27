@@ -8,6 +8,10 @@ import user_3        from '../assets/user-demos-3.jpg';
 
 import banner        from '../assets/banner.jpg';
 
+import arduino       from '../assets/banner.webp';
+
+import get_3d        from '../assets/home__i2.jpg';
+
 const images = {
     facebook_logo,
 
@@ -17,6 +21,10 @@ const images = {
     user_2,
     user_3,
 
-    banner
+    banner,
+
+    arduino,
+
+    get_3d
 };
 export default images;
