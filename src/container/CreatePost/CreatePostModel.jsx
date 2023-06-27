@@ -16,6 +16,7 @@ const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts, userInfo }) => 
     const [postImage, setPostImage] = useState(null);
     const [hasImage, setHasImage] = useState(false);
     const [loading, setLoading] = useState(0);
+    const [isLoaded, setIsLoaded] = useState(false);
     const inputRef = useRef(null);
     const { user } = useAuth();
     const [postDetails, setPostDetails] = useState({
@@ -43,9 +44,9 @@ const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts, userInfo }) => 
             hasImage: hasImage,
         })
         .then(() => {
+            setViewCreatingPostModel(false);
             setPostContent('');
             setPostImage(null);
-            setViewCreatingPostModel(false);
             fetchPosts();
         })
         .catch((err) => console.error(err));
@@ -153,6 +154,9 @@ const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts, userInfo }) => 
                                     <img 
                                         src={ URL.createObjectURL(postImage) }
                                         alt='post image'
+                                        loading='lazy'
+                                        draggable='false'
+                                        onLoad={ () => setIsLoaded(true) }
                                     />
                                 }
                             </label>
@@ -163,7 +167,7 @@ const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts, userInfo }) => 
                     <button 
                         disabled={ 
                             (postContent === '' && postImage === null) ||
-                            (postImage !== null && loading !== 100)
+                            (postImage !== null && loading !== 100 && !isLoaded)
                         }
                         onClick={ handleSubmitPost }
                     >Publier</button>
