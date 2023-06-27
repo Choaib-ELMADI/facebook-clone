@@ -1,6 +1,4 @@
-'use client';
-
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { IoTelescope } from 'react-icons/io5';
 import { FaCalendarPlus } from 'react-icons/fa';
 import { BsFillPeopleFill, BsFillSaveFill, BsFillStarFill, BsFillPlayBtnFill, BsMessenger } from "react-icons/bs";
@@ -115,12 +113,16 @@ const Left = () => {
   const handleSearch = () => {
     setFilteredItems(
       menuItems.filter(item => {
-        return search.toLowerCase() === ' ' ?
+        return search.toLowerCase() === '' ?
         item :
         item.category.toLowerCase().includes(search.toLowerCase())
       })
     );
   };
+
+  useEffect(() => {
+    handleSearch();
+  }, [search]);  
 
   return (
     <div className="left-container">
@@ -131,7 +133,6 @@ const Left = () => {
           placeholder="Rechercher dans le menu"
           onChange={ (e) => {
             setSearch(e.target.value);
-            handleSearch();
           }}
           value={ search }
         />
