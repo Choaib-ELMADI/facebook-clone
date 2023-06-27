@@ -1,5 +1,5 @@
 import './Marketplace.scss';
-import { Navbar } from '../../components/index';
+import { Navbar, Sidebar } from '../../components/index';
 
 
 
@@ -7,7 +7,16 @@ const Marketplace = () => {
   return (
     <main className="marketplace">
       <Navbar />
-      <h3>Marketplace Page</h3>
+      <div className='section'>
+          <Sidebar title='MarketPlace' />
+          <div className='marketplace-content'>
+            <p>Produit</p>
+            <p>Produit</p>
+            <p>Produit</p>
+            <p>Produit</p>
+            <p>Produit</p>
+          </div>
+      </div>
     </main>
   );
 };

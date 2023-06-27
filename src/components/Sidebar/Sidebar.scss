@@ -1,0 +1,57 @@
+.commun-sidebar {
+    width: 350px;
+    height: calc(100vh - 65px);
+    overflow-y: scroll;
+    background: var(--white_color);
+
+    &__header {
+        padding: .5rem;
+
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        span {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--gray_color_3);
+            cursor: pointer;
+
+            display: grid;
+            place-items: center;
+        }
+    }
+
+    .commun-sidebar__fake-links {
+        .fake-link {
+            display: flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .5rem;
+            margin-left: .5rem;
+            transition: .2s;
+            background: transparent;
+            border-radius: 8px;
+            cursor: pointer;
+
+            &:hover {
+                background: var(--gray_color_4);
+            }
+
+            .cercle {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                background: var(--gray_color_3);
+            }
+
+            .rectangle {
+                width: 200px;
+                height: 14px;
+                border-radius: 4px;
+                background: var(--gray_color_3);
+            }
+        }
+    }
+}

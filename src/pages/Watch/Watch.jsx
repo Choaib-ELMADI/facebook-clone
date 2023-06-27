@@ -1,5 +1,5 @@
 import './Watch.scss';
-import { Navbar } from '../../components/index';
+import { Navbar, Sidebar } from '../../components/index';
 
 
 
@@ -7,7 +7,16 @@ const Watch = () => {
   return (
     <main className="watch">
       <Navbar />
-      <h3>Watch Page</h3>
+      <div className='section'>
+          <Sidebar title='Watch' />
+          <div className='watch-content'>
+            <p>Video</p>
+            <p>Video</p>
+            <p>Video</p>
+            <p>Video</p>
+            <p>Video</p>
+          </div>
+      </div>
     </main>
   );
 };

@@ -20,3 +20,5 @@ export { default as Videos       } from './UserProfile/components/Videos';
 export { default as Photos       } from './UserProfile/components/Photos';
 export { default as UserFriends  } from './UserProfile/components/Friends';
 export { default as Reels        } from './UserProfile/components/Reels';
+
+export { default as Sidebar     } from './Sidebar/Sidebar';
