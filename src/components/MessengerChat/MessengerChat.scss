@@ -1,7 +1,89 @@
 .messenger-chat-container {
-    background: red;
-
     &__content {
-        padding-top: 65px;
+        margin-top: 65px;
+        background: var(--white_color);
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        width: calc(100% - 1rem);
+        max-width: 700px;
+        margin-inline: auto;
+        height: calc(100vh - 65px);
+        overflow-y: scroll;
+
+        display: flex;
+        flex-direction: column;
+
+        &::-webkit-scrollbar {
+            width: 0;
+        }
+
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+    
+            padding: .5rem;
+            border-bottom: 1px solid var(--gray_color_3);
+            box-shadow: rgba(0, 0, 0, .1) 0px 1px 8px;
+    
+            .receiver-profile {
+                display: flex;
+                align-items: center;
+                gap: .5rem;
+    
+                text-decoration: none;
+                color: var(--black_color);
+    
+                img {
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+            }
+    
+            .link-to-home {
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                transition: .2s;
+                text-decoration: none;
+                color: var(--main_bleu_color);
+    
+                display: grid;
+                place-items: center;
+    
+                &:hover {
+                    background: var(--gray_color_3);
+                }
+            }
+        }
+
+        .messages-container {
+            background: red;
+            height: 100%;
+            overflow-y: scroll;
+
+            &::-webkit-scrollbar {
+                width: 0;
+            }
+
+            &__messages {
+                height: 1000px;
+                background: linear-gradient(45deg, red, blue);
+            }
+        }
+
+        .footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 50px;
+    
+            margin-top: auto;
+            padding: .5rem;
+            border-top: 1px solid var(--gray_color_3);
+            box-shadow: rgba(0, 0, 0, .1) 0px 1px 8px;
+            background: greenyellow;
+        }
     }
 }
