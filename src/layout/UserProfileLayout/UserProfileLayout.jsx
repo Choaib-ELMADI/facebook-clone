@@ -17,6 +17,10 @@ const UserProfileLayout = ({ userInfo }) => {
     const [viewModel, setViewModel] = useState(false);
 
     useEffect(() => {
+        document.title = `${ userInfo.userLink } | Facebook`;
+    }, []);
+
+    useEffect(() => {
         if (viewModel) {
             setLoading(true);
             document.body.style.overflow = 'hidden';
@@ -31,39 +35,39 @@ const UserProfileLayout = ({ userInfo }) => {
     }, []);
     
     const filterUserPostsByYear = (year) => {
-    if (year === 'Année') {
-        fetchUserPosts();
-    } else {
-        fetchByYear(year);
-    }
+        if (year === 'Année') {
+            fetchUserPosts();
+        } else {
+            fetchByYear(year);
+        }
     };
     
     const fetchUserPosts = () => {
-    const q = query(
-        collection(db, "posts"),
-        where("userId", "==", userInfo.userId)
-    );
+        const q = query(
+            collection(db, "posts"),
+            where("userId", "==", userInfo.userId)
+        );
     
-    let availablePosts = [];
-    getDocs(q)
-        .then((data) => {
-            data.forEach((doc) => {
-                availablePosts.push({ ...doc.data() });
+        let availablePosts = [];
+        getDocs(q)
+            .then((data) => {
+                data.forEach((doc) => {
+                    availablePosts.push({ ...doc.data() });
+                })
+                setUserPosts(availablePosts);
+                setLoading(false);
             })
-            setUserPosts(availablePosts);
-            setLoading(false);
-        })
-        .catch((err) => console.error(err));
+            .catch((err) => console.error(err));
     };
     
     const fetchByYear = (year) => {
-    const q = query(
-        collection(db, "posts"), 
-        and(
-        where("userId", "==", userInfo.userId), 
-        where("year", "==", year)
-        )
-    );
+        const q = query(
+            collection(db, "posts"), 
+            and(
+            where("userId", "==", userInfo.userId), 
+            where("year", "==", year)
+            )
+        );
     
         let availablePosts = [];
         getDocs(q)

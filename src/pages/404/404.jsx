@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { FcLock } from 'react-icons/fc';
 
@@ -8,6 +8,10 @@ import { Navbar } from '../../components/index';
 
 
 const NotFound = () => {
+    useEffect(() => {
+        document.title = '404 | Facebook';
+    }, []);
+
     return (
         <div className='not-found-wrapper'>
             <Navbar />

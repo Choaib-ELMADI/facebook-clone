@@ -1,9 +1,15 @@
+import { useEffect } from 'react';
+
 import './Friends.scss';
 import { Navbar, Sidebar } from '../../components/index';
 
 
 
 const Friends = () => {
+  useEffect(() => {
+    document.title = 'Friends | Facebook';
+  }, []);
+
   return (
     <main className="friends">
       <Navbar />

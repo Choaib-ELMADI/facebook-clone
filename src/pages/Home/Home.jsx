@@ -14,6 +14,10 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    document.title = 'Facebook';
+  }, []);
+
+  useEffect(() => {
     fetchPosts();
   }, [posts]);
 

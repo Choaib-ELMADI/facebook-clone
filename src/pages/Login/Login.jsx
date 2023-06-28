@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import './Login.scss';
 import SignInWithGoogle from './utils/SignInWithGoogle/SignInWithGoogle';
@@ -12,6 +12,10 @@ export default function Login() {
         email: '',
         password: '',
     });
+
+    useEffect(() => {
+        document.title = 'Lodin | Facebook';
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;

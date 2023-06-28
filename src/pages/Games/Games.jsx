@@ -1,9 +1,15 @@
+import { useEffect } from 'react';
+
 import './Games.scss';
 import { Navbar, Sidebar } from '../../components/index';
 
 
 
 const Games = () => {
+  useEffect(() => {
+    document.title = 'Games | Facebook';
+  }, []);
+
   return (
     <main className="games">
         <Navbar />

@@ -1,9 +1,15 @@
+import { useEffect } from 'react';
+
 import './Marketplace.scss';
 import { Navbar, Sidebar } from '../../components/index';
 
 
 
 const Marketplace = () => {
+  useEffect(() => {
+    document.title = 'Marketplace | Facebook';
+  }, []);
+
   return (
     <main className="marketplace">
       <Navbar />
