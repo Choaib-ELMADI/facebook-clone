@@ -181,7 +181,7 @@ const Navbar = () => {
 
             { clickedButton === 'notifications' && <Notification  /> }
             { clickedButton === 'messenger' && <Messenger /> }
-            { clickedButton === 'profile' && <Profile /> }
+            { clickedButton === 'profile' && <Profile userInfo={ userInfo } /> }
             { clickedButton === 'menu' && <Menu /> }
         </nav>
     );

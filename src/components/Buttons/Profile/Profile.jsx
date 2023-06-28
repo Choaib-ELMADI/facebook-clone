@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react';
-import { query, collection, where, getDocs, deleteDoc, doc } from 'firebase/firestore';
+import React from 'react';
 import { IoSettingsSharp, IoLogOut } from 'react-icons/io5';
 import { BsChevronRight } from 'react-icons/bs';
 import { BsFillQuestionCircleFill, BsFillMoonFill } from 'react-icons/bs';
@@ -8,38 +7,15 @@ import { signOut } from 'firebase/auth';
 
 import './Profile.scss';
 import images from '../../../constants/images';
-import { auth, db } from '../../../config/firebase';
-import { useAuth } from '../../../context/AuthContext';
+import { auth } from '../../../config/firebase';
 
 
 
-const Profile = () => {
-    const { user } = useAuth();
-    const [userInfo, setUserInfo] = useState({});
-
-    useEffect(() => {
-        fetchUserInfo();
-    }, [user]);
-    
-    const fetchUserInfo = () => {
-        const q = query(collection(db, 'users'), where('userId', '==', user.uid));
-        getDocs(q)
-            .then(data => {
-                data.forEach(d => {
-                    setUserInfo({ ...d.data() })
-                })
-            })
-            .catch(err => console.error(err));
-    };
-
+const Profile = ({ userInfo }) => {
     const handleUserLogOut = () => {
         signOut(auth)
-            .then(() => {
-                deleteDoc(doc(db, "users", user.uid))
-                    .then(() => console.log('Log out successfully'))
-                    .catch((error) => console.log('Error while deleting from firestore', error));
-            })
-            .catch((error) => console.log('Error while signing out', error));
+            .then(() => console.log('Log out successfully'))
+            .catch((error) => console.error(error));
     };
 
     return (

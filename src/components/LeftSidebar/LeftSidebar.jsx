@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { collection, getDocs, query, where } from 'firebase/firestore';
 import { FcPuzzle } from 'react-icons/fc';
 import { FaCalendarPlus } from 'react-icons/fa';
 import { BsFillPeopleFill, BsFillSaveFill, BsFillStarFill, BsFillPlayBtnFill } from "react-icons/bs";
@@ -8,9 +7,7 @@ import { HiUserGroup } from "react-icons/hi";
 import { BiJoystickAlt } from "react-icons/bi";
 import { GiGamepadCross, GiBackwardTime } from 'react-icons/gi';
 
-import { db } from '../../config/firebase';
 import './LeftSidebar.scss';
-import { useAuth } from '../../context/AuthContext';
 import images from '../../constants/images';
 const links = [
     {
@@ -67,25 +64,7 @@ const links = [
 
 
 
-const LeftSidebar = () => {
-    const { user } = useAuth();
-    const [userInfo, setUserInfo] = useState({});
-
-    useEffect(() => {
-        fetchUserInfo();
-    }, [user]);
-    
-    const fetchUserInfo = () => {
-        const q = query(collection(db, 'users'), where('userId', '==', user.uid));
-        getDocs(q)
-            .then(data => {
-                data.forEach(d => {
-                    setUserInfo({ ...d.data() })
-                })
-            })
-            .catch(err => console.error(err));
-    };
-
+const LeftSidebar = ({ userInfo }) => {
     return (
         <div className='sidebar left'>
             <div className='left-sidebar-content'>
