@@ -5,7 +5,7 @@
         flex-direction: column;
         align-items: center;
         width: 100%;
-        padding: 0 .5rem .5rem .5rem;
+        padding: 0 0 .5rem 0;
         background: var(--white_color);
         border-radius: 0;
         box-shadow: none;
@@ -13,6 +13,7 @@
         .header {
             height: 56px;
             width: 100%;
+
 
             display: flex;
             align-items: center;
