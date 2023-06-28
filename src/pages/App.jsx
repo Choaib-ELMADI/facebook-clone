@@ -5,6 +5,7 @@ import { Login, Home, Friends, Watch, Marketplace, Games, Bookmarks, NotFound } 
 import { useAuth } from '../context/AuthContext';
 import { Publications, About, Photos, Videos, Reels, UserFriends, UserProfile } from '../components/index';
 import { UserProfileLoader } from '../components/UserProfile/UserProfile';
+import MessengerChat, { ReceiverProfileLoader } from '../components/MessengerChat/MessengerChat';
 
 
 
@@ -49,6 +50,11 @@ const router = createBrowserRouter(
           <Route path='videos'  element={ <Videos       /> } />
           <Route path='reels'   element={ <Reels        /> } />
         </Route>
+      </Route>
+
+      <Route path='messages'>
+        <Route index            element={ <RequireAuth><NotFound /></RequireAuth>      }  />
+        <Route path=':userLink' element={ <RequireAuth><MessengerChat /></RequireAuth> } loader={ ReceiverProfileLoader } />
       </Route>
 
       <Route path='*'           element={ <RequireAuth><NotFound /></RequireAuth>    } />

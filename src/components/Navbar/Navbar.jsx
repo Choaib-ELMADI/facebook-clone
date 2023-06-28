@@ -180,7 +180,7 @@ const Navbar = () => {
             </div>
 
             { clickedButton === 'notifications' && <Notification  /> }
-            { clickedButton === 'messenger' && <Messenger /> }
+            { clickedButton === 'messenger' && <Messenger setClickedButton={ setClickedButton } /> }
             { clickedButton === 'profile' && <Profile userInfo={ userInfo } /> }
             { clickedButton === 'menu' && <Menu /> }
         </nav>
