@@ -1,8 +1,11 @@
 .commun-sidebar {
     width: 350px;
-    height: calc(100vh - 65px);
+    height: calc(100vh - 56px);
     overflow-y: scroll;
     background: var(--white_color);
+
+    position: sticky;
+    top: 56px;
 
     &__header {
         padding: .5rem;
@@ -53,5 +56,9 @@
                 background: var(--gray_color_3);
             }
         }
+    }
+
+    @media screen and (width <= 900px) {
+        display: none;
     }
 }

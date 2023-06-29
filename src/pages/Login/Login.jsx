@@ -14,7 +14,7 @@ export default function Login() {
     });
 
     useEffect(() => {
-        document.title = 'Lodin | Facebook';
+        document.title = 'Login | Facebook';
     }, []);
 
     const handleChange = (e) => {
