@@ -1,6 +1,7 @@
 .messenger-container {
     .search-list {
-        position: static;
+        position: sticky;
+        top: -65px;
         display: flex;
         flex-direction: column;
         align-items: center;
