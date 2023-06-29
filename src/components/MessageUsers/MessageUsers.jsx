@@ -46,7 +46,7 @@ const MessageUsers = () => {
             <Messenger />
 
 
-            //TODO: Recent Chats
+            {/* //TODO: Recent Chats */}
             {
                 recentChats.length < 1 ?
                 <h3>No recent chats</h3>

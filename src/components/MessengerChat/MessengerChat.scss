@@ -74,6 +74,68 @@
 
             &__messages {
                 min-height: 100%;
+
+                .message-model {
+                    padding: .5rem;
+                    animation: blinking 1.5s infinite ease-in-out;
+
+                    display: flex;
+                    gap: .25rem;
+
+                    &.sender {
+                        flex-direction: row-reverse;
+
+                        .message-model__profile {
+                            width: 32px;
+                            height: 32px;
+                            border-radius: 50%;
+                            background: var(--main_bleu_color_trs);
+                        }
+                        
+                        .message-model__message {
+                            .message {
+                                background: var(--main_bleu_color);
+                            }
+    
+                            .moment {
+                                margin-left: auto;
+                                background: var(--main_bleu_color_trs);
+                            }
+                        }
+                    }
+
+                    &__profile {
+                        width: 32px;
+                        height: 32px;
+                        border-radius: 50%;
+                        background: var(--gray_color);
+                    }
+
+                    &__message {
+                        .message {
+                            width: 160px;
+                            height: 32px;
+                            border-radius: 16px;
+                            background: var(--gray_color_3);
+                        }
+
+                        .moment {
+                            width: 70px;
+                            height: var(--verysmall__size);
+                            margin-top: 2px;
+                            background: var(--gray_color);
+                        }
+                    }
+
+                    @keyframes blinking {
+                        0%, 100% {
+                            opacity: 1;
+                        }
+                        50% {
+                            opacity: .4;
+                        }
+                    }
+                }
             }
         }
 

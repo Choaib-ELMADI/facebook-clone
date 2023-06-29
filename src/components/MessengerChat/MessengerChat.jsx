@@ -10,6 +10,18 @@ import { Navbar, Message } from '../../components/index';
 import './MessengerChat.scss';
 import images from '../../constants/images';
 
+const MessageModel = ({ sender }) => {
+    return (
+        <div className={ sender ? 'message-model sender' : 'message-model' }>
+            <div className='message-model__profile' />
+            <div className='message-model__message'>
+                <div className='message' />
+                <div className='moment' />
+            </div>
+        </div>
+    )
+};
+
 
 
 const MessengerChat = () => {
@@ -29,6 +41,7 @@ const MessengerChat = () => {
 
     useEffect(() => {
         fetchUser();
+        fetchChat();
     }, []);
 
     const fetchUser = () => {
@@ -36,9 +49,7 @@ const MessengerChat = () => {
             .then((data) => {
                 setUserInfo({ ...data.data() });
             })
-            .then(() => {
-                fetchChat();
-            })
+            .catch((err) => console.error(err));
     };
 
     const autoResize = (ref) => {
@@ -131,7 +142,14 @@ const MessengerChat = () => {
     const renderContent = () => {
         if (loading) {
             return (
-                <h3>Message model</h3>
+                <>
+                    <MessageModel />
+                    <MessageModel />
+                    <MessageModel />
+                    <MessageModel sender={ true } />
+                    <MessageModel sender={ true } />
+                    <MessageModel />
+                </>
             );
         }
             
