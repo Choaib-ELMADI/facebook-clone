@@ -1,11 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLoaderData, useLocation } from 'react-router-dom';
+import { Link, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { getDoc, doc, addDoc, collection, query, where, and, updateDoc, arrayUnion, getDocs, or } from 'firebase/firestore';
 import { IoClose, IoSend } from 'react-icons/io5';
+import { BiArrowBack } from 'react-icons/bi';
 
 import { db } from '../../config/firebase';
 import { useAuth } from '../../context/AuthContext';
-import { Navbar } from '../../components/index';
+import { Navbar, Message } from '../../components/index';
 import './MessengerChat.scss';
 import images from '../../constants/images';
 
@@ -20,6 +21,7 @@ const MessengerChat = () => {
     const [chat, setChat] = useState({});
     const [loading, setLoading] = useState(true);
     const location = useLocation();
+    const navigate = useNavigate();
 
     useEffect(() => {
         document.title = `${ receiverInfo.userLink } | Facebook`;
@@ -68,6 +70,7 @@ const MessengerChat = () => {
                             message: message,
                             sender: userInfo.userLink,
                             time: new Date().getTime(),
+                            profile: userInfo.userProfile,
                         })
                     })
                         .then(() => {
@@ -83,6 +86,7 @@ const MessengerChat = () => {
                             message: message,
                             sender: userInfo.userLink,
                             time: new Date().getTime(),
+                            profile: userInfo.userProfile,
                         }],
                     })
                         .then(() => {
@@ -139,7 +143,7 @@ const MessengerChat = () => {
 
         return (
             [...chat[0].messages].map((message, i) => (
-                <h3 key={ `message-${ i+1 }` }>{message.message}</h3>
+                <Message key={ `message-${ i+1 }` } message={ message } />
             ))
         );
     };
@@ -162,12 +166,20 @@ const MessengerChat = () => {
                         />
                         <p>{ receiverInfo.userName ? receiverInfo.userName : 'User' }</p>
                     </Link>
-                    <Link 
-                        to='/'
-                        className='link-to-home'
-                    >
-                        <IoClose size={ 30 } />
-                    </Link>
+                    <div className='links-container'>
+                        <div 
+                            onClick={ () => navigate(-1) }
+                            className='link'
+                        >
+                            <BiArrowBack size={ 26 } />
+                        </div>
+                        <Link 
+                            to='/'
+                            className='link'
+                        >
+                            <IoClose size={ 30 } />
+                        </Link>
+                    </div>
                 </div>
                 <div className='messages-container'>
                     <div className='messages-container__messages'>

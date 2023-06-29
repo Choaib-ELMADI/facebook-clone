@@ -41,25 +41,30 @@
                 }
             }
     
-            .link-to-home {
-                width: 35px;
-                height: 35px;
-                border-radius: 50%;
-                transition: .2s;
-                text-decoration: none;
-                color: var(--main_bleu_color);
-    
-                display: grid;
-                place-items: center;
-    
-                &:hover {
-                    background: var(--gray_color_3);
+            .links-container {
+                display: flex;
+                align-items: center;
+                gap: .5rem;
+
+                .link {
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 50%;
+                    transition: .2s;
+                    text-decoration: none;
+                    color: var(--main_bleu_color);
+        
+                    display: grid;
+                    place-items: center;
+        
+                    &:hover {
+                        background: var(--gray_color_3);
+                    }
                 }
             }
         }
 
         .messages-container {
-            background: red;
             height: 100%;
             overflow-y: scroll;
 
@@ -67,10 +72,9 @@
                 width: 0;
             }
 
-            // &__messages {
-            //     height: 1000px;
-            //     background: linear-gradient(45deg, red, blue);
-            // }
+            &__messages {
+                min-height: 100%;
+            }
         }
 
         .footer {
