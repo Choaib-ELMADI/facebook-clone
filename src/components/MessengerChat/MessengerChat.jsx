@@ -13,15 +13,15 @@ import images from '../../constants/images';
 
 
 const MessengerChat = () => {
-    const inputMessageRef = useRef(null);
-    const [message, setMessage] = useState('');
-    const { user } = useAuth();
     const [userInfo, setUserInfo] = useState({});
-    const receiverInfo = useLoaderData();
-    const [chat, setChat] = useState({});
     const [loading, setLoading] = useState(true);
-    const location = useLocation();
+    const [message, setMessage] = useState('');
+    const [chat, setChat] = useState({});
+    const inputMessageRef = useRef(null);
+    const receiverInfo = useLoaderData();
     const navigate = useNavigate();
+    const location = useLocation();
+    const { user } = useAuth();
 
     useEffect(() => {
         document.title = `${ receiverInfo.userLink } | Facebook`;
