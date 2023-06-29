@@ -2,7 +2,10 @@ export { default as Notification       } from './Buttons/Notification/Notificati
 export { default as Messenger          } from './Buttons/Messenger/Messenger';
 export { default as Profile            } from './Buttons/Profile/Profile';
 export { default as Menu               } from './Buttons/Menu/Menu';
+
 export { default as MessengerSearchbar } from './MessengerSearchbar/MessengerSearchbar';
+export { default as Message            } from './Message/Message';
+export { default as MessageUsers       } from './MessageUsers/MessageUsers';
 
 export { default as Navbar             } from './Navbar/Navbar';
 export { default as LeftSidebar        } from './LeftSidebar/LeftSidebar';

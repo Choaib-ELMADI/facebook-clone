@@ -119,10 +119,12 @@
         gap: .5rem;
         align-items: center;
 
-        div {
+        div, .link {
+            text-decoration: none;
             width: 40px;
             height: 40px;
             background: var(--main_background_color);
+            color: var(--black_color);
             display: grid;
             place-items: center;
             border-radius: 50%;
@@ -150,7 +152,7 @@
                 border-radius: 50%;
             }
 
-            &:nth-child(1) {
+            &:nth-child(2) {
                 @media screen and (width <= 900px) {
                     display: none;
                 }

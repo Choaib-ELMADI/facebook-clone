@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData, useLocation } from 'react-router-dom';
 import { getDoc, doc, addDoc, collection, query, where, and, updateDoc, arrayUnion, getDocs, or } from 'firebase/firestore';
 import { IoClose, IoSend } from 'react-icons/io5';
 
@@ -17,6 +17,9 @@ const MessengerChat = () => {
     const { user } = useAuth();
     const [userInfo, setUserInfo] = useState({});
     const receiverInfo = useLoaderData();
+    const [chat, setChat] = useState({});
+    const [loading, setLoading] = useState(true);
+    const location = useLocation();
 
     useEffect(() => {
         document.title = `${ receiverInfo.userLink } | Facebook`;
@@ -26,18 +29,15 @@ const MessengerChat = () => {
         fetchUser();
     }, []);
 
-    const fetchUser = async () => {
-        try {
-            const querySnapshot = await getDoc(doc(db, 'users', user.email.split('@')[0]));
-            setUserInfo({ ...querySnapshot.data() });
-        }
-        catch(err) {
-            console.error(err);
-        };
+    const fetchUser = () => {
+        getDoc(doc(db, 'users', user.email.split('@')[0]))
+            .then((data) => {
+                setUserInfo({ ...data.data() });
+            })
+            .then(() => {
+                fetchChat();
+            })
     };
-
-    useEffect(() => {
-    }, [message]);
 
     const autoResize = (ref) => {
         const current = ref.current;
@@ -91,8 +91,57 @@ const MessengerChat = () => {
                         })
                         .catch((err) => console.log('2) => ', err));
                 }
+                fetchChat();
             })
             .catch((err) => console.log('3) => ', err));
+    };
+
+    const fetchChat = () => {
+        const q = query(
+            collection(db, 'chats'),
+            or(
+                and(
+                    where('senderLink', '==', location.pathname.split('/')[2]),
+                    where('receiverLink', '==', receiverInfo.userLink),
+                ),
+                and(
+                    where('senderLink', '==', receiverInfo.userLink),
+                    where('receiverLink', '==', location.pathname.split('/')[2]),
+                )
+            )
+        );
+
+        let currentChat = [];
+
+        getDocs(q)
+            .then((data) => {
+                data.forEach((document) => {
+                    currentChat.push({ ...document.data() })
+                })
+                setChat(currentChat);
+                setLoading(false);
+            })
+            .catch((err) => console.log('3) => ', err));
+    };
+
+    const renderContent = () => {
+        if (loading) {
+            return (
+                <h3>Message model</h3>
+            );
+        }
+            
+        if (chat.length < 1) {
+            return (
+                <h3>No Messages</h3>
+            );
+        }
+
+        return (
+            [...chat[0].messages].map((message, i) => (
+                <h3 key={ `message-${ i+1 }` }>{message.message}</h3>
+            ))
+        );
     };
 
     return (
@@ -122,7 +171,7 @@ const MessengerChat = () => {
                 </div>
                 <div className='messages-container'>
                     <div className='messages-container__messages'>
-
+                        { renderContent() }
                     </div>
                 </div>
                 <div className='footer'>
@@ -152,10 +201,10 @@ const MessengerChat = () => {
 export default MessengerChat;
 
 export const ReceiverProfileLoader = async ({ params }) => {
-    const { userLink } = params;
+    const { receiverLink } = params;
 
     try {
-        const querySnapshot = await getDoc(doc(db, 'users', userLink));
+        const querySnapshot = await getDoc(doc(db, 'users', receiverLink));
         if (querySnapshot.exists()) {
             return querySnapshot.data();
         }

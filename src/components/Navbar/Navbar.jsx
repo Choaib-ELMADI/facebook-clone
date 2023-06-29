@@ -18,7 +18,7 @@ import './Navbar.scss';
 import images from '../../constants/images';
 import Searchbar from '../SearchBar/Searchbar';
 import { useAuth } from '../../context/AuthContext';
-import { Notification, Messenger, Profile, Menu } from '../index';
+import { Notification, Profile, Menu } from '../index';
 import { db } from '../../config/firebase';
 
 const links = [
@@ -64,10 +64,6 @@ const buttons = [
     {
         name: 'menu',
         icon: <TbGridDots size={ 20 } />,
-    },
-    {
-        name: 'messenger',
-        icon: <BsMessenger size={ 20 } />,
     },
     {
         name: 'notifications',
@@ -148,6 +144,12 @@ const Navbar = () => {
             </div>
 
             <div className='personal-section'>
+                <Link
+                    to={ `/messages/${ userInfo.userLink }` }
+                    className='link'
+                >
+                    <BsMessenger size={ 20 } />
+                </Link>
                 {
                     buttons.map((btn, i) => {
                         return (
@@ -180,7 +182,6 @@ const Navbar = () => {
             </div>
 
             { clickedButton === 'notifications' && <Notification  /> }
-            { clickedButton === 'messenger' && <Messenger setClickedButton={ setClickedButton } /> }
             { clickedButton === 'profile' && <Profile userInfo={ userInfo } /> }
             { clickedButton === 'menu' && <Menu /> }
         </nav>

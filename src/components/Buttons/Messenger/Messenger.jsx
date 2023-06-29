@@ -4,22 +4,24 @@ import { GoSearch } from 'react-icons/go';
 
 import './Messenger.scss';
 import { MessengerSearchbar } from '../../index';
+import { Link } from 'react-router-dom';
 
 
 
-const Messenger = ({ setClickedButton }) => {
+const Messenger = () => {
   const [vueSearchList, setVueSearchList] = useState(false);
 
   return (
     <div className='messenger-container'>
         <div className='header'>
-            <h1>Discussions</h1>
+            <h2>Discussions</h2>
             <div className='actions'>
-                <div 
-                  onClick={ () => setClickedButton(null) }
+                <Link
+                  to='/'
+                  className='link'
                 >
                   <BiCollapse size={ 22 } />
-                </div>
+                </Link>
             </div>
         </div>
 
@@ -36,7 +38,6 @@ const Messenger = ({ setClickedButton }) => {
         { vueSearchList && (
           <MessengerSearchbar
             setVueSearchList={ setVueSearchList }
-            setClickedButton={ setClickedButton }
           /> 
         )}
     </div>

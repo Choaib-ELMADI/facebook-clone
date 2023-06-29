@@ -3,7 +3,7 @@ import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider, N
 import { AuthContextProvider } from '../context/AuthContext';
 import { Login, Home, Friends, Watch, Marketplace, Games, Bookmarks, NotFound } from './index';
 import { useAuth } from '../context/AuthContext';
-import { Publications, About, Photos, Videos, Reels, UserFriends, UserProfile } from '../components/index';
+import { Publications, About, Photos, Videos, Reels, UserFriends, UserProfile, MessageUsers } from '../components/index';
 import { UserProfileLoader } from '../components/UserProfile/UserProfile';
 import MessengerChat, { ReceiverProfileLoader } from '../components/MessengerChat/MessengerChat';
 
@@ -27,37 +27,40 @@ const RequireLogOut = ({ children }) => {
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path='/'>
-      <Route index              element={ <RequireAuth><Home /></RequireAuth>        }  />
+    <Route       path='/'>
+      <Route     index                element={ <RequireAuth><Home /></RequireAuth>         }  />
       
-      <Route path='login'       element={ <RequireLogOut><Login /></RequireLogOut>   }  />
+      <Route     path='login'         element={ <RequireLogOut><Login /></RequireLogOut>    }  />
 
-      <Route path='friends'     element={ <RequireAuth><Friends /></RequireAuth>     }  />
-      <Route path='watch'       element={ <RequireAuth><Watch /></RequireAuth>       }  />
-      <Route path='marketplace' element={ <RequireAuth><Marketplace /></RequireAuth> }  />
-      <Route path='games'       element={ <RequireAuth><Games /></RequireAuth>       }  />
-      <Route path='bookmarks'   element={ <RequireAuth><Bookmarks /></RequireAuth>   }  />
+      <Route     path='friends'       element={ <RequireAuth><Friends /></RequireAuth>      }  />
+      <Route     path='watch'         element={ <RequireAuth><Watch /></RequireAuth>        }  />
+      <Route     path='marketplace'   element={ <RequireAuth><Marketplace /></RequireAuth>  }  />
+      <Route     path='games'         element={ <RequireAuth><Games /></RequireAuth>        }  />
+      <Route     path='bookmarks'     element={ <RequireAuth><Bookmarks /></RequireAuth>    }  />
 
-      <Route path='users'>
-        <Route index            element={ <RequireAuth><NotFound /></RequireAuth>    }  />
+      <Route     path='users'>
+        <Route   index                element={ <RequireAuth><NotFound /></RequireAuth>     }  />
 
-        <Route path=':userLink' element={ <RequireAuth><UserProfile /></RequireAuth> } loader={ UserProfileLoader }>
-          <Route index          element={ <Publications /> } />
+        <Route   path=':userLink'     element={ <RequireAuth><UserProfile /></RequireAuth>  } loader={ UserProfileLoader }>
+          <Route index                element={ <Publications /> } />
 
-          <Route path='about'   element={ <About        /> } />
-          <Route path='friends' element={ <UserFriends  /> } />
-          <Route path='photos'  element={ <Photos       /> } />
-          <Route path='videos'  element={ <Videos       /> } />
-          <Route path='reels'   element={ <Reels        /> } />
+          <Route path='about'         element={ <About        /> } />
+          <Route path='friends'       element={ <UserFriends  /> } />
+          <Route path='photos'        element={ <Photos       /> } />
+          <Route path='videos'        element={ <Videos       /> } />
+          <Route path='reels'         element={ <Reels        /> } />
         </Route>
       </Route>
 
-      <Route path='messages'>
-        <Route index            element={ <RequireAuth><NotFound /></RequireAuth>      }  />
-        <Route path=':userLink' element={ <RequireAuth><MessengerChat /></RequireAuth> } loader={ ReceiverProfileLoader } />
+      <Route     path='messages'>
+        <Route   index                element={ <RequireAuth><NotFound /></RequireAuth>      } />
+        <Route   path=':senderLink'>
+          <Route index                element={ <RequireAuth><MessageUsers /></RequireAuth>  } />
+          <Route path=':receiverLink' element={ <RequireAuth><MessengerChat /></RequireAuth> } loader={ ReceiverProfileLoader } />
+        </Route>
       </Route>
 
-      <Route path='*'           element={ <RequireAuth><NotFound /></RequireAuth>    } />
+      <Route     path='*'             element={ <RequireAuth><NotFound /></RequireAuth>      } />
     </Route>
   )
 );

@@ -10,7 +10,7 @@ import images from '../../constants/images';
 
 
 
-const MessengerSearchbar = ({ setVueSearchList, setClickedButton }) => {
+const MessengerSearchbar = ({ setVueSearchList }) => {
     const [search, setSearch] = useState('');
     const { user } = useAuth();
     const [searchedUsers, setSearchedUsers] = useState([]);
@@ -52,11 +52,12 @@ const MessengerSearchbar = ({ setVueSearchList, setClickedButton }) => {
     return (
         <div className='search-list'>
             <div className='header'>
-                <BiArrowBack 
+                <div 
                     className='back-arrow'
-                    size={ 30 }
                     onClick={ () => setVueSearchList(false) }
-                />
+                >
+                    <BiArrowBack size={ 22 } />
+                </div>
                 <input
                     type='text'
                     placeholder='Rechercher sur Messenger'
@@ -79,12 +80,11 @@ const MessengerSearchbar = ({ setVueSearchList, setClickedButton }) => {
                                     
                                     return (
                                         <Link 
-                                            to={ `/messages/${ searchUser.userLink }` } 
+                                            to={ `/messages/${ user.email.split('@')[0] }/${ searchUser.userLink }` } 
                                             key={ `user-${ i }` }
                                             className='messaging-user-link'
                                             onClick={ () => {
                                                 setVueSearchList(false);
-                                                setClickedButton(null);
                                             }}
                                         >
                                             <div className='user-profile'>
