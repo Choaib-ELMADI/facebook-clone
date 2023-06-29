@@ -29,6 +29,7 @@ const MessengerChat = () => {
     const [loading, setLoading] = useState(true);
     const [message, setMessage] = useState('');
     const [chat, setChat] = useState({});
+    const chatContainerRef = useRef(null);
     const inputMessageRef = useRef(null);
     const receiverInfo = useLoaderData();
     const navigate = useNavigate();
@@ -58,6 +59,11 @@ const MessengerChat = () => {
         current.style.height = `${ current.scrollHeight }px`;
     };
 
+    useEffect(() => {
+        autoResize(inputMessageRef);
+        chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }, [message]);
+
     const handleSendMessage = () => {
         const q = query(
             collection(db, 'chats'),
@@ -86,9 +92,10 @@ const MessengerChat = () => {
                     })
                         .then(() => {
                             setMessage('');
+                            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
                             console.log('Messages updated');
                         })
-                        .catch((err) => console.log('1) => ', err));
+                        .catch((err) => console.log(err));
                 } else {
                     addDoc(collection(db, 'chats'), {
                         senderLink: userInfo.userLink,
@@ -102,13 +109,14 @@ const MessengerChat = () => {
                     })
                         .then(() => {
                             setMessage('');
+                            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
                             console.log('Message added');
                         })
-                        .catch((err) => console.log('2) => ', err));
+                        .catch((err) => console.log(err));
                 }
                 fetchChat();
             })
-            .catch((err) => console.log('3) => ', err));
+            .catch((err) => console.log(err));
     };
 
     const fetchChat = () => {
@@ -145,17 +153,16 @@ const MessengerChat = () => {
                 <>
                     <MessageModel />
                     <MessageModel />
-                    <MessageModel />
                     <MessageModel sender={ true } />
-                    <MessageModel sender={ true } />
-                    <MessageModel />
                 </>
             );
         }
             
-        if (chat.length < 1) {
+        if (!chat.length || !chat[0].messages.length) {
             return (
-                <h3>No Messages</h3>
+                <div className='no-messages'>
+                    <h3>{ `Start a conversation with ${ receiverInfo.userName ? receiverInfo.userName : 'User' }` }</h3>
+                </div>
             );
         }
 
@@ -199,8 +206,21 @@ const MessengerChat = () => {
                         </Link>
                     </div>
                 </div>
-                <div className='messages-container'>
+                <div 
+                    className='messages-container'
+                    ref={ chatContainerRef }
+                >
                     <div className='messages-container__messages'>
+                        <div className='receiver-information'>
+                            <img 
+                                src={ receiverInfo.userProfile ? receiverInfo.userProfile : images.user_1 }
+                                alt=''
+                                draggable='false'
+                                referrerPolicy='no-referrer'
+                                loading='lazy'
+                            />
+                            <h3>{ receiverInfo.userName ? receiverInfo.userName : 'User' }</h3>
+                        </div>
                         { renderContent() }
                     </div>
                 </div>
@@ -209,10 +229,7 @@ const MessengerChat = () => {
                         <textarea
                             ref={ inputMessageRef }
                             className='message'
-                            onChange={ (e) => {
-                                setMessage(e.target.value);
-                                autoResize(inputMessageRef);
-                            }}
+                            onChange={ (e) => setMessage(e.target.value) }
                             value={ message }
                         ></textarea>
                     </div>

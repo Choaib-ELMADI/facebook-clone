@@ -1,12 +1,12 @@
 .messenger-chat-container {
     &__content {
-        margin-top: 65px;
+        margin-top: 58px;
         background: var(--white_color);
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         width: calc(100% - 1rem);
-        max-width: 700px;
+        max-width: 600px;
         margin-inline: auto;
-        height: calc(100vh - 65px);
+        height: calc(100vh - 58px);
         overflow-y: scroll;
 
         display: flex;
@@ -74,6 +74,45 @@
 
             &__messages {
                 min-height: 100%;
+
+                .receiver-information {
+                    width: 100%;
+                    padding-block: 2rem 1rem;
+
+                    display: flex;
+                    flex-direction: column;
+                    gap: .5rem;
+                    align-items: center;
+
+                    img {
+                        width: 100px;
+                        height: 100px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                        background: var(--gray_color_3);
+
+                        @media screen and (width <= 600px) {
+                            width: 80px;
+                            height: 80px;
+                        }
+                    }
+                }
+
+                .no-messages {
+                    width: calc(100% - 1rem);
+                    padding-block: 2rem;
+                    margin-inline: .5rem;
+                    background: var(--gray_color_3);
+                    border-radius: 12px;
+                    color: var(--gray_color);
+
+                    display: flex;
+                    justify-content: center;
+
+                    h3 {
+                        text-align: center;
+                    }
+                }
 
                 .message-model {
                     padding: .5rem;
