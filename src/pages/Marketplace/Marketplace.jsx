@@ -1,29 +1,52 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import { collection, getDocs } from 'firebase/firestore';
 
 import './Marketplace.scss';
+import { db } from '../../config/firebase';
 import { Navbar, Sidebar } from '../../components/index';
-import images from '../../constants/images';
+import { useAuth } from '../../context/AuthContext';
 
-const Produit = () => {
+const Produit = ({ product }) => {
+  const { user } = useAuth();
+
   return (
     <Link 
       className='product-container'
-      to='/'
+      to={ 
+        user.email.split('@')[0] === product.owner ?
+        '/marketplace' :
+        `/messages/${ user.email.split('@')[0] }/${ product.owner }` 
+      }
     >
-      <img 
-        src={ images.user_2 }
-        alt=''
-        loading='lazy'
-        draggable='false'
-        referrerPolicy='no-referrer'
-      />
+      <div className='product-photo'>
+        <img 
+          src={ product.photo }
+          alt=''
+          loading='lazy'
+          draggable='false'
+          referrerPolicy='no-referrer'
+        />
+      </div>
       <div className='product-details'>
-        <p className='price'>150 Dhs</p>
-        <p className='description'>sdksdjjqsl klsdfjjj sdcgcghq mqsdc</p>
-        <p className='place'>Marrakech, Morocco</p>
+        <p className='price'>{ product.prix } Dh</p>
+        <p className='description'>{ product.desc }</p>
+        <p className='place'>{ product.place }{ ', ' }{ product.state }</p>
       </div>
     </Link>
+  );
+};
+
+const ProductModel = () => {
+  return (
+    <div className='product-model'>
+      <div className='photo-model' />
+      <div className='info-model'>
+        <div className='price' />
+        <div className='desc' />
+        <div className='place' />
+      </div>
+    </div>
   );
 };
 
@@ -31,9 +54,54 @@ const Produit = () => {
 
 
 const Marketplace = () => {
+  const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     document.title = 'Marketplace | Facebook';
   }, []);
+
+  useEffect(() => {
+    fetchProducts();
+  }, []);
+
+  const fetchProducts = () => {
+    let availableProducts = [];
+
+    getDocs(collection(db, 'products'))
+      .then((data) => {
+        data.docs.forEach((product) => {
+          availableProducts.push({ ...product.data() });
+        });
+        setProducts(availableProducts);
+        setLoading(false);
+        
+      })
+      .catch((err) => console.error(err));
+  };
+
+  const renderContent = () => {
+    if (loading) {
+      return (
+        <>
+          <ProductModel />
+          <ProductModel />
+        </>
+      )
+    }
+
+    if (products.length < 1) {
+      return (
+        <div className='no-products'>No products</div>
+      );
+    }
+
+    return (
+      products.map((product, i) => (
+        <Produit product={ product } key={ `product-${ i+1 }` } />
+      ))
+    )
+  };
 
   return (
     <main className="marketplace">
@@ -41,10 +109,7 @@ const Marketplace = () => {
       <div className='section'>
           <Sidebar title='MarketPlace' />
           <div className='marketplace-content'>
-            <Produit />
-            <Produit />
-            <Produit />
-            <Produit />
+            { renderContent() }
           </div>
       </div>
     </main>
