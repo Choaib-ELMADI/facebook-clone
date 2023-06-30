@@ -5,9 +5,13 @@ import './UploadPhoto.scss';
 
 
 
-const UploadPhoto = ({ setPhoto }) => {
+const UploadPhoto = ({ setPhoto, setHovered }) => {
     return (
-        <div className='upload-product-photo'>
+        <div 
+            className='upload-product-photo'
+            onPointerEnter={ () => setHovered('photo') }
+            onPointerLeave={ () => setHovered(null) }
+        >
             <input 
                 type="file"
                 onChange={ (e) => setPhoto(e.target.files[0]) }

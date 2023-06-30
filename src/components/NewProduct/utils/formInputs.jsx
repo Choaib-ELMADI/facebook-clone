@@ -10,7 +10,7 @@ const states = [
 
 
 
-const formInputs = ({ formData, setFormData }) => {
+const formInputs = ({ formData, setFormData, setHovered }) => {
     const [showStates, setShowStates] = useState(false);
     const [state, setState] = useState('');
 
@@ -28,18 +28,13 @@ const formInputs = ({ formData, setFormData }) => {
                 <p>Donnez le plus de détails possible</p>
             </div>
             <input 
-                type='text'
+                type='number'
                 name='prix'
                 placeholder='Prix'
                 value={ formData.prix }
                 onChange={ (e) => handelChange(e) }
-            />
-            <input 
-                type='text'
-                name='desc'
-                placeholder='Description'
-                value={ formData.desc }
-                onChange={ (e) => handelChange(e) }
+                onPointerEnter={ () => setHovered('prix') }
+                onPointerLeave={ () => setHovered(null) }
             />
             <input 
                 type='text'
@@ -47,8 +42,14 @@ const formInputs = ({ formData, setFormData }) => {
                 placeholder='Place'
                 value={ formData.place }
                 onChange={ (e) => handelChange(e) }
+                onPointerEnter={ () => setHovered('place') }
+                onPointerLeave={ () => setHovered(null) }
             />
-            <div className='states-container'>
+            <div 
+                className='states-container'
+                onPointerEnter={ () => setHovered('state') }
+                onPointerLeave={ () => setHovered(null) }
+            >
                 <div 
                     className={ state === '' ? 'state' : 'state active' }
                     onClick={ () => setShowStates(!showStates) }
@@ -75,6 +76,15 @@ const formInputs = ({ formData, setFormData }) => {
                     </>
                 )}
             </div>
+            <input 
+                type='text'
+                name='desc'
+                placeholder='Description'
+                value={ formData.desc }
+                onChange={ (e) => handelChange(e) }
+                onPointerEnter={ () => setHovered('desc') }
+                onPointerLeave={ () => setHovered(null) }
+            />
         </div>
     );
 };

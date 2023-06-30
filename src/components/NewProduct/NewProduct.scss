@@ -1,0 +1,7 @@
+.new-product-wrap {
+    display: flex;
+
+    @media screen and (width <= 900px) {
+        flex-direction: column;
+    }
+}

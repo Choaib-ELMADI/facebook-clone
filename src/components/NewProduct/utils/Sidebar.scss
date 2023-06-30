@@ -5,7 +5,7 @@
     height: 100vh;
 
     header {
-        height: 98px;
+        height: 96px;
 
         .links {
             display: flex;
@@ -37,14 +37,14 @@
         }
 
         h3 {
-            padding: .75rem 0;
+            padding: .5rem 0;
             margin-inline: 1rem 1.5rem;
             border-bottom: 1px solid var(--gray_color_3);
         }
     }
 
     .body {
-        height: calc(100vh - 98px);
+        height: calc(100vh - 96px);
         overflow-y: scroll;
         padding: 1rem;
 
@@ -61,5 +61,14 @@
                 background: var(--gray_color_3);
             }
         }
+
+        @media screen and (width <= 900px) {
+            height: max-content;
+        }
+    }
+
+    @media screen and (width <= 900px) {
+        width: 100%;
+        height: max-content;
     }
 }

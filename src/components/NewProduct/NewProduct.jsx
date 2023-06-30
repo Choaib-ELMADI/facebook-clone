@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 
 import './NewProduct.scss';
-import { Sidebar } from './utils/index';
+import { Sidebar, Apercu } from './utils/index';
 
 
 
 const NewProduct = () => {
     const [photo, setPhoto] = useState(null);
+    const [hovered, setHovered] = useState(null);
     const [formData, setFormData] = useState({
         prix: '',
         desc: '',
@@ -17,11 +18,17 @@ const NewProduct = () => {
     console.table(formData);
 
     return (
-        <div>
+        <div className='new-product-wrap'>
             <Sidebar 
                 setPhoto={ setPhoto } 
                 formData={ formData }
                 setFormData={ setFormData }
+                setHovered={ setHovered }
+            />
+            <Apercu 
+                photo={ photo } 
+                formData={ formData }
+                hovered={ hovered }
             />
         </div>
     );

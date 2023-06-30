@@ -9,7 +9,7 @@ import { UploadPhoto, FormInputs } from './index';
 
 
 
-const Sidebar = ({ setPhoto, formData, setFormData }) => {
+const Sidebar = ({ setPhoto, formData, setFormData, setHovered }) => {
     const navigate = useNavigate();
     const { user } = useAuth();
 
@@ -48,10 +48,14 @@ const Sidebar = ({ setPhoto, formData, setFormData }) => {
                     />
                     <p>{ user.displayName ? user.displayName : 'User' }</p>
                 </div>
-                <UploadPhoto setPhoto={ setPhoto } />
+                <UploadPhoto 
+                    setPhoto={ setPhoto }
+                    setHovered={ setHovered }
+                />
                 <FormInputs 
                     formData={ formData }
                     setFormData={ setFormData } 
+                    setHovered={ setHovered }
                 />
             </div>
         </div>
