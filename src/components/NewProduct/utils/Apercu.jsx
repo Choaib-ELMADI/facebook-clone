@@ -1,10 +1,28 @@
 import React from 'react';
+import { addDoc, collection } from 'firebase/firestore';
 
 import './Apercu.scss';
+import { db } from '../../../config/firebase';
 
 
 
-const Apercu = ({ formData, photo, hovered }) => {
+const Apercu = ({ formData, setFormData, photo, setPhoto, hovered }) => {
+    const hnadleAddProduct = () => {
+        addDoc(collection(db, 'products'), {
+            ...formData
+        })
+            .then(() => {
+                setFormData({
+                    prix: '',
+                    desc: '',
+                    place: '',
+                    state: '',
+                });
+                setPhoto(null);
+            })
+            .catch((err) => console.error(err));
+    };
+
     return (
         <div className='apercu-container'>
             <h4>Aperçu</h4>
@@ -74,7 +92,7 @@ const Apercu = ({ formData, photo, hovered }) => {
                                 !formData.state ||
                                 !photo
                             }
-                            onClick={ () => console.table(formData) }
+                            onClick={ hnadleAddProduct }
                         >
                             Add product
                         </button>
