@@ -12,6 +12,10 @@ import arduino       from '../assets/banner.webp';
 
 import get_3d        from '../assets/home__i2.jpg';
 
+import article       from '../assets/article.jpg';
+import immobilier    from '../assets/immobilier.jpg';
+import vehicule      from '../assets/vehicule.jpg';
+
 const images = {
     facebook_logo,
 
@@ -25,6 +29,10 @@ const images = {
 
     arduino,
 
-    get_3d
+    get_3d,
+
+    article,
+    immobilier,
+    vehicule
 };
 export default images;

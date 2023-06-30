@@ -1,7 +1,9 @@
 import React from 'react';
 import { IoSettings } from 'react-icons/io5';
+import { BsPlus } from 'react-icons/bs';
 
 import './Sidebar.scss';
+import { Link } from 'react-router-dom';
 
 
 
@@ -23,6 +25,15 @@ const Sidebar = ({ title }) => {
                         </div>
                     ))
                 }
+                { title === 'MarketPlace' && (
+                    <Link 
+                        className='add-item'
+                        to='/marketplace/create'
+                    >
+                        <BsPlus size={ 24 } />
+                        Ajouter un article
+                    </Link>
+                )}
             </div>
         </div>
     );

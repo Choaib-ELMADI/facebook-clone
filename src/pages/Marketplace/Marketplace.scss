@@ -11,12 +11,6 @@
         grid-template-columns: repeat(auto-fit, minmax(255px, 1fr));
         grid-gap: 1rem .5rem;
 
-        &:hover {
-            .product-container:not(.product-container:hover) {
-                filter: blur(4px);
-            }
-        }
-
         @media screen and (width <= 600px) {
             grid-template-columns: repeat(2, 1fr);
         }
@@ -29,16 +23,6 @@
             text-decoration: none;
             color: var(--black_color);
             transition: .3s;
-
-            &:hover {
-                transform: scale(1.02);
-
-                .product-details {
-                    .price {
-                        right: 10px;
-                    }
-                }
-            }
 
             img {
                 width: 100%;
@@ -59,12 +43,6 @@
                     font-weight: 600;
                     font-size: calc(var(--normal__size) - 2px);
                     color: var(--main_bleu_color);
-                    transition: .2s;
-                    width: min-content;
-
-                    position: absolute;
-                    right: -100px;
-                    top: 0;
                 }
 
                 .place {

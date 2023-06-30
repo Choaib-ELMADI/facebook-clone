@@ -27,6 +27,9 @@
     }
 
     .commun-sidebar__fake-links {
+        display: flex;
+        flex-direction: column;
+
         .fake-link {
             display: flex;
             align-items: center;
@@ -53,6 +56,26 @@
                 width: 200px;
                 height: 14px;
                 border-radius: 4px;
+                background: var(--gray_color_3);
+            }
+        }
+
+        .add-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: .25rem;
+
+            padding: .75rem .5rem;
+            margin-left: .5rem;
+            margin-top: .5rem;
+            transition: .2s;
+            background: var(--main_bleu_background);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--main_bleu_color);
+
+            &:hover {
                 background: var(--gray_color_3);
             }
         }

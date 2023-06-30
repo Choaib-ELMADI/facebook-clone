@@ -3,7 +3,7 @@ import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider, N
 import { AuthContextProvider } from '../context/AuthContext';
 import { Login, Home, Friends, Watch, Marketplace, Games, Bookmarks, NotFound } from './index';
 import { useAuth } from '../context/AuthContext';
-import { Publications, About, Photos, Videos, Reels, UserFriends, UserProfile, MessageUsers } from '../components/index';
+import { Publications, About, Photos, Videos, Reels, UserFriends, UserProfile, MessageUsers, CreateProduct, NewProduct } from '../components/index';
 import { UserProfileLoader } from '../components/UserProfile/UserProfile';
 import MessengerChat, { ReceiverProfileLoader } from '../components/MessengerChat/MessengerChat';
 
@@ -34,7 +34,15 @@ const router = createBrowserRouter(
 
       <Route     path='friends'       element={ <RequireAuth><Friends /></RequireAuth>      }  />
       <Route     path='watch'         element={ <RequireAuth><Watch /></RequireAuth>        }  />
-      <Route     path='marketplace'   element={ <RequireAuth><Marketplace /></RequireAuth>  }  />
+
+      <Route     path='marketplace'>
+        <Route   index                element={ <RequireAuth><Marketplace /></RequireAuth>  } />
+        <Route   path='create'>
+          <Route index                element={ <RequireAuth><CreateProduct /></RequireAuth>} />
+          <Route path='new'           element={ <RequireAuth><NewProduct /></RequireAuth> }/>
+        </Route>
+      </Route>
+
       <Route     path='games'         element={ <RequireAuth><Games /></RequireAuth>        }  />
       <Route     path='bookmarks'     element={ <RequireAuth><Bookmarks /></RequireAuth>    }  />
 

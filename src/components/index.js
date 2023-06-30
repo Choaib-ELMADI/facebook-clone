@@ -26,3 +26,6 @@ export { default as UserFriends        } from './UserProfile/components/Friends'
 export { default as Reels              } from './UserProfile/components/Reels';
 
 export { default as Sidebar            } from './Sidebar/Sidebar';
+
+export { default as CreateProduct      } from './CreateProduct/CreateProduct';
+export { default as NewProduct         } from './NewProduct/NewProduct';
