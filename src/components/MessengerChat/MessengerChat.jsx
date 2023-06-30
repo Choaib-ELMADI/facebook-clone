@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLoaderData, useLocation, useNavigate } from 'react-router-dom';
 import { getDoc, doc, addDoc, collection, query, where, and, updateDoc, arrayUnion, getDocs, or } from 'firebase/firestore';
 import { IoClose, IoSend } from 'react-icons/io5';
 import { BiArrowBack } from 'react-icons/bi';
@@ -173,6 +173,12 @@ const MessengerChat = () => {
         );
     };
 
+    if (receiverInfo.userLink === user.email.split('@')[0]) {
+        return (
+            <Navigate to='/404' />
+        );
+    };
+
     return (
         <div className='messenger-chat-container'>
             <Navbar />
@@ -220,6 +226,16 @@ const MessengerChat = () => {
                                 loading='lazy'
                             />
                             <h3>{ receiverInfo.userName ? receiverInfo.userName : 'User' }</h3>
+                            <Link 
+                                to={ `/users/${ receiverInfo.userLink }` }
+                                style={{
+                                    textDecoration: 'none',
+                                    background: 'var(--gray_color_3)',
+                                    padding: '.35rem .5rem .25rem .5rem',
+                                    borderRadius: '8px',
+                                    color: 'var(--gray_color)'
+                                }}
+                            >Voir profile</Link>
                         </div>
                         { renderContent() }
                     </div>

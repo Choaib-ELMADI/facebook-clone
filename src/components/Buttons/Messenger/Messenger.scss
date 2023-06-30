@@ -72,16 +72,25 @@
         }
 
         .link {
-            width: 100%;
-            padding: .5rem;
+            width: max-content;
+            padding: .5rem .75rem;
             text-decoration: none;
             color: var(--black_color);
-            background: var(--gray_color_4);
-            border-radius: 8px;
+            background: var(--gray_color_3);
+            border-radius: 6px;
             transition: .2s;
 
+            &:nth-child(2) {
+                border-top-left-radius: 20px;
+                border-top-right-radius: 20px;
+            }
+
+            &:last-child {
+                border-bottom-left-radius: 20px;
+                border-bottom-right-radius: 20px;
+            }
+
             &:hover {
-                background: var(--gray_color_3);
                 color: var(--main_bleu_color);
             }
         }
