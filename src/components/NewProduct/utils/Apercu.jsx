@@ -39,7 +39,7 @@ const Apercu = ({ formData, photo, hovered }) => {
                                 className={ formData.prix ? 'info active' : 'info'}
                                 style={{ color: hovered === 'prix' ? 'var(--main_bleu_color)' : '' }}
                             >
-                                { formData.prix ? `${ formData.prix } د٠م٠` : 'Prix' }
+                                { formData.prix ? `${ formData.prix } dh` : 'Prix' }
                             </h2>
                             <h3 
                                 className={ formData.place ? 'info active' : 'info'}
@@ -55,7 +55,7 @@ const Apercu = ({ formData, photo, hovered }) => {
                                 style={{ color: hovered === 'state' ? 'var(--main_bleu_color)' : '' }}
                             >
                                 <span style={{ marginRight: '3rem' }}>Etat</span>
-                                <sapn>{ formData.state }</sapn>
+                                <span>{ formData.state }</span>
                             </h4>
                             <p 
                                 className={ formData.desc ? 'info active' : 'info' }

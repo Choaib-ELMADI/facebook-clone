@@ -15,11 +15,10 @@ const NewProduct = () => {
         state: '',
     });
 
-    console.table(formData);
-
     return (
         <div className='new-product-wrap'>
             <Sidebar 
+                photo={ photo }
                 setPhoto={ setPhoto } 
                 formData={ formData }
                 setFormData={ setFormData }
