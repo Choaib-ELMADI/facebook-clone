@@ -64,6 +64,8 @@
         }
 
         .product-model {
+            animation: blinking 1s ease-in-out infinite;
+
             .photo-model {
                 width: 100%;
                 aspect-ratio: 1.4;
@@ -97,6 +99,15 @@
                     }
                 }
 
+            }
+
+            @keyframes blinlin {
+                0%, 100% {
+                    opacity: 1;
+                }
+                50% {
+                    opacity: .6;
+                }
             }
         }
 
