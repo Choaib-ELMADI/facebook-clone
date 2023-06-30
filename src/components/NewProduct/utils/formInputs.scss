@@ -1,0 +1,28 @@
+.form-data {
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+    
+    .obligation {
+        p {
+            color: var(--gray_color);
+        }
+    }
+
+    input {
+        padding: 1rem .5rem;
+        border: 1.5px solid var(--gray_color_3);
+        border-radius: 8px;
+        font-size: var(--small__size);
+        outline: none;
+        transition: .2s;
+
+        &:hover {
+            border-color: var(--gray_color_1);
+        }
+
+        &:focus {
+            border-color: var(--main_bleu_color);
+        }
+    }
+}

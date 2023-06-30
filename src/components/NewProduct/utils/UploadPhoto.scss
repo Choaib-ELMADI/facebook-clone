@@ -1,0 +1,27 @@
+.upload-product-photo {
+    width: 100%;
+    border: 1px solid var(--gray_color_2);
+    border-radius: 8px;
+    margin-block: .5rem .75rem;
+    
+    label {
+        padding: 2rem 1rem;
+        cursor: pointer;
+
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+
+        span {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: var(--gray_color_3);
+            margin-bottom: .5rem;
+
+            display: grid;
+            place-items: center;
+        }
+    }
+}
