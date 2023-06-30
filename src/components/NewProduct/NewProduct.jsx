@@ -11,7 +11,10 @@ const NewProduct = () => {
         prix: '',
         desc: '',
         place: '',
+        state: '',
     });
+
+    console.table(formData);
 
     return (
         <div>

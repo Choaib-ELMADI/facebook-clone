@@ -25,4 +25,58 @@
             border-color: var(--main_bleu_color);
         }
     }
+
+    .states-container {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+
+        .state {
+            padding: 1rem .5rem;
+            border: 1.5px solid var(--gray_color_3);
+            border-radius: 8px;
+            font-size: var(--small__size);
+            transition: .2s;
+            width: 100%;
+            color: #75758b;
+            cursor: pointer;
+            position: relative;
+
+            &::after {
+                position: absolute;
+                content: '▼';
+                top: 50%;
+                transform: translateY(-50%);
+                right: .75rem;
+                color: black;
+            }
+
+            &.active {
+                color: black;
+            }
+
+            &.choose {
+                color: black;
+
+                &::after {
+                    content: '';
+                }
+
+                &.active {
+                    &::after {
+                        content: '✔';
+                        color: var(--main_bleu_color);
+                    }
+                }
+            }
+
+            &:hover {
+                border-color: var(--gray_color_1);
+            }
+
+            &:focus {
+                border-color: var(--main_bleu_color);
+            }
+        }
+    }
 }

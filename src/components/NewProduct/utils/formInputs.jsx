@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './formInputs.scss';
+const states = [
+    "Neuf",
+    "D'occasion, comme neuf",
+    "D'occasion, bon état",
+    "D'occasion, assez bon état",
+];
 
 
 
 const formInputs = ({ formData, setFormData }) => {
+    const [showStates, setShowStates] = useState(false);
+    const [state, setState] = useState('');
+
     const handelChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -39,6 +48,33 @@ const formInputs = ({ formData, setFormData }) => {
                 value={ formData.place }
                 onChange={ (e) => handelChange(e) }
             />
+            <div className='states-container'>
+                <div 
+                    className={ state === '' ? 'state' : 'state active' }
+                    onClick={ () => setShowStates(!showStates) }
+                >
+                    { state === '' ? 'Etat' : state }
+                </div>
+                { showStates && (
+                    <>
+                        {
+                            states.map((s) => (
+                                <div 
+                                    className={ state === s ? 'state choose active' : 'state choose' }
+                                    key={ s }
+                                    onClick={ () => {
+                                        setState(s);
+                                        setFormData({
+                                            ...formData, state: s,
+                                        });
+                                        setShowStates(false);
+                                    }}
+                                >{ s }</div>
+                            ))
+                        }
+                    </>
+                )}
+            </div>
         </div>
     );
 };
