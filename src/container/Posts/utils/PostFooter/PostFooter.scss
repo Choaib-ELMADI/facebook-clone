@@ -72,6 +72,7 @@
                 border-radius: 2px;
                 cursor: pointer;
                 transition: .2s;
+                user-select: none;
                 
                 font-size: var(--small__size);
                 font-weight: 600;
