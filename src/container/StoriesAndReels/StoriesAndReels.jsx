@@ -228,8 +228,7 @@ const StoriesAndReels = () => {
             >
                 <BsChevronLeft size={ 24 } />
             </button>
-            <button 
-                disabled={ containerRef.current?.scrollLeft >= containerRef.current?.offsetWidth - 60 }
+            <button
                 className='right' 
                 onClick={ () => handleScroll(1) }
             >

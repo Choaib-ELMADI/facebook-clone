@@ -16,6 +16,8 @@ import article       from '../assets/article.jpg';
 import immobilier    from '../assets/immobilier.jpg';
 import vehicule      from '../assets/vehicule.jpg';
 
+import main_game     from '../assets/main-game.jpg';
+
 const images = {
     facebook_logo,
 
@@ -33,6 +35,8 @@ const images = {
 
     article,
     immobilier,
-    vehicule
+    vehicule,
+
+    main_game
 };
 export default images;

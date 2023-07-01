@@ -1,3 +1,118 @@
 .games {
     padding-top: 56px;
+
+    .games-content {
+        flex: 1;
+        margin: 1rem;
+
+        .main-game-container {
+            width: 100%;
+            aspect-ratio: 2;
+            background: var(--gray_color_3);
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+
+            &::after {
+                position: absolute;
+                content: '';
+                left: 0;
+                bottom: 0;
+                width: 100%;
+                height: 140px;
+                background: linear-gradient(
+                    to top,
+                    rgba(0, 0, 0, .7),
+                    transparent
+                );
+            }
+
+            img {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            .info {
+                display: flex;
+                align-items: center;
+                gap: 1rem;
+
+                position: absolute;
+                z-index: 2;
+                bottom: 2rem;
+                left: 2rem;
+
+                .thumbnail {
+                    width: 80px;
+                    height: 80px;
+                    border-radius: 8px;
+                    overflow: hidden;
+                    position: relative;
+
+                    img {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                    }
+                }
+
+                .title {
+                    color: var(--white_color);
+                }
+
+                @media screen and (width <= 600px) {
+                    left: 1rem;
+                    bottom: 1rem;
+                }
+            }
+
+            @media screen and (width <= 600px) {
+                aspect-ratio: 1.4;
+            }
+
+            @media screen and (width <= 420px) {
+                aspect-ratio: 1;
+            }
+        }
+
+        .games-container {
+            margin-top: 1rem;
+
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-gap: .5rem;
+
+            @media screen and (width <= 1200px) {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            @media screen and (width <= 950px) {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            @media screen and (width <= 900px) {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            @media screen and (width <= 650px) {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            @media screen and (width <= 360px) {
+                grid-template-columns: repeat(1, 1fr);
+            }
+
+            div {
+                height: 300px;
+                border-radius: 8px;
+                background: var(--gray_color_3);
+
+                display: grid;
+                place-items: center;
+            }
+        }
+    }
 }
