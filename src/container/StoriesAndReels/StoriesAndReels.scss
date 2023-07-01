@@ -196,7 +196,7 @@
         place-items: center;
 
         &:disabled {
-            background: red;
+            display: none;
         }
 
         &:hover {

@@ -24,6 +24,20 @@ const storiesAndReels = [
         type: 'stories',
         cover: images.user_2,
         userProfile: images.user_1,
+        userName: 'Mohammed Elmadi',
+        link: '#'
+    },
+    {
+        type: 'stories',
+        cover: images.user_2,
+        userProfile: images.user_1,
+        userName: 'Mohammed Elmadi',
+        link: '#'
+    },
+    {
+        type: 'stories',
+        cover: images.user_2,
+        userProfile: images.user_1,
         userName: 'Hassan Elmadi',
         link: '#'
     },
@@ -126,9 +140,7 @@ const StoriesAndReels = () => {
 
     const handleScroll = (direction) => {
         const { current } = containerRef;
-        current.scrollLeft += direction * 140 *3;
-        
-        console.log(containerRef);
+        current.scrollLeft += direction * 140 * 3;
     };
 
     const handleSelection = (type) => {
@@ -210,12 +222,14 @@ const StoriesAndReels = () => {
             </div>
 
             <button 
+                disabled={ containerRef.current?.scrollLeft === 0 }
                 className='left' 
                 onClick={ () => handleScroll(-1) }
             >
                 <BsChevronLeft size={ 24 } />
             </button>
             <button 
+                disabled={ containerRef.current?.scrollLeft >= containerRef.current?.offsetWidth - 60 }
                 className='right' 
                 onClick={ () => handleScroll(1) }
             >
