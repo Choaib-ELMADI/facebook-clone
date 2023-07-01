@@ -43,19 +43,20 @@
     scroll-behavior: smooth;
 
     &::-webkit-scrollbar {
-        width: 8px;
-        background: transparent;
+        width: 0;
+        // width: 8px;
+        // background: transparent;
     }
-    &::-webkit-scrollbar-thumb {
-        background: transparent;
-        border-radius: 8px;
-    }
+    // &::-webkit-scrollbar-thumb {
+    //     background: transparent;
+    //     border-radius: 8px;
+    // }
 
-    &:hover {
-        &::-webkit-scrollbar-thumb {
-            background: var(--gray_color_2);
-        }
-    }
+    // &:hover {
+    //     &::-webkit-scrollbar-thumb {
+    //         background: var(--gray_color_2);
+    //     }
+    // }
 }
 
 body {
