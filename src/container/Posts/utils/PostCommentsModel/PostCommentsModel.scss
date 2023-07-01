@@ -8,14 +8,14 @@
     height: 100%;
     min-height: 100vh;
     overflow-y: scroll;
-    padding: 1rem;
+    padding: 1rem 0;
     background: var(--white_color_trs);
     
     display: grid;
     place-items: center;
     
     &__container {
-        width: 100%;
+        width: calc(100% - 1rem);
         max-width: 700px;
         height: max-content;
         max-height: 580px;
@@ -35,6 +35,10 @@
             padding: 1rem;
             border-bottom: 1px solid var(--gray_color_2);
             font-size: var(--normal__size);
+
+            @media screen and (width <= 600px) {
+                text-align: left;
+            }
         }
 
         .post-comment-group {

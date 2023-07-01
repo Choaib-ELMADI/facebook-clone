@@ -5,13 +5,13 @@
     background: var(--white_color);
     padding: 1rem;
     border-radius: 8px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; 
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
     .header {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 340px;
+        width: 100%;
 
         div {
             width: 30px;

@@ -13,6 +13,14 @@ const Post = ({ post, inTheComments }) => {
     const [responsesNumber, setResponsesNumber] = useState(0);
 
     useEffect(() => {
+        if (viewPostCommentsModel) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+    }, [viewPostCommentsModel]);
+
+    useEffect(() => {
         fetchResponsesNumber();
     }, [responsesNumber]);
 
@@ -71,6 +79,7 @@ const Post = ({ post, inTheComments }) => {
             { viewPostCommentsModel && (
                 <PostCommentsModel 
                     post={ post }
+                    viewPostCommentsModel={ viewPostCommentsModel }
                     setViewPostCommentsModel={ setViewPostCommentsModel }
                     fetchResponsesNumber={ fetchResponsesNumber }
                 />

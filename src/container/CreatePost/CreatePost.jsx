@@ -16,6 +16,14 @@ const CreatePost = ({ fetchPosts }) => {
     const [viewCreatingPostModel, setViewCreatingPostModel] = useState(false);
     const [userInfo, setUserInfo] = useState({});
     const { user } = useAuth();
+
+    useEffect(() => {
+        if (viewCreatingPostModel) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+    }, [viewCreatingPostModel]);
     
     useEffect(() => {
         fetchUserInfo();

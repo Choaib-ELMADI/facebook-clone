@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import moment from 'moment';
 import { CgClose } from 'react-icons/cg';
 import { IoSend } from 'react-icons/io5';
@@ -14,12 +14,20 @@ import Post from '../../Post';
 
 
 
-const PostCommentsModel = ({ post, setViewPostCommentsModel, fetchResponsesNumber }) => {
+const PostCommentsModel = ({ post, viewPostCommentsModel, setViewPostCommentsModel, fetchResponsesNumber }) => {
     const [comment, setComment] = useState('');
     const commentInputRef = useRef(null);
     const [showTextInput, setShowTextInput] = useState(false);
     const [targetComment, setTargetComment] = useState(null);
     const { user } = useAuth();
+
+    useEffect(() => {
+        if (viewPostCommentsModel) {
+            document.body.style.overflow = 'hidden';
+        } else {
+            document.body.style.overflow = 'auto';
+        }
+    }, [viewPostCommentsModel]);
 
     const handleCommentChange = (e) => {
         setComment(e.target.value);
