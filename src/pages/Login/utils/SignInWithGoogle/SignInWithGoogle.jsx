@@ -18,11 +18,9 @@ const SignInWithGoogle = () => {
                 return user;
             })
             .then((user) => {
-                getDoc(db, 'users', user.email.split('@')[0])
+                getDoc(doc(db, 'users', user.email.split('@')[0]))
                     .then((snapshot) => {
-                        if (snapshot.exists()) {
-                            return;
-                        } else {
+                        if (!snapshot.exists()) {
                             setDoc(doc(db, 'users', user.email.split('@')[0]), {
                                 userId: user.uid,
                                 userName: user.displayName,
