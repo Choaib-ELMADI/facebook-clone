@@ -3,7 +3,7 @@ import { FaRegCommentAlt } from 'react-icons/fa';
 import { RiShareForwardLine } from 'react-icons/ri';
 import { motion } from 'framer-motion';
 import { AiOutlineLike } from 'react-icons/ai';
-import { updateDoc, doc, getDoc, collection, getDocs } from 'firebase/firestore';
+import { updateDoc, doc, getDoc } from 'firebase/firestore';
 
 import './PostFooter.scss';
 import { db } from '../../../../config/firebase';
@@ -97,14 +97,6 @@ const GiveReaction = ({ setGiveReaction, setUserReaction, handleUserReaction }) 
 const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, responsesNumber }) => {
     const { user } = useAuth();
     const [giveReaction, setGiveReaction] = useState(false);
-    // const [reactionCounts, setReactionCounts] = useState([
-    //     {type: 'like',  count: 0},
-    //     {type: 'love',  count: 0},
-    //     {type: 'care',  count: 0},
-    //     {type: 'sad',   count: 0},
-    //     {type: 'grrr',  count: 0},
-    //     {type: 'wouah', count: 0},
-    // ]);
     const [userReaction, setUserReaction] = useState(
         post.reactions[
             post.reactions.findIndex(
@@ -112,9 +104,32 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, responsesNu
             )
         ]?.reactionType || null
     );
+    const [reactionCounts, setReactionCounts] = useState({});
 
     useEffect(() => {
         handleUserReaction();
+    }, [userReaction]);
+
+    useEffect(() => {
+        const currentReactionCounts = {};
+
+        for (const reaction of post.reactions.filter(r => r.reactionType)) {
+            const { reactionType } = reaction;
+            if (reactionType in currentReactionCounts) {
+                currentReactionCounts[reactionType]++;
+            } else {
+                currentReactionCounts[reactionType] = 1;
+            }
+        };
+
+        const sortedReactionCounts = Object.entries(currentReactionCounts)
+            .sort(([, countA], [, countB]) => countB - countA)
+            .reduce((sortedObj, [reactionType, count]) => {
+                sortedObj[reactionType] = count;
+                return sortedObj;
+            }, {});
+
+        setReactionCounts(sortedReactionCounts);
     }, [userReaction]);
     
     const handleUserReaction = () => {
@@ -165,19 +180,21 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, responsesNu
             className='post-footer'
             onPointerLeave={ () => setGiveReaction(false) }
         >
-            <div className='post-numbers'>
-                <div className='reactions'>
-                    <Like zIndex={ 3 } />
-                    <Love zIndex={ 2 } />
-                    <Care zIndex={ 1 } />
+            { (Object.keys(reactionCounts).length || (post.comments && post.comments.length)) && (
+                <div className='post-numbers'>
+                    <div className='reactions'>
+                        { reactions[Object.keys(reactionCounts)[0]].icon }
+                        { Object.keys(reactionCounts).length >= 2 && reactions[Object.keys(reactionCounts)[1]].icon }
+                        { Object.keys(reactionCounts).length >= 3 && reactions[Object.keys(reactionCounts)[2]].icon }
+                    </div>
+                    <div className='comments-share'>
+                        <p className='comments'>
+                            { post.comments ? post.comments.length + responsesNumber : 0 }
+                            <FaRegCommentAlt size={ 17 } />
+                        </p>
+                    </div>
                 </div>
-                <div className='comments-share'>
-                    <p className='comments'>
-                        { post.comments ? post.comments.length + responsesNumber : 0 }
-                        <FaRegCommentAlt size={ 17 } />
-                    </p>
-                </div>
-            </div>
+            )}
             <div className='line' />
             <div className='action-buttons'>
                 <button

@@ -22,8 +22,8 @@ const links = [
     },
     {
         icon: <FaCalendarPlus color="#e74a66" size={ 24 } />,
-        title: 'Evènements',
-        link: '/'
+        title: 'Marketplace',
+        link: '/marketplace'
     },
     {
         icon: <HiUserGroup color='#1a7fe9' size={ 24 } />,
@@ -50,16 +50,6 @@ const links = [
         title: 'Jouer à des jeux',
         link: '/games'
     },
-    {
-        icon: <GiBackwardTime color='#1a7fe9' size={ 28 } />,
-        title: 'Souvenirs',
-        link: '/'
-    },
-    {
-        icon: <BsFillSaveFill color='#c139ac' size={ 22 } />,
-        title: 'Enregistrements',
-        link: '/'
-    }
 ];
 
 
