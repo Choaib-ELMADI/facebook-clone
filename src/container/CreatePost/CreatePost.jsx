@@ -54,7 +54,7 @@ const CreatePost = ({ fetchPosts }) => {
                 <button
                     onClick={ () => setViewCreatingPostModel(true) }
                 >
-                    { `Quoi de neuf, ${ userInfo.userName ? userInfo.userName : 'User' } ?` }
+                    { `Quoi de neuf, ${ userInfo.userName ? userInfo.userName.split(' ')[0] : 'User' } ?` }
                 </button>
             </div>
             <div className='line' />

@@ -46,6 +46,10 @@
         font-weight: 600;
         border-radius: 4px;
         transition: .2s;
+
+        @media screen and (width <= 500px) {
+            font-size: 14px;
+        }
         
         &:hover {
             background: var(--gray_color_3);
@@ -86,7 +90,7 @@
                 z-index: 2;
                 transform: translateY(100%);
 
-                width: max-content;
+                width: 134px;
                 background: var(--white_color);
                 border-radius: 4px;
                 box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -97,7 +101,7 @@
                 
                 .navlink {
                     width: 100%;
-                    min-width: 145px;
+                    min-width: 126px;
                     padding: .75rem;
 
                     &.current {
@@ -108,7 +112,7 @@
                             position: absolute;
                             content: '✓';
                             bottom: 50%;
-                            right: .75rem;
+                            right: .5rem;
                             transform: translateY(50%);
 
                             color: var(--main_bleu_color);

@@ -183,7 +183,7 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, responsesNu
             { (Object.keys(reactionCounts).length || (post.comments && post.comments.length)) && (
                 <div className='post-numbers'>
                     <div className='reactions'>
-                        { reactions[Object.keys(reactionCounts)[0]].icon }
+                        { Object.keys(reactionCounts).length >= 1 && reactions[Object.keys(reactionCounts)[0]].icon }
                         { Object.keys(reactionCounts).length >= 2 && reactions[Object.keys(reactionCounts)[1]].icon }
                         { Object.keys(reactionCounts).length >= 3 && reactions[Object.keys(reactionCounts)[2]].icon }
                     </div>
