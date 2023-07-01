@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { collection, getDocs } from 'firebase/firestore';
+import  { BsPlus } from 'react-icons/bs';
 
 import './Marketplace.scss';
 import { db } from '../../config/firebase';
@@ -108,6 +109,14 @@ const Marketplace = () => {
       <Navbar />
       <div className='section'>
           <Sidebar title='MarketPlace' />
+
+          <Link 
+              className='new-add-item'
+              to='/marketplace/create'
+          >
+              <BsPlus size={ 30 } />
+          </Link>
+
           <div className='marketplace-content'>
             { renderContent() }
           </div>
