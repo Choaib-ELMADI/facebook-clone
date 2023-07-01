@@ -4,6 +4,8 @@ import './Friends.scss';
 import { Navbar, Sidebar } from '../../components/index';
 
 const Friend = ({ user, handleDelete }) => {
+  const [sendRequest, setSendRequest] = useState(false);
+
   return (
     <div className='friend-wrapper'>
       <div className='friend-profile'>
@@ -15,11 +17,23 @@ const Friend = ({ user, handleDelete }) => {
         />
       </div>
       <p className='friend-username'>{ user.name.first } { user.name.last }</p>
-      <button className='add'>Ajouter comme ami(e)</button>
+      <button 
+        className='add'
+        onClick={ () => setSendRequest(true) }
+        style={{ display: sendRequest ? 'none' : '' }}
+      >
+        Ajouter comme ami(e)
+      </button>
       <button 
         className='close'
-        onClick={ () => handleDelete(user.email) }
-      >Supprimer</button>
+        onClick={ () => {
+          if (sendRequest) {
+            setSendRequest(false);
+          } else {
+            handleDelete(user.email);
+          }
+        }}
+      >{ sendRequest ? 'Annuler' : 'Supprimer' }</button>
     </div>
   );
 };
