@@ -20,7 +20,7 @@ const containerVariants = {
         transition: {
             duration: .5,
             type: 'spring',
-            delay: .5,
+            delay: .3,
         }
     },
 };
@@ -54,11 +54,10 @@ const reactions = {
 
 
 
-const GiveReaction = ({ setGiveReaction, setUserReaction, handleUserReaction }) => {
+const GiveReaction = ({ setUserReaction, handleUserReaction, setGiveReaction }) => {
     return (
         <motion.div 
             className='give-reaction-wrapper'
-            onPointerLeave={ () => setGiveReaction(false) }
             variants={ containerVariants }
             initial='hidden'
             animate='visible'
@@ -66,29 +65,29 @@ const GiveReaction = ({ setGiveReaction, setUserReaction, handleUserReaction }) 
             <Like 
                 animate={ true } 
                 setUserReaction={ setUserReaction } 
-                setGiveReaction={ setGiveReaction } 
                 handleUserReaction={ handleUserReaction }
+                setGiveReaction={ setGiveReaction }
             />
             <Love 
                 animate={ true } 
                 setUserReaction={ setUserReaction } 
-                setGiveReaction={ setGiveReaction } 
                 handleUserReaction={ handleUserReaction }
+                setGiveReaction={ setGiveReaction }
             />
             <Care 
                 setUserReaction={ setUserReaction } 
-                setGiveReaction={ setGiveReaction } 
                 handleUserReaction={ handleUserReaction }
+                setGiveReaction={ setGiveReaction }
             />
             <Funny 
                 setUserReaction={ setUserReaction } 
-                setGiveReaction={ setGiveReaction } 
                 handleUserReaction={ handleUserReaction }
+                setGiveReaction={ setGiveReaction }
             />
             <Grrr 
                 setUserReaction={ setUserReaction } 
-                setGiveReaction={ setGiveReaction } 
                 handleUserReaction={ handleUserReaction }
+                setGiveReaction={ setGiveReaction }
             />
         </motion.div>
     )
@@ -166,20 +165,16 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, responsesNu
             .catch((err) => console.error(err));
     };
 
-    const handleLikeReaction = () => {
+    const handleGiveReaction = () => {
         if (userReaction) {
             setUserReaction(null);
         } else {
-            setUserReaction('like');
+            setGiveReaction(!giveReaction);
         }
-        setGiveReaction(false);
     };
 
     return (
-        <div 
-            className='post-footer'
-            onPointerLeave={ () => setGiveReaction(false) }
-        >
+        <div className='post-footer'>
             { (Object.keys(reactionCounts).length || (post.comments && post.comments.length)) && (
                 <div className='post-numbers'>
                     <div className='reactions'>
@@ -195,11 +190,9 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, responsesNu
                     </div>
                 </div>
             )}
-            <div className='line' />
             <div className='action-buttons'>
                 <button
-                    onPointerEnter={ () => setGiveReaction(true) }
-                    onClick={ handleLikeReaction }
+                    onClick={ handleGiveReaction }
                     style={{
                         color: userReaction ? reactions[userReaction].color : ''
                     }}
@@ -222,9 +215,9 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, responsesNu
 
             { giveReaction && (
                 <GiveReaction 
-                    setGiveReaction={ setGiveReaction } 
                     setUserReaction={ setUserReaction } 
                     handleUserReaction={ handleUserReaction }
+                    setGiveReaction={ setGiveReaction }
                 />
             )}
         </div>

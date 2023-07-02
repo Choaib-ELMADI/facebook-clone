@@ -5,15 +5,14 @@ import '../reaction.scss';
 
 
 
-const Grrr = ({ zIndex, setUserReaction, setGiveReaction, handleUserReaction }) => {
+const Grrr = ({ setUserReaction, handleUserReaction, setGiveReaction }) => {
     return (
         <div
-            className='reaction grrr-reaction' 
-            style={{ zIndex }}
+            className='reaction grrr-reaction'
             onClick={ () => {
-                setGiveReaction(false);
-                setUserReaction('grrr');
                 handleUserReaction();
+                setUserReaction('grrr');
+                setGiveReaction(false);
             }}
         >
             <div className="face">

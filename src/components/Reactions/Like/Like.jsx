@@ -19,15 +19,14 @@ const likeVariants = {
 
 
 
-const Like = ({ zIndex, animate, setUserReaction, setGiveReaction, handleUserReaction }) => {
+const Like = ({ animate, setUserReaction, handleUserReaction, setGiveReaction }) => {
     return (
         <div 
-            className='reaction like-reaction' 
-            style={{ zIndex }}
+            className='reaction like-reaction'
             onClick={ () => {
-                setGiveReaction(false);
-                setUserReaction('like');
                 handleUserReaction();
+                setUserReaction('like');
+                setGiveReaction(false);
             }}
         >
             { animate ?

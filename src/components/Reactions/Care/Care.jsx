@@ -6,15 +6,14 @@ import '../reaction.scss';
 
 
 
-const Care = ({ zIndex, setUserReaction, setGiveReaction, handleUserReaction }) => {
+const Care = ({ setUserReaction, handleUserReaction, setGiveReaction }) => {
     return (
         <div 
-            className='reaction care-reaction' 
-            style={{ zIndex }}
+            className='reaction care-reaction'
             onClick={ () => {
-                setGiveReaction(false);
-                setUserReaction('care');
                 handleUserReaction();
+                setUserReaction('care');
+                setGiveReaction(false);
             }}
         >
             <div className="body">
