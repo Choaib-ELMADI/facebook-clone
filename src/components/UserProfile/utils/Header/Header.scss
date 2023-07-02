@@ -106,7 +106,8 @@
             display: flex;
             align-items: center;
 
-            button {
+            button, .link {
+                text-decoration: none;
                 padding: .5rem .75rem;
                 border-radius: 4px;
                 cursor: pointer;

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { BsFillPersonCheckFill, BsMessenger, BsPlus, BsPencilFill } from 'react-icons/bs';
 import { IoCamera } from 'react-icons/io5';
 
@@ -103,10 +104,13 @@ const Header = ({ userInfo }) => {
                                 <BsFillPersonCheckFill size={ 20 } />
                                 Amis
                             </button>
-                            <button className='message'>
+                            <Link 
+                                className='link message'
+                                to={ `/messages/${ user.email.split('@')[0] }/${ userInfo.userLink }` }
+                            >
                                 <BsMessenger size={ 18 } />
                                 Message
-                            </button>
+                            </Link>
                         </>
                     )}
                 </div>
