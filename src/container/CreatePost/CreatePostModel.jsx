@@ -37,7 +37,7 @@ const CreatePostModel = ({ setViewCreatingPostModel, fetchPosts, userInfo }) => 
     };
 
     const handleSubmitPost = () => {
-        const id = new Date().getTime() + '__' + user.email.split('@')[0];
+        const id = new Date().getTime() + '__' + user.email.split('@')[0].replaceAll('.', '');
         setDoc(doc(db, 'posts', id), {
             ...postDetails,
             id: id,

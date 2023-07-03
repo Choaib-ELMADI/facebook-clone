@@ -15,7 +15,7 @@ const NewProduct = () => {
         desc: '',
         place: '',
         state: '',
-        owner: user.email.split('@')[0],
+        owner: user.email.split('@')[0].replaceAll('.', ''),
     });
 
     return (

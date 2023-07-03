@@ -17,12 +17,12 @@ const SeConnect = ({ userData }) => {
                 return user;
             })
             .then((user) => {
-                setDoc(doc(db, 'users', user.email.split('@')[0]), {
+                setDoc(doc(db, 'users', user.email.split('@')[0].replaceAll('.', '')), {
                     userId: user.uid,
                     userName: user.displayName,
                     userEmail: user.email,
                     userProfile: user.photoURL,
-                    userLink: user.email.split('@')[0],
+                    userLink: user.email.split('@')[0].replaceAll('.', ''),
                 });
 
                 navigate('/');

@@ -46,7 +46,7 @@ const MessengerChat = () => {
     }, []);
 
     const fetchUser = () => {
-        getDoc(doc(db, 'users', user.email.split('@')[0]))
+        getDoc(doc(db, 'users', user.email.split('@')[0].replaceAll('.', '')))
             .then((data) => {
                 setUserInfo({ ...data.data() });
             })
@@ -173,7 +173,7 @@ const MessengerChat = () => {
         );
     };
 
-    if (receiverInfo.userLink === user.email.split('@')[0]) {
+    if (receiverInfo.userLink === user.email.split('@')[0].replaceAll('.', '')) {
         return (
             <Navigate to='/404' />
         );

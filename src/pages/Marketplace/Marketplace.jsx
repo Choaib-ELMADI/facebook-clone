@@ -15,9 +15,9 @@ const Produit = ({ product }) => {
     <Link 
       className='product-container'
       to={ 
-        user.email.split('@')[0] === product.owner ?
+        user.email.split('@')[0].replaceAll('.', '') === product.owner ?
         '/marketplace' :
-        `/messages/${ user.email.split('@')[0] }/${ product.owner }` 
+        `/messages/${ user.email.split('@')[0].replaceAll('.', '') }/${ product.owner }` 
       }
     >
       <div className='product-photo'>

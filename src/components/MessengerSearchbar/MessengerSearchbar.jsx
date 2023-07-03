@@ -76,11 +76,11 @@ const MessengerSearchbar = ({ setVueSearchList }) => {
                         {
                             searchedUsers
                                 .map((searchUser, i) => {
-                                    if (searchUser.userLink === user.email.split('@')[0]) return;
+                                    if (searchUser.userLink === user.email.split('@')[0].replaceAll('.', '')) return;
                                     
                                     return (
                                         <Link 
-                                            to={ `/messages/${ user.email.split('@')[0] }/${ searchUser.userLink }` } 
+                                            to={ `/messages/${ user.email.split('@')[0].replaceAll('.', '') }/${ searchUser.userLink }` } 
                                             key={ `user-${ i }` }
                                             className='messaging-user-link'
                                             onClick={ () => {

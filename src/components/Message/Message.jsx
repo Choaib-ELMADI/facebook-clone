@@ -12,7 +12,7 @@ const Message = ({ message }) => {
     const { user } = useAuth();
 
     return (
-        <div className={ user.email.split('@')[0] === sender ? 'message-wrapper sender' : 'message-wrapper' }>
+        <div className={ user.email.split('@')[0].replaceAll('.', '') === sender ? 'message-wrapper sender' : 'message-wrapper' }>
             <div className='profile-message'>
                 <div className='profile'>
                     <img 

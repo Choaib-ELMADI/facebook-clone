@@ -108,6 +108,11 @@
                         &:hover {
                             background: var(--main_bleu_color);
                         }
+
+                        &:disabled {
+                            opacity: .8;
+                            cursor: not-allowed;
+                        }
                     }
                 }
             }

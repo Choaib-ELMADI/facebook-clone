@@ -107,6 +107,11 @@
                     border-radius: 4px;
                     cursor: pointer;
                     transition: .2s;
+
+                    &:disabled {
+                        opacity: .8;
+                        cursor: not-allowed;
+                    }
                     
                     &:hover {
                         background: var(--gray_color_3);

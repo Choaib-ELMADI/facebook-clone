@@ -106,7 +106,7 @@ const Header = ({ userInfo }) => {
                             </button>
                             <Link 
                                 className='link message'
-                                to={ `/messages/${ user.email.split('@')[0] }/${ userInfo.userLink }` }
+                                to={ `/messages/${ user.email.split('@')[0].replaceAll('.', '') }/${ userInfo.userLink }` }
                             >
                                 <BsMessenger size={ 18 } />
                                 Message

@@ -12,9 +12,12 @@ import './BannerModel.scss';
 const BannerModel = ({ setViewBannerModel }) => {
     const { user } = useAuth();
     const [newBanner, setNewBanner] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const handleUpdateBanner = () => {
         if (!newBanner) return;
+
+        setLoading(true);
 
         const storageRef = ref(store, `${ user.uid }/${ new Date().getTime() }__${ newBanner.name }`);
         const uploadTask = uploadBytesResumable(storageRef, newBanner);
@@ -25,10 +28,13 @@ const BannerModel = ({ setViewBannerModel }) => {
             () => {
                 getDownloadURL(uploadTask.snapshot.ref)
                     .then((downloadURL) => {
-                        updateDoc(doc(db, 'users', user.email.split('@')[0]), {
+                        updateDoc(doc(db, 'users', user.email.split('@')[0].replaceAll('.', '')), {
                             userBanner: downloadURL
                         })
-                            .then(() => setViewBannerModel(false))
+                            .then(() =>  {
+                                setLoading(false);
+                                setViewBannerModel(false);
+                            })
                             .catch((err) => console.error(err));
                     });
             }
@@ -58,9 +64,10 @@ const BannerModel = ({ setViewBannerModel }) => {
                                 onClick={ () => setViewBannerModel(false) }
                             >Annuler</button>
                             <button 
+                                disabled={ loading }
                                 className='save'
                                 onClick={ handleUpdateBanner }
-                            >Enregistrer</button>
+                            >{ loading ? 'Enregistrer...' : 'Enregistrer' }</button>
                         </div>
                     </div>
                 )}

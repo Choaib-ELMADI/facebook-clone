@@ -18,15 +18,15 @@ const SignInWithGoogle = () => {
                 return user;
             })
             .then((user) => {
-                getDoc(doc(db, 'users', user.email.split('@')[0]))
+                getDoc(doc(db, 'users', user.email.split('@')[0].replaceAll('.', '')))
                     .then((snapshot) => {
                         if (!snapshot.exists()) {
-                            setDoc(doc(db, 'users', user.email.split('@')[0]), {
+                            setDoc(doc(db, 'users', user.email.split('@')[0].replaceAll('.', '')), {
                                 userId: user.uid,
                                 userName: user.displayName,
                                 userEmail: user.email,
                                 userProfile: user.photoURL,
-                                userLink: user.email.split('@')[0],
+                                userLink: user.email.split('@')[0].replaceAll('.', ''),
                             });
                         }
                         navigate('/');

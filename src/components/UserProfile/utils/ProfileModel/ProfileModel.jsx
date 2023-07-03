@@ -11,9 +11,12 @@ import { useAuth } from '../../../../context/AuthContext';
 const ProfileModel = ({ setViewProfileModel }) => {
     const { user } = useAuth();
     const [newProfile, setNewProfile] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const handleUpdateProfile = () => {
         if (!newProfile) return;
+
+        setLoading(true);
 
         const storageRef = ref(store, `${ user.uid }/${ new Date().getTime() }__${ newProfile.name }`);
         const uploadTask = uploadBytesResumable(storageRef, newProfile);
@@ -24,7 +27,7 @@ const ProfileModel = ({ setViewProfileModel }) => {
             () => {
                 getDownloadURL(uploadTask.snapshot.ref)
                     .then((downloadURL) => {
-                        updateDoc(doc(db, 'users', user.email.split('@')[0]), {
+                        updateDoc(doc(db, 'users', user.email.split('@')[0].replaceAll('.', '')), {
                             userProfile: downloadURL
                         });
 
@@ -41,6 +44,7 @@ const ProfileModel = ({ setViewProfileModel }) => {
                             })
                             .then((batch) => {
                                 batch.commit();
+                                setLoading(false);
                                 setViewProfileModel(false);
                             })
                             .catch((err) => console.error(err));
@@ -72,9 +76,10 @@ const ProfileModel = ({ setViewProfileModel }) => {
                                 onClick={ () => setViewProfileModel(false) }
                             >Annuler</button>
                             <button 
+                                disabled={ loading }
                                 className='save'
                                 onClick={ handleUpdateProfile }
-                            >Enregistrer</button>
+                            >{ loading ? 'Enregistrer...' : 'Enregistrer' }</button>
                         </div>
                     </div>
                 )}
