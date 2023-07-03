@@ -1,6 +1,7 @@
 import React from 'react';
 import moment from 'moment';
 
+import images from '../../../../constants/images'
 import './Response.scss';
 
 
