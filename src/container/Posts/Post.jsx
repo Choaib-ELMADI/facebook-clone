@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getDocs, collection } from 'firebase/firestore';
+import { getDocs, collection, query, where } from 'firebase/firestore';
 
 import { db } from '../../config/firebase';
 import './Post.scss';
@@ -25,8 +25,10 @@ const Post = ({ post, inTheComments }) => {
     }, [responsesNumber]);
 
     const fetchResponsesNumber = () => {
+        const q = query(collection(db, 'responses'), where('postId', '==', post.id))
+
         let i=0;
-        getDocs(collection(db, 'responses'))
+        getDocs(q)
             .then((res) => {
                 if (res) {
                     res.forEach((doc) => {

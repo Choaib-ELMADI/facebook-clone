@@ -46,6 +46,7 @@ const CommentResponses = ({ post, autoResize, fetchResponsesNumber, targetCommen
             commentId: target.time,
             commentOwner: target.userName,
             time: new Date().getTime(),
+            postId: post.id,
         })
             .then(() => {
                 setResponse('');
