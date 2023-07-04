@@ -25,6 +25,7 @@ const Posts = ({ userPosts, loading }) => {
                 <Post 
                     key={ userPost.id } 
                     post={ userPost }
+                    inTheComments={ true }
                 />
             ))
         );
