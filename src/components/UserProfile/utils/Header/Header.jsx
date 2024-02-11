@@ -29,7 +29,6 @@ const Header = ({ userInfo }) => {
             document.body.style.overflow = 'auto';
         }
     }, [showUpdateProfileModel]);
-
     return (
         <div className='user-profile-page__content__header'>
             <img 

@@ -201,8 +201,10 @@ const PostFooter = ({ post, inTheComments, setViewPostCommentsModel, responsesNu
                     { userReaction ? reactions[userReaction].title : "J'aime" }
                 </button>
                 <button
-                    onClick={ () => setViewPostCommentsModel(true) }
-                    disabled={ inTheComments }
+                    onClick={ () => {
+                        
+                        setViewPostCommentsModel(true)} }
+                   // disabled={ inTheComments }
                 >
                     <FaRegCommentAlt size={ 20 } />
                     Commenter
