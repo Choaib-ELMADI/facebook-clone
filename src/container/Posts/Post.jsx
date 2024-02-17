@@ -78,14 +78,16 @@ const Post = ({ post, inTheComments }) => {
                 </div>
             )}
 
-            { viewPostCommentsModel && (
+            { 
+            
+            (viewPostCommentsModel && (
                 <PostCommentsModel 
                     post={ post }
                     viewPostCommentsModel={ viewPostCommentsModel }
                     setViewPostCommentsModel={ setViewPostCommentsModel }
                     fetchResponsesNumber={ fetchResponsesNumber }
                 />
-            )}
+            ))}
         </div>
     );
 };
