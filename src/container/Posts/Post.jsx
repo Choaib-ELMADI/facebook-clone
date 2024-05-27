@@ -69,7 +69,7 @@ const Post = ({ post, inTheComments }) => {
                 <div className='post-hided'>
                     <span>X</span>
                     <div>
-                        <p>Publication masquée</p>
+                        <p>Publication masquée (hidden)</p>
                         <p>Masquer des publications aide Facebook à personnaliser votre Fil.</p>
                     </div>
                     <button
